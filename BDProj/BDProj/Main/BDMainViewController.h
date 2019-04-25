@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  BDMainViewController.h
 //  BDProj
 //
 //  Created by apple on 2019/4/24.
@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+NS_ASSUME_NONNULL_BEGIN
 
+@interface BDMainViewController : UIViewController
 
 @end
 
+NS_ASSUME_NONNULL_END
