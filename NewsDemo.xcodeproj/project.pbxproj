@@ -1,0 +1,1332 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6323DBA9CEA9697509E56202 /* libPods-NewsDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CBD97A0A5912800A232F996B /* libPods-NewsDemo.a */; };
+		9758CEB5228808B20090C60D /* BarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 9758CEB4228808B20090C60D /* BarItem.m */; };
+		9758CEB8228809220090C60D /* MyImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9758CEB7228809220090C60D /* MyImageView.m */; };
+		9758CEBB228809730090C60D /* iCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9758CEBA228809730090C60D /* iCarousel.m */; };
+		9758CEC1228809FC0090C60D /* NSObject+Hint.m in Sources */ = {isa = PBXBuildFile; fileRef = 9758CEC0228809FC0090C60D /* NSObject+Hint.m */; };
+		9758CEC422880A1A0090C60D /* AppDelegate+DDLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 9758CEC322880A1A0090C60D /* AppDelegate+DDLog.m */; };
+		EF61625B228F972300EB7367 /* HomeController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF61625A228F972300EB7367 /* HomeController.m */; };
+		EF61625E228F973200EB7367 /* HomeListController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF61625D228F973200EB7367 /* HomeListController.m */; };
+		EF616261228F974200EB7367 /* HomeDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF616260228F974200EB7367 /* HomeDetailController.m */; };
+		EF616264228F98AE00EB7367 /* MyController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF616263228F98AE00EB7367 /* MyController.m */; };
+		EF616267228F98BE00EB7367 /* RegisterController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF616266228F98BE00EB7367 /* RegisterController.m */; };
+		EF61626A228F98D000EB7367 /* RegisterLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF616269228F98D000EB7367 /* RegisterLoginController.m */; };
+		EF61626D228F98DD00EB7367 /* SetController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF61626C228F98DD00EB7367 /* SetController.m */; };
+		EF616270228F99B500EB7367 /* VideoController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF61626F228F99B500EB7367 /* VideoController.m */; };
+		EF616273228F9A0200EB7367 /* WordController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF616272228F9A0200EB7367 /* WordController.m */; };
+		EF616276228F9A1000EB7367 /* WordDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF616275228F9A1000EB7367 /* WordDetailController.m */; };
+		EF616279228F9A2300EB7367 /* PicController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF616278228F9A2300EB7367 /* PicController.m */; };
+		EF61627C228F9A3100EB7367 /* PicDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF61627B228F9A3100EB7367 /* PicDetailController.m */; };
+		EF61628D228FAF0F00EB7367 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = EF61628C228FAF0F00EB7367 /* libc++.tbd */; };
+		EF8CD7C12286686E00A7B431 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8CD7C02286686E00A7B431 /* AppDelegate.m */; };
+		EF8CD7C42286686E00A7B431 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8CD7C32286686E00A7B431 /* ViewController.m */; };
+		EF8CD7C72286686E00A7B431 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF8CD7C52286686E00A7B431 /* Main.storyboard */; };
+		EF8CD7C92286686E00A7B431 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EF8CD7C82286686E00A7B431 /* Assets.xcassets */; };
+		EF8CD7CC2286686E00A7B431 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF8CD7CA2286686E00A7B431 /* LaunchScreen.storyboard */; };
+		EF8CD7CF2286686E00A7B431 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8CD7CE2286686E00A7B431 /* main.m */; };
+		EF8CD7D92286686E00A7B431 /* NewsDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8CD7D82286686E00A7B431 /* NewsDemoTests.m */; };
+		EF8CD7E42286686E00A7B431 /* NewsDemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8CD7E32286686E00A7B431 /* NewsDemoUITests.m */; };
+		EF8CD80A228676CD00A7B431 /* libSocialQQ.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EF8CD809228676CD00A7B431 /* libSocialQQ.a */; };
+		EF8CD80E2286770300A7B431 /* libSocialWechat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EF8CD80C2286770300A7B431 /* libSocialWechat.a */; };
+		EF8CD81B2286785200A7B431 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = EF8CD8142286785200A7B431 /* LICENSE */; };
+		EF8CD81C2286785200A7B431 /* PSCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8CD8152286785200A7B431 /* PSCollectionView.m */; };
+		EF8CD81D2286785200A7B431 /* PSCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8CD8162286785200A7B431 /* PSCollectionViewCell.m */; };
+		EF8CD81E2286785200A7B431 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = EF8CD8172286785200A7B431 /* README.md */; };
+		EF8CD81F2286785200A7B431 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = EF8CD8182286785200A7B431 /* .gitignore */; };
+		EF8CD85A2286786000A7B431 /* TencentOpenApi_IOS_Bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = EF8CD8252286786000A7B431 /* TencentOpenApi_IOS_Bundle.bundle */; };
+		EF8CD85B2286786000A7B431 /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF8CD8262286786000A7B431 /* TencentOpenAPI.framework */; };
+		EF8CD85D2286786000A7B431 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EF8CD82C2286786000A7B431 /* libWeChatSDK.a */; };
+		EF8CD85E2286786000A7B431 /* libUMSocial_Sdk_4.2.5.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EF8CD82E2286786000A7B431 /* libUMSocial_Sdk_4.2.5.a */; };
+		EF8CD85F2286786000A7B431 /* UMSocialLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EF8CD82F2286786000A7B431 /* UMSocialLocalizable.strings */; };
+		EF8CD8602286786000A7B431 /* UMSocialSDKResourcesNew.bundle in Resources */ = {isa = PBXBuildFile; fileRef = EF8CD8322286786000A7B431 /* UMSocialSDKResourcesNew.bundle */; };
+		EF8CD8612286786000A7B431 /* UMSCommentInputController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF8CD8342286786000A7B431 /* UMSCommentInputController.xib */; };
+		EF8CD8622286786000A7B431 /* UMSLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF8CD8352286786000A7B431 /* UMSLoginViewController.xib */; };
+		EF8CD8632286786000A7B431 /* UMSShareListController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF8CD8362286786000A7B431 /* UMSShareListController.xib */; };
+		EF8CD8642286786000A7B431 /* UMShareEditViewControlleriPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF8CD8372286786000A7B431 /* UMShareEditViewControlleriPad.xib */; };
+		EF8CD8652286786000A7B431 /* UMSnsAccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF8CD8382286786000A7B431 /* UMSnsAccountViewController.xib */; };
+		EF8CD8662286786000A7B431 /* UMShareEditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF8CD8392286786000A7B431 /* UMShareEditViewController.xib */; };
+		EF8CD8672286786000A7B431 /* UMSCommentInputControlleriPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF8CD83A2286786000A7B431 /* UMSCommentInputControlleriPad.xib */; };
+		EF8CD8682286786000A7B431 /* UMSCommentDetailController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF8CD83B2286786000A7B431 /* UMSCommentDetailController.xib */; };
+		EF8CD8692286786000A7B431 /* iOS-social-releasenote.html in Resources */ = {isa = PBXBuildFile; fileRef = EF8CD8492286786000A7B431 /* iOS-social-releasenote.html */; };
+		EF8CD86A2286786000A7B431 /* ios-social-sdk-comment-detail.html in Resources */ = {isa = PBXBuildFile; fileRef = EF8CD84A2286786000A7B431 /* ios-social-sdk-comment-detail.html */; };
+		EF8CD86B2286786000A7B431 /* markdown.css in Resources */ = {isa = PBXBuildFile; fileRef = EF8CD84B2286786000A7B431 /* markdown.css */; };
+		EF8CD86C2286786000A7B431 /* ios-social-sdk-share-quick.html in Resources */ = {isa = PBXBuildFile; fileRef = EF8CD84C2286786000A7B431 /* ios-social-sdk-share-quick.html */; };
+		EF8CD86D2286786000A7B431 /* ios-social-sdk-login-detail.html in Resources */ = {isa = PBXBuildFile; fileRef = EF8CD84D2286786000A7B431 /* ios-social-sdk-login-detail.html */; };
+		EF8CD86E2286786000A7B431 /* ios-social-sdk-share-detail.html in Resources */ = {isa = PBXBuildFile; fileRef = EF8CD84E2286786000A7B431 /* ios-social-sdk-share-detail.html */; };
+		EF8CD86F2286786000A7B431 /* ios-social-sdk-like.html in Resources */ = {isa = PBXBuildFile; fileRef = EF8CD84F2286786000A7B431 /* ios-social-sdk-like.html */; };
+		EF8CD8702286786000A7B431 /* ios-social-sdk-socialbar.html in Resources */ = {isa = PBXBuildFile; fileRef = EF8CD8502286786000A7B431 /* ios-social-sdk-socialbar.html */; };
+		EF8CD8712286786000A7B431 /* iOS-social-analytics-releasenote.html in Resources */ = {isa = PBXBuildFile; fileRef = EF8CD8512286786000A7B431 /* iOS-social-analytics-releasenote.html */; };
+		EF8CD8722286786000A7B431 /* ios-social-sdk-login-quick.html in Resources */ = {isa = PBXBuildFile; fileRef = EF8CD8522286786000A7B431 /* ios-social-sdk-login-quick.html */; };
+		EF8CD8732286786000A7B431 /* ios-social-sdk-shake.html in Resources */ = {isa = PBXBuildFile; fileRef = EF8CD8532286786000A7B431 /* ios-social-sdk-shake.html */; };
+		EF8CD8742286786000A7B431 /* ios-social-sdk-comment-quick.html in Resources */ = {isa = PBXBuildFile; fileRef = EF8CD8542286786000A7B431 /* ios-social-sdk-comment-quick.html */; };
+		EF8CD8752286786000A7B431 /* libMobClickLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EF8CD8582286786000A7B431 /* libMobClickLibrary.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		EF8CD7D52286686E00A7B431 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EF8CD7B42286686E00A7B431 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EF8CD7BB2286686E00A7B431;
+			remoteInfo = NewsDemo;
+		};
+		EF8CD7E02286686E00A7B431 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EF8CD7B42286686E00A7B431 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EF8CD7BB2286686E00A7B431;
+			remoteInfo = NewsDemo;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		08E29C2F448135E36A6FCBFE /* Pods-NewsDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NewsDemo.debug.xcconfig"; path = "Target Support Files/Pods-NewsDemo/Pods-NewsDemo.debug.xcconfig"; sourceTree = "<group>"; };
+		79FCBF6DBF2FB0006B83DC6C /* Pods-NewsDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NewsDemo.release.xcconfig"; path = "Target Support Files/Pods-NewsDemo/Pods-NewsDemo.release.xcconfig"; sourceTree = "<group>"; };
+		9748C468228C554500CDB674 /* Const.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Const.h; sourceTree = "<group>"; };
+		9748C469228C5CAE00CDB674 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		9758CEB3228808B20090C60D /* BarItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BarItem.h; sourceTree = "<group>"; };
+		9758CEB4228808B20090C60D /* BarItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BarItem.m; sourceTree = "<group>"; };
+		9758CEB6228809220090C60D /* MyImageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyImageView.h; sourceTree = "<group>"; };
+		9758CEB7228809220090C60D /* MyImageView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyImageView.m; sourceTree = "<group>"; };
+		9758CEB9228809730090C60D /* iCarousel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iCarousel.h; sourceTree = "<group>"; };
+		9758CEBA228809730090C60D /* iCarousel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iCarousel.m; sourceTree = "<group>"; };
+		9758CEBF228809FC0090C60D /* NSObject+Hint.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+Hint.h"; sourceTree = "<group>"; };
+		9758CEC0228809FC0090C60D /* NSObject+Hint.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Hint.m"; sourceTree = "<group>"; };
+		9758CEC222880A1A0090C60D /* AppDelegate+DDLog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AppDelegate+DDLog.h"; sourceTree = "<group>"; };
+		9758CEC322880A1A0090C60D /* AppDelegate+DDLog.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "AppDelegate+DDLog.m"; sourceTree = "<group>"; };
+		CBD97A0A5912800A232F996B /* libPods-NewsDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-NewsDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EF616259228F972300EB7367 /* HomeController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeController.h; sourceTree = "<group>"; };
+		EF61625A228F972300EB7367 /* HomeController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeController.m; sourceTree = "<group>"; };
+		EF61625C228F973200EB7367 /* HomeListController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeListController.h; sourceTree = "<group>"; };
+		EF61625D228F973200EB7367 /* HomeListController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeListController.m; sourceTree = "<group>"; };
+		EF61625F228F974200EB7367 /* HomeDetailController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeDetailController.h; sourceTree = "<group>"; };
+		EF616260228F974200EB7367 /* HomeDetailController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeDetailController.m; sourceTree = "<group>"; };
+		EF616262228F98AE00EB7367 /* MyController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyController.h; sourceTree = "<group>"; };
+		EF616263228F98AE00EB7367 /* MyController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyController.m; sourceTree = "<group>"; };
+		EF616265228F98BE00EB7367 /* RegisterController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RegisterController.h; sourceTree = "<group>"; };
+		EF616266228F98BE00EB7367 /* RegisterController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RegisterController.m; sourceTree = "<group>"; };
+		EF616268228F98D000EB7367 /* RegisterLoginController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RegisterLoginController.h; sourceTree = "<group>"; };
+		EF616269228F98D000EB7367 /* RegisterLoginController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RegisterLoginController.m; sourceTree = "<group>"; };
+		EF61626B228F98DD00EB7367 /* SetController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SetController.h; sourceTree = "<group>"; };
+		EF61626C228F98DD00EB7367 /* SetController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SetController.m; sourceTree = "<group>"; };
+		EF61626E228F99B500EB7367 /* VideoController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoController.h; sourceTree = "<group>"; };
+		EF61626F228F99B500EB7367 /* VideoController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoController.m; sourceTree = "<group>"; };
+		EF616271228F9A0200EB7367 /* WordController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WordController.h; sourceTree = "<group>"; };
+		EF616272228F9A0200EB7367 /* WordController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WordController.m; sourceTree = "<group>"; };
+		EF616274228F9A1000EB7367 /* WordDetailController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WordDetailController.h; sourceTree = "<group>"; };
+		EF616275228F9A1000EB7367 /* WordDetailController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WordDetailController.m; sourceTree = "<group>"; };
+		EF616277228F9A2300EB7367 /* PicController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PicController.h; sourceTree = "<group>"; };
+		EF616278228F9A2300EB7367 /* PicController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PicController.m; sourceTree = "<group>"; };
+		EF61627A228F9A3100EB7367 /* PicDetailController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PicDetailController.h; sourceTree = "<group>"; };
+		EF61627B228F9A3100EB7367 /* PicDetailController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PicDetailController.m; sourceTree = "<group>"; };
+		EF61628C228FAF0F00EB7367 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		EF8CD7BC2286686E00A7B431 /* NewsDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NewsDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EF8CD7BF2286686E00A7B431 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		EF8CD7C02286686E00A7B431 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		EF8CD7C22286686E00A7B431 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		EF8CD7C32286686E00A7B431 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		EF8CD7C62286686E00A7B431 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		EF8CD7C82286686E00A7B431 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		EF8CD7CB2286686E00A7B431 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		EF8CD7CD2286686E00A7B431 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EF8CD7CE2286686E00A7B431 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		EF8CD7D42286686E00A7B431 /* NewsDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NewsDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EF8CD7D82286686E00A7B431 /* NewsDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewsDemoTests.m; sourceTree = "<group>"; };
+		EF8CD7DA2286686E00A7B431 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EF8CD7DF2286686E00A7B431 /* NewsDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NewsDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EF8CD7E32286686E00A7B431 /* NewsDemoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewsDemoUITests.m; sourceTree = "<group>"; };
+		EF8CD7E52286686E00A7B431 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EF8CD805228676AA00A7B431 /* libMobClickLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libMobClickLibrary.a; path = NewsDemo/Classes/Vendor/UMAnalytics_Sdk_3.6.4/libMobClickLibrary.a; sourceTree = "<group>"; };
+		EF8CD807228676BC00A7B431 /* libUMSocial_Sdk_4.2.5.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libUMSocial_Sdk_4.2.5.a; path = NewsDemo/Classes/Vendor/UM/UMSocial_Sdk_4.2.5/libUMSocial_Sdk_4.2.5.a; sourceTree = "<group>"; };
+		EF8CD809228676CD00A7B431 /* libSocialQQ.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSocialQQ.a; path = NewsDemo/Classes/Vendor/UM/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI/libSocialQQ.a; sourceTree = "<group>"; };
+		EF8CD80B2286770300A7B431 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libWeChatSDK.a; path = NewsDemo/Classes/Vendor/UM/UMSocial_Sdk_Extra_Frameworks/Wechat/libWeChatSDK.a; sourceTree = "<group>"; };
+		EF8CD80C2286770300A7B431 /* libSocialWechat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSocialWechat.a; path = NewsDemo/Classes/Vendor/UM/UMSocial_Sdk_Extra_Frameworks/Wechat/libSocialWechat.a; sourceTree = "<group>"; };
+		EF8CD8142286785200A7B431 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		EF8CD8152286785200A7B431 /* PSCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSCollectionView.m; sourceTree = "<group>"; };
+		EF8CD8162286785200A7B431 /* PSCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSCollectionViewCell.m; sourceTree = "<group>"; };
+		EF8CD8172286785200A7B431 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		EF8CD8182286785200A7B431 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		EF8CD8192286785200A7B431 /* PSCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSCollectionView.h; sourceTree = "<group>"; };
+		EF8CD81A2286785200A7B431 /* PSCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSCollectionViewCell.h; sourceTree = "<group>"; };
+		EF8CD8232286786000A7B431 /* UMSocialQQHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocialQQHandler.h; sourceTree = "<group>"; };
+		EF8CD8242286786000A7B431 /* libSocialQQ.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSocialQQ.a; sourceTree = "<group>"; };
+		EF8CD8252286786000A7B431 /* TencentOpenApi_IOS_Bundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TencentOpenApi_IOS_Bundle.bundle; sourceTree = "<group>"; };
+		EF8CD8262286786000A7B431 /* TencentOpenAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TencentOpenAPI.framework; sourceTree = "<group>"; };
+		EF8CD8282286786000A7B431 /* libSocialWechat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSocialWechat.a; sourceTree = "<group>"; };
+		EF8CD8292286786000A7B431 /* UMSocialWechatHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocialWechatHandler.h; sourceTree = "<group>"; };
+		EF8CD82A2286786000A7B431 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
+		EF8CD82B2286786000A7B431 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
+		EF8CD82C2286786000A7B431 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
+		EF8CD82E2286786000A7B431 /* libUMSocial_Sdk_4.2.5.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUMSocial_Sdk_4.2.5.a; sourceTree = "<group>"; };
+		EF8CD8302286786000A7B431 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/UMSocialLocalizable.strings"; sourceTree = "<group>"; };
+		EF8CD8312286786000A7B431 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/UMSocialLocalizable.strings; sourceTree = "<group>"; };
+		EF8CD8322286786000A7B431 /* UMSocialSDKResourcesNew.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = UMSocialSDKResourcesNew.bundle; sourceTree = "<group>"; };
+		EF8CD8342286786000A7B431 /* UMSCommentInputController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UMSCommentInputController.xib; sourceTree = "<group>"; };
+		EF8CD8352286786000A7B431 /* UMSLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UMSLoginViewController.xib; sourceTree = "<group>"; };
+		EF8CD8362286786000A7B431 /* UMSShareListController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UMSShareListController.xib; sourceTree = "<group>"; };
+		EF8CD8372286786000A7B431 /* UMShareEditViewControlleriPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UMShareEditViewControlleriPad.xib; sourceTree = "<group>"; };
+		EF8CD8382286786000A7B431 /* UMSnsAccountViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UMSnsAccountViewController.xib; sourceTree = "<group>"; };
+		EF8CD8392286786000A7B431 /* UMShareEditViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UMShareEditViewController.xib; sourceTree = "<group>"; };
+		EF8CD83A2286786000A7B431 /* UMSCommentInputControlleriPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UMSCommentInputControlleriPad.xib; sourceTree = "<group>"; };
+		EF8CD83B2286786000A7B431 /* UMSCommentDetailController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UMSCommentDetailController.xib; sourceTree = "<group>"; };
+		EF8CD83D2286786000A7B431 /* UMSocialData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocialData.h; sourceTree = "<group>"; };
+		EF8CD83E2286786000A7B431 /* UMSocial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocial.h; sourceTree = "<group>"; };
+		EF8CD83F2286786000A7B431 /* UMSocialControllerServiceComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocialControllerServiceComment.h; sourceTree = "<group>"; };
+		EF8CD8402286786000A7B431 /* UMSocialBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocialBar.h; sourceTree = "<group>"; };
+		EF8CD8412286786000A7B431 /* UMSocialSnsPlatformManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocialSnsPlatformManager.h; sourceTree = "<group>"; };
+		EF8CD8422286786000A7B431 /* UMSocialDataService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocialDataService.h; sourceTree = "<group>"; };
+		EF8CD8432286786000A7B431 /* UMSocialSnsService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocialSnsService.h; sourceTree = "<group>"; };
+		EF8CD8442286786000A7B431 /* UMSocialControllerService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocialControllerService.h; sourceTree = "<group>"; };
+		EF8CD8452286786000A7B431 /* UMSocialAccountManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocialAccountManager.h; sourceTree = "<group>"; };
+		EF8CD8462286786000A7B431 /* UMSocialConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocialConfig.h; sourceTree = "<group>"; };
+		EF8CD8472286786000A7B431 /* UMSocialSnsData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocialSnsData.h; sourceTree = "<group>"; };
+		EF8CD8492286786000A7B431 /* iOS-social-releasenote.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "iOS-social-releasenote.html"; sourceTree = "<group>"; };
+		EF8CD84A2286786000A7B431 /* ios-social-sdk-comment-detail.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "ios-social-sdk-comment-detail.html"; sourceTree = "<group>"; };
+		EF8CD84B2286786000A7B431 /* markdown.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = markdown.css; sourceTree = "<group>"; };
+		EF8CD84C2286786000A7B431 /* ios-social-sdk-share-quick.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "ios-social-sdk-share-quick.html"; sourceTree = "<group>"; };
+		EF8CD84D2286786000A7B431 /* ios-social-sdk-login-detail.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "ios-social-sdk-login-detail.html"; sourceTree = "<group>"; };
+		EF8CD84E2286786000A7B431 /* ios-social-sdk-share-detail.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "ios-social-sdk-share-detail.html"; sourceTree = "<group>"; };
+		EF8CD84F2286786000A7B431 /* ios-social-sdk-like.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "ios-social-sdk-like.html"; sourceTree = "<group>"; };
+		EF8CD8502286786000A7B431 /* ios-social-sdk-socialbar.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "ios-social-sdk-socialbar.html"; sourceTree = "<group>"; };
+		EF8CD8512286786000A7B431 /* iOS-social-analytics-releasenote.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "iOS-social-analytics-releasenote.html"; sourceTree = "<group>"; };
+		EF8CD8522286786000A7B431 /* ios-social-sdk-login-quick.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "ios-social-sdk-login-quick.html"; sourceTree = "<group>"; };
+		EF8CD8532286786000A7B431 /* ios-social-sdk-shake.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "ios-social-sdk-shake.html"; sourceTree = "<group>"; };
+		EF8CD8542286786000A7B431 /* ios-social-sdk-comment-quick.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "ios-social-sdk-comment-quick.html"; sourceTree = "<group>"; };
+		EF8CD8562286786000A7B431 /* MobClick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClick.h; sourceTree = "<group>"; };
+		EF8CD8572286786000A7B431 /* MobClickSocialAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClickSocialAnalytics.h; sourceTree = "<group>"; };
+		EF8CD8582286786000A7B431 /* libMobClickLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMobClickLibrary.a; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		EF8CD7B92286686E00A7B431 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EF61628D228FAF0F00EB7367 /* libc++.tbd in Frameworks */,
+				EF8CD85B2286786000A7B431 /* TencentOpenAPI.framework in Frameworks */,
+				EF8CD80E2286770300A7B431 /* libSocialWechat.a in Frameworks */,
+				EF8CD8752286786000A7B431 /* libMobClickLibrary.a in Frameworks */,
+				EF8CD80A228676CD00A7B431 /* libSocialQQ.a in Frameworks */,
+				EF8CD85D2286786000A7B431 /* libWeChatSDK.a in Frameworks */,
+				EF8CD85E2286786000A7B431 /* libUMSocial_Sdk_4.2.5.a in Frameworks */,
+				6323DBA9CEA9697509E56202 /* libPods-NewsDemo.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EF8CD7D12286686E00A7B431 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EF8CD7DC2286686E00A7B431 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1EB882B36BF14DDCB2067F2A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				08E29C2F448135E36A6FCBFE /* Pods-NewsDemo.debug.xcconfig */,
+				79FCBF6DBF2FB0006B83DC6C /* Pods-NewsDemo.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		9748C45A228C50EC00CDB674 /* HomeViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = HomeViewModel;
+			sourceTree = "<group>";
+		};
+		9748C45C228C511200CDB674 /* VideoViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = VideoViewModel;
+			sourceTree = "<group>";
+		};
+		9748C45D228C514400CDB674 /* WordPicViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = WordPicViewModel;
+			sourceTree = "<group>";
+		};
+		9748C45E228C518300CDB674 /* HomeView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = HomeView;
+			sourceTree = "<group>";
+		};
+		9748C45F228C518F00CDB674 /* VideoView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = VideoView;
+			sourceTree = "<group>";
+		};
+		9748C460228C519F00CDB674 /* WordPicView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = WordPicView;
+			sourceTree = "<group>";
+		};
+		9748C461228C51AC00CDB674 /* HomeModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = HomeModel;
+			sourceTree = "<group>";
+		};
+		9748C462228C51B600CDB674 /* VideoModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = VideoModel;
+			sourceTree = "<group>";
+		};
+		9748C463228C51C500CDB674 /* WordPicModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = WordPicModel;
+			sourceTree = "<group>";
+		};
+		9758CEAF228805EF0090C60D /* BarItem */ = {
+			isa = PBXGroup;
+			children = (
+				9758CEB3228808B20090C60D /* BarItem.h */,
+				9758CEB4228808B20090C60D /* BarItem.m */,
+			);
+			path = BarItem;
+			sourceTree = "<group>";
+		};
+		9758CEB0228805FD0090C60D /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				9758CEBF228809FC0090C60D /* NSObject+Hint.h */,
+				9758CEC0228809FC0090C60D /* NSObject+Hint.m */,
+				9758CEC222880A1A0090C60D /* AppDelegate+DDLog.h */,
+				9758CEC322880A1A0090C60D /* AppDelegate+DDLog.m */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		9758CEB1228806220090C60D /* iCarousel */ = {
+			isa = PBXGroup;
+			children = (
+				9758CEB9228809730090C60D /* iCarousel.h */,
+				9758CEBA228809730090C60D /* iCarousel.m */,
+			);
+			path = iCarousel;
+			sourceTree = "<group>";
+		};
+		9758CEB22288069D0090C60D /* MyImageView */ = {
+			isa = PBXGroup;
+			children = (
+				9758CEB6228809220090C60D /* MyImageView.h */,
+				9758CEB7228809220090C60D /* MyImageView.m */,
+			);
+			path = MyImageView;
+			sourceTree = "<group>";
+		};
+		975B4755228D588000378825 /* HomeNetManager */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = HomeNetManager;
+			sourceTree = "<group>";
+		};
+		975B4756228D588A00378825 /* VideoNetManager */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = VideoNetManager;
+			sourceTree = "<group>";
+		};
+		975B4757228D589600378825 /* WordPicNetManager */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = WordPicNetManager;
+			sourceTree = "<group>";
+		};
+		975F6E08228A562900A49B59 /* HomeController */ = {
+			isa = PBXGroup;
+			children = (
+				EF616259228F972300EB7367 /* HomeController.h */,
+				EF61625A228F972300EB7367 /* HomeController.m */,
+				EF61625C228F973200EB7367 /* HomeListController.h */,
+				EF61625D228F973200EB7367 /* HomeListController.m */,
+				EF61625F228F974200EB7367 /* HomeDetailController.h */,
+				EF616260228F974200EB7367 /* HomeDetailController.m */,
+			);
+			path = HomeController;
+			sourceTree = "<group>";
+		};
+		975F6E09228A563E00A49B59 /* MyController */ = {
+			isa = PBXGroup;
+			children = (
+				EF616262228F98AE00EB7367 /* MyController.h */,
+				EF616263228F98AE00EB7367 /* MyController.m */,
+				EF616265228F98BE00EB7367 /* RegisterController.h */,
+				EF616266228F98BE00EB7367 /* RegisterController.m */,
+				EF616268228F98D000EB7367 /* RegisterLoginController.h */,
+				EF616269228F98D000EB7367 /* RegisterLoginController.m */,
+				EF61626B228F98DD00EB7367 /* SetController.h */,
+				EF61626C228F98DD00EB7367 /* SetController.m */,
+			);
+			path = MyController;
+			sourceTree = "<group>";
+		};
+		975F6E0A228A564700A49B59 /* VideoController */ = {
+			isa = PBXGroup;
+			children = (
+				EF61626E228F99B500EB7367 /* VideoController.h */,
+				EF61626F228F99B500EB7367 /* VideoController.m */,
+			);
+			path = VideoController;
+			sourceTree = "<group>";
+		};
+		979820A6228A5D0F00EC9BE9 /* WordPicController */ = {
+			isa = PBXGroup;
+			children = (
+				EF616271228F9A0200EB7367 /* WordController.h */,
+				EF616272228F9A0200EB7367 /* WordController.m */,
+				EF616274228F9A1000EB7367 /* WordDetailController.h */,
+				EF616275228F9A1000EB7367 /* WordDetailController.m */,
+				EF616277228F9A2300EB7367 /* PicController.h */,
+				EF616278228F9A2300EB7367 /* PicController.m */,
+				EF61627A228F9A3100EB7367 /* PicDetailController.h */,
+				EF61627B228F9A3100EB7367 /* PicDetailController.m */,
+			);
+			path = WordPicController;
+			sourceTree = "<group>";
+		};
+		C789411124A1B3A51F63B025 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EF61628C228FAF0F00EB7367 /* libc++.tbd */,
+				EF8CD80C2286770300A7B431 /* libSocialWechat.a */,
+				EF8CD80B2286770300A7B431 /* libWeChatSDK.a */,
+				EF8CD809228676CD00A7B431 /* libSocialQQ.a */,
+				EF8CD807228676BC00A7B431 /* libUMSocial_Sdk_4.2.5.a */,
+				EF8CD805228676AA00A7B431 /* libMobClickLibrary.a */,
+				CBD97A0A5912800A232F996B /* libPods-NewsDemo.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EF8CD7B32286686E00A7B431 = {
+			isa = PBXGroup;
+			children = (
+				EF8CD7BE2286686E00A7B431 /* NewsDemo */,
+				EF8CD7D72286686E00A7B431 /* NewsDemoTests */,
+				EF8CD7E22286686E00A7B431 /* NewsDemoUITests */,
+				EF8CD7BD2286686E00A7B431 /* Products */,
+				1EB882B36BF14DDCB2067F2A /* Pods */,
+				C789411124A1B3A51F63B025 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		EF8CD7BD2286686E00A7B431 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EF8CD7BC2286686E00A7B431 /* NewsDemo.app */,
+				EF8CD7D42286686E00A7B431 /* NewsDemoTests.xctest */,
+				EF8CD7DF2286686E00A7B431 /* NewsDemoUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EF8CD7BE2286686E00A7B431 /* NewsDemo */ = {
+			isa = PBXGroup;
+			children = (
+				EF8CD7CD2286686E00A7B431 /* Info.plist */,
+				EF8CD7F22286687B00A7B431 /* Supporting Files */,
+				EF8CD7F12286687500A7B431 /* Classes */,
+				EF8CD7C22286686E00A7B431 /* ViewController.h */,
+				EF8CD7C32286686E00A7B431 /* ViewController.m */,
+			);
+			path = NewsDemo;
+			sourceTree = "<group>";
+		};
+		EF8CD7D72286686E00A7B431 /* NewsDemoTests */ = {
+			isa = PBXGroup;
+			children = (
+				EF8CD7D82286686E00A7B431 /* NewsDemoTests.m */,
+				EF8CD7DA2286686E00A7B431 /* Info.plist */,
+			);
+			path = NewsDemoTests;
+			sourceTree = "<group>";
+		};
+		EF8CD7E22286686E00A7B431 /* NewsDemoUITests */ = {
+			isa = PBXGroup;
+			children = (
+				EF8CD7E32286686E00A7B431 /* NewsDemoUITests.m */,
+				EF8CD7E52286686E00A7B431 /* Info.plist */,
+			);
+			path = NewsDemoUITests;
+			sourceTree = "<group>";
+		};
+		EF8CD7F12286687500A7B431 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				EF8CD7F42286693500A7B431 /* Define */,
+				EF8CD7FF2286755E00A7B431 /* Vendor */,
+				EF8CD7FC2286698B00A7B431 /* Resource */,
+				EF8CD7FA2286697B00A7B431 /* Help */,
+				EF8CD7F92286697200A7B431 /* ViewModel */,
+				EF8CD7F82286696600A7B431 /* ViewController */,
+				EF8CD7F72286696000A7B431 /* View */,
+				EF8CD7F62286695900A7B431 /* Model */,
+				EF8CD7F52286694F00A7B431 /* NetManager */,
+				EF8CD7F3228668FF00A7B431 /* Other */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		EF8CD7F22286687B00A7B431 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				EF8CD7C52286686E00A7B431 /* Main.storyboard */,
+				EF8CD7C82286686E00A7B431 /* Assets.xcassets */,
+				EF8CD7CA2286686E00A7B431 /* LaunchScreen.storyboard */,
+				EF8CD7CE2286686E00A7B431 /* main.m */,
+				9748C469228C5CAE00CDB674 /* PrefixHeader.pch */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		EF8CD7F3228668FF00A7B431 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				EF8CD7BF2286686E00A7B431 /* AppDelegate.h */,
+				EF8CD7C02286686E00A7B431 /* AppDelegate.m */,
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
+		EF8CD7F42286693500A7B431 /* Define */ = {
+			isa = PBXGroup;
+			children = (
+				9748C468228C554500CDB674 /* Const.h */,
+			);
+			path = Define;
+			sourceTree = "<group>";
+		};
+		EF8CD7F52286694F00A7B431 /* NetManager */ = {
+			isa = PBXGroup;
+			children = (
+				975B4757228D589600378825 /* WordPicNetManager */,
+				975B4756228D588A00378825 /* VideoNetManager */,
+				975B4755228D588000378825 /* HomeNetManager */,
+			);
+			path = NetManager;
+			sourceTree = "<group>";
+		};
+		EF8CD7F62286695900A7B431 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				9748C463228C51C500CDB674 /* WordPicModel */,
+				9748C462228C51B600CDB674 /* VideoModel */,
+				9748C461228C51AC00CDB674 /* HomeModel */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		EF8CD7F72286696000A7B431 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				9748C460228C519F00CDB674 /* WordPicView */,
+				9748C45F228C518F00CDB674 /* VideoView */,
+				9748C45E228C518300CDB674 /* HomeView */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		EF8CD7F82286696600A7B431 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				979820A6228A5D0F00EC9BE9 /* WordPicController */,
+				975F6E0A228A564700A49B59 /* VideoController */,
+				975F6E09228A563E00A49B59 /* MyController */,
+				975F6E08228A562900A49B59 /* HomeController */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		EF8CD7F92286697200A7B431 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				9748C45D228C514400CDB674 /* WordPicViewModel */,
+				9748C45C228C511200CDB674 /* VideoViewModel */,
+				9748C45A228C50EC00CDB674 /* HomeViewModel */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		EF8CD7FA2286697B00A7B431 /* Help */ = {
+			isa = PBXGroup;
+			children = (
+				9758CEB22288069D0090C60D /* MyImageView */,
+				9758CEB1228806220090C60D /* iCarousel */,
+				9758CEB0228805FD0090C60D /* Category */,
+				9758CEAF228805EF0090C60D /* BarItem */,
+			);
+			path = Help;
+			sourceTree = "<group>";
+		};
+		EF8CD7FC2286698B00A7B431 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		EF8CD7FF2286755E00A7B431 /* Vendor */ = {
+			isa = PBXGroup;
+			children = (
+				EF8CD8202286786000A7B431 /* UM */,
+				EF8CD8552286786000A7B431 /* UMAnalytics_Sdk_3.6.4 */,
+				EF8CD8132286785200A7B431 /* PSCollectionView-master */,
+			);
+			path = Vendor;
+			sourceTree = "<group>";
+		};
+		EF8CD8132286785200A7B431 /* PSCollectionView-master */ = {
+			isa = PBXGroup;
+			children = (
+				EF8CD8142286785200A7B431 /* LICENSE */,
+				EF8CD8152286785200A7B431 /* PSCollectionView.m */,
+				EF8CD8162286785200A7B431 /* PSCollectionViewCell.m */,
+				EF8CD8172286785200A7B431 /* README.md */,
+				EF8CD8182286785200A7B431 /* .gitignore */,
+				EF8CD8192286785200A7B431 /* PSCollectionView.h */,
+				EF8CD81A2286785200A7B431 /* PSCollectionViewCell.h */,
+			);
+			path = "PSCollectionView-master";
+			sourceTree = "<group>";
+		};
+		EF8CD8202286786000A7B431 /* UM */ = {
+			isa = PBXGroup;
+			children = (
+				EF8CD8212286786000A7B431 /* UMSocial_Sdk_Extra_Frameworks */,
+				EF8CD82D2286786000A7B431 /* UMSocial_Sdk_4.2.5 */,
+				EF8CD8482286786000A7B431 /* UMSocial_Sdk_Instructions */,
+			);
+			path = UM;
+			sourceTree = "<group>";
+		};
+		EF8CD8212286786000A7B431 /* UMSocial_Sdk_Extra_Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EF8CD8222286786000A7B431 /* TencentOpenAPI */,
+				EF8CD8272286786000A7B431 /* Wechat */,
+			);
+			path = UMSocial_Sdk_Extra_Frameworks;
+			sourceTree = "<group>";
+		};
+		EF8CD8222286786000A7B431 /* TencentOpenAPI */ = {
+			isa = PBXGroup;
+			children = (
+				EF8CD8232286786000A7B431 /* UMSocialQQHandler.h */,
+				EF8CD8242286786000A7B431 /* libSocialQQ.a */,
+				EF8CD8252286786000A7B431 /* TencentOpenApi_IOS_Bundle.bundle */,
+				EF8CD8262286786000A7B431 /* TencentOpenAPI.framework */,
+			);
+			path = TencentOpenAPI;
+			sourceTree = "<group>";
+		};
+		EF8CD8272286786000A7B431 /* Wechat */ = {
+			isa = PBXGroup;
+			children = (
+				EF8CD8282286786000A7B431 /* libSocialWechat.a */,
+				EF8CD8292286786000A7B431 /* UMSocialWechatHandler.h */,
+				EF8CD82A2286786000A7B431 /* WXApi.h */,
+				EF8CD82B2286786000A7B431 /* WXApiObject.h */,
+				EF8CD82C2286786000A7B431 /* libWeChatSDK.a */,
+			);
+			path = Wechat;
+			sourceTree = "<group>";
+		};
+		EF8CD82D2286786000A7B431 /* UMSocial_Sdk_4.2.5 */ = {
+			isa = PBXGroup;
+			children = (
+				EF8CD82E2286786000A7B431 /* libUMSocial_Sdk_4.2.5.a */,
+				EF8CD82F2286786000A7B431 /* UMSocialLocalizable.strings */,
+				EF8CD8322286786000A7B431 /* UMSocialSDKResourcesNew.bundle */,
+				EF8CD8332286786000A7B431 /* SocialSDKXib */,
+				EF8CD83C2286786000A7B431 /* Header */,
+			);
+			path = UMSocial_Sdk_4.2.5;
+			sourceTree = "<group>";
+		};
+		EF8CD8332286786000A7B431 /* SocialSDKXib */ = {
+			isa = PBXGroup;
+			children = (
+				EF8CD8342286786000A7B431 /* UMSCommentInputController.xib */,
+				EF8CD8352286786000A7B431 /* UMSLoginViewController.xib */,
+				EF8CD8362286786000A7B431 /* UMSShareListController.xib */,
+				EF8CD8372286786000A7B431 /* UMShareEditViewControlleriPad.xib */,
+				EF8CD8382286786000A7B431 /* UMSnsAccountViewController.xib */,
+				EF8CD8392286786000A7B431 /* UMShareEditViewController.xib */,
+				EF8CD83A2286786000A7B431 /* UMSCommentInputControlleriPad.xib */,
+				EF8CD83B2286786000A7B431 /* UMSCommentDetailController.xib */,
+			);
+			path = SocialSDKXib;
+			sourceTree = "<group>";
+		};
+		EF8CD83C2286786000A7B431 /* Header */ = {
+			isa = PBXGroup;
+			children = (
+				EF8CD83D2286786000A7B431 /* UMSocialData.h */,
+				EF8CD83E2286786000A7B431 /* UMSocial.h */,
+				EF8CD83F2286786000A7B431 /* UMSocialControllerServiceComment.h */,
+				EF8CD8402286786000A7B431 /* UMSocialBar.h */,
+				EF8CD8412286786000A7B431 /* UMSocialSnsPlatformManager.h */,
+				EF8CD8422286786000A7B431 /* UMSocialDataService.h */,
+				EF8CD8432286786000A7B431 /* UMSocialSnsService.h */,
+				EF8CD8442286786000A7B431 /* UMSocialControllerService.h */,
+				EF8CD8452286786000A7B431 /* UMSocialAccountManager.h */,
+				EF8CD8462286786000A7B431 /* UMSocialConfig.h */,
+				EF8CD8472286786000A7B431 /* UMSocialSnsData.h */,
+			);
+			path = Header;
+			sourceTree = "<group>";
+		};
+		EF8CD8482286786000A7B431 /* UMSocial_Sdk_Instructions */ = {
+			isa = PBXGroup;
+			children = (
+				EF8CD8492286786000A7B431 /* iOS-social-releasenote.html */,
+				EF8CD84A2286786000A7B431 /* ios-social-sdk-comment-detail.html */,
+				EF8CD84B2286786000A7B431 /* markdown.css */,
+				EF8CD84C2286786000A7B431 /* ios-social-sdk-share-quick.html */,
+				EF8CD84D2286786000A7B431 /* ios-social-sdk-login-detail.html */,
+				EF8CD84E2286786000A7B431 /* ios-social-sdk-share-detail.html */,
+				EF8CD84F2286786000A7B431 /* ios-social-sdk-like.html */,
+				EF8CD8502286786000A7B431 /* ios-social-sdk-socialbar.html */,
+				EF8CD8512286786000A7B431 /* iOS-social-analytics-releasenote.html */,
+				EF8CD8522286786000A7B431 /* ios-social-sdk-login-quick.html */,
+				EF8CD8532286786000A7B431 /* ios-social-sdk-shake.html */,
+				EF8CD8542286786000A7B431 /* ios-social-sdk-comment-quick.html */,
+			);
+			path = UMSocial_Sdk_Instructions;
+			sourceTree = "<group>";
+		};
+		EF8CD8552286786000A7B431 /* UMAnalytics_Sdk_3.6.4 */ = {
+			isa = PBXGroup;
+			children = (
+				EF8CD8562286786000A7B431 /* MobClick.h */,
+				EF8CD8572286786000A7B431 /* MobClickSocialAnalytics.h */,
+				EF8CD8582286786000A7B431 /* libMobClickLibrary.a */,
+			);
+			path = UMAnalytics_Sdk_3.6.4;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		EF8CD7BB2286686E00A7B431 /* NewsDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EF8CD7E82286686E00A7B431 /* Build configuration list for PBXNativeTarget "NewsDemo" */;
+			buildPhases = (
+				1AB07D4D2603733F67A67BE3 /* [CP] Check Pods Manifest.lock */,
+				EF8CD7B82286686E00A7B431 /* Sources */,
+				EF8CD7B92286686E00A7B431 /* Frameworks */,
+				EF8CD7BA2286686E00A7B431 /* Resources */,
+				A73C58BFED1307885FD8242F /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NewsDemo;
+			productName = NewsDemo;
+			productReference = EF8CD7BC2286686E00A7B431 /* NewsDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+		EF8CD7D32286686E00A7B431 /* NewsDemoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EF8CD7EB2286686E00A7B431 /* Build configuration list for PBXNativeTarget "NewsDemoTests" */;
+			buildPhases = (
+				EF8CD7D02286686E00A7B431 /* Sources */,
+				EF8CD7D12286686E00A7B431 /* Frameworks */,
+				EF8CD7D22286686E00A7B431 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EF8CD7D62286686E00A7B431 /* PBXTargetDependency */,
+			);
+			name = NewsDemoTests;
+			productName = NewsDemoTests;
+			productReference = EF8CD7D42286686E00A7B431 /* NewsDemoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		EF8CD7DE2286686E00A7B431 /* NewsDemoUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EF8CD7EE2286686E00A7B431 /* Build configuration list for PBXNativeTarget "NewsDemoUITests" */;
+			buildPhases = (
+				EF8CD7DB2286686E00A7B431 /* Sources */,
+				EF8CD7DC2286686E00A7B431 /* Frameworks */,
+				EF8CD7DD2286686E00A7B431 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EF8CD7E12286686E00A7B431 /* PBXTargetDependency */,
+			);
+			name = NewsDemoUITests;
+			productName = NewsDemoUITests;
+			productReference = EF8CD7DF2286686E00A7B431 /* NewsDemoUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		EF8CD7B42286686E00A7B431 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1010;
+				ORGANIZATIONNAME = news;
+				TargetAttributes = {
+					EF8CD7BB2286686E00A7B431 = {
+						CreatedOnToolsVersion = 10.1;
+					};
+					EF8CD7D32286686E00A7B431 = {
+						CreatedOnToolsVersion = 10.1;
+						TestTargetID = EF8CD7BB2286686E00A7B431;
+					};
+					EF8CD7DE2286686E00A7B431 = {
+						CreatedOnToolsVersion = 10.1;
+						TestTargetID = EF8CD7BB2286686E00A7B431;
+					};
+				};
+			};
+			buildConfigurationList = EF8CD7B72286686E00A7B431 /* Build configuration list for PBXProject "NewsDemo" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+				"zh-Hans",
+			);
+			mainGroup = EF8CD7B32286686E00A7B431;
+			productRefGroup = EF8CD7BD2286686E00A7B431 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				EF8CD7BB2286686E00A7B431 /* NewsDemo */,
+				EF8CD7D32286686E00A7B431 /* NewsDemoTests */,
+				EF8CD7DE2286686E00A7B431 /* NewsDemoUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		EF8CD7BA2286686E00A7B431 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EF8CD7CC2286686E00A7B431 /* LaunchScreen.storyboard in Resources */,
+				EF8CD8682286786000A7B431 /* UMSCommentDetailController.xib in Resources */,
+				EF8CD8712286786000A7B431 /* iOS-social-analytics-releasenote.html in Resources */,
+				EF8CD8722286786000A7B431 /* ios-social-sdk-login-quick.html in Resources */,
+				EF8CD7C92286686E00A7B431 /* Assets.xcassets in Resources */,
+				EF8CD85F2286786000A7B431 /* UMSocialLocalizable.strings in Resources */,
+				EF8CD8602286786000A7B431 /* UMSocialSDKResourcesNew.bundle in Resources */,
+				EF8CD86E2286786000A7B431 /* ios-social-sdk-share-detail.html in Resources */,
+				EF8CD8672286786000A7B431 /* UMSCommentInputControlleriPad.xib in Resources */,
+				EF8CD86C2286786000A7B431 /* ios-social-sdk-share-quick.html in Resources */,
+				EF8CD8642286786000A7B431 /* UMShareEditViewControlleriPad.xib in Resources */,
+				EF8CD81E2286785200A7B431 /* README.md in Resources */,
+				EF8CD81B2286785200A7B431 /* LICENSE in Resources */,
+				EF8CD86A2286786000A7B431 /* ios-social-sdk-comment-detail.html in Resources */,
+				EF8CD85A2286786000A7B431 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
+				EF8CD86D2286786000A7B431 /* ios-social-sdk-login-detail.html in Resources */,
+				EF8CD81F2286785200A7B431 /* .gitignore in Resources */,
+				EF8CD86F2286786000A7B431 /* ios-social-sdk-like.html in Resources */,
+				EF8CD8742286786000A7B431 /* ios-social-sdk-comment-quick.html in Resources */,
+				EF8CD8612286786000A7B431 /* UMSCommentInputController.xib in Resources */,
+				EF8CD7C72286686E00A7B431 /* Main.storyboard in Resources */,
+				EF8CD86B2286786000A7B431 /* markdown.css in Resources */,
+				EF8CD8692286786000A7B431 /* iOS-social-releasenote.html in Resources */,
+				EF8CD8622286786000A7B431 /* UMSLoginViewController.xib in Resources */,
+				EF8CD8732286786000A7B431 /* ios-social-sdk-shake.html in Resources */,
+				EF8CD8632286786000A7B431 /* UMSShareListController.xib in Resources */,
+				EF8CD8702286786000A7B431 /* ios-social-sdk-socialbar.html in Resources */,
+				EF8CD8652286786000A7B431 /* UMSnsAccountViewController.xib in Resources */,
+				EF8CD8662286786000A7B431 /* UMShareEditViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EF8CD7D22286686E00A7B431 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EF8CD7DD2286686E00A7B431 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1AB07D4D2603733F67A67BE3 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-NewsDemo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A73C58BFED1307885FD8242F /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-NewsDemo/Pods-NewsDemo-resources.sh",
+				"${PODS_ROOT}/FlatUIKit/Resources/flat-ui-icons-regular.ttf",
+				"${PODS_ROOT}/FlatUIKit/Resources/Lato-Bold.ttf",
+				"${PODS_ROOT}/FlatUIKit/Resources/Lato-Italic.ttf",
+				"${PODS_ROOT}/FlatUIKit/Resources/Lato-Light.ttf",
+				"${PODS_ROOT}/FlatUIKit/Resources/Lato-Regular.ttf",
+				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/MWPhotoBrowser/MWPhotoBrowser.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/flat-ui-icons-regular.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Lato-Bold.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Lato-Italic.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Lato-Light.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Lato-Regular.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MJRefresh.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MWPhotoBrowser.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-NewsDemo/Pods-NewsDemo-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		EF8CD7B82286686E00A7B431 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EF616261228F974200EB7367 /* HomeDetailController.m in Sources */,
+				EF616267228F98BE00EB7367 /* RegisterController.m in Sources */,
+				EF616279228F9A2300EB7367 /* PicController.m in Sources */,
+				EF8CD7C42286686E00A7B431 /* ViewController.m in Sources */,
+				EF616270228F99B500EB7367 /* VideoController.m in Sources */,
+				EF616273228F9A0200EB7367 /* WordController.m in Sources */,
+				EF61627C228F9A3100EB7367 /* PicDetailController.m in Sources */,
+				EF8CD7CF2286686E00A7B431 /* main.m in Sources */,
+				EF61626A228F98D000EB7367 /* RegisterLoginController.m in Sources */,
+				EF616264228F98AE00EB7367 /* MyController.m in Sources */,
+				EF8CD7C12286686E00A7B431 /* AppDelegate.m in Sources */,
+				EF8CD81C2286785200A7B431 /* PSCollectionView.m in Sources */,
+				EF61625B228F972300EB7367 /* HomeController.m in Sources */,
+				EF61626D228F98DD00EB7367 /* SetController.m in Sources */,
+				9758CEB5228808B20090C60D /* BarItem.m in Sources */,
+				9758CEBB228809730090C60D /* iCarousel.m in Sources */,
+				EF8CD81D2286785200A7B431 /* PSCollectionViewCell.m in Sources */,
+				9758CEC1228809FC0090C60D /* NSObject+Hint.m in Sources */,
+				9758CEB8228809220090C60D /* MyImageView.m in Sources */,
+				EF616276228F9A1000EB7367 /* WordDetailController.m in Sources */,
+				9758CEC422880A1A0090C60D /* AppDelegate+DDLog.m in Sources */,
+				EF61625E228F973200EB7367 /* HomeListController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EF8CD7D02286686E00A7B431 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EF8CD7D92286686E00A7B431 /* NewsDemoTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EF8CD7DB2286686E00A7B431 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EF8CD7E42286686E00A7B431 /* NewsDemoUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		EF8CD7D62286686E00A7B431 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EF8CD7BB2286686E00A7B431 /* NewsDemo */;
+			targetProxy = EF8CD7D52286686E00A7B431 /* PBXContainerItemProxy */;
+		};
+		EF8CD7E12286686E00A7B431 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EF8CD7BB2286686E00A7B431 /* NewsDemo */;
+			targetProxy = EF8CD7E02286686E00A7B431 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		EF8CD7C52286686E00A7B431 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EF8CD7C62286686E00A7B431 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		EF8CD7CA2286686E00A7B431 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EF8CD7CB2286686E00A7B431 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		EF8CD82F2286786000A7B431 /* UMSocialLocalizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EF8CD8302286786000A7B431 /* zh-Hans */,
+				EF8CD8312286786000A7B431 /* en */,
+			);
+			name = UMSocialLocalizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		EF8CD7E62286686E00A7B431 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		EF8CD7E72286686E00A7B431 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		EF8CD7E92286686E00A7B431 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 08E29C2F448135E36A6FCBFE /* Pods-NewsDemo.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/NewsDemo/Classes/Vendor/UM/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "NewsDemo/Supporting Files/PrefixHeader.pch";
+				INFOPLIST_FILE = NewsDemo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/NewsDemo/Classes/Vendor/UMAnalytics_Sdk_3.6.4",
+					"$(PROJECT_DIR)/NewsDemo/Classes/Vendor/UM/UMSocial_Sdk_4.2.5",
+					"$(PROJECT_DIR)/NewsDemo/Classes/Vendor/UM/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
+					"$(PROJECT_DIR)/NewsDemo/Classes/Vendor/UM/UMSocial_Sdk_Extra_Frameworks/Wechat",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = news.NewsDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		EF8CD7EA2286686E00A7B431 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 79FCBF6DBF2FB0006B83DC6C /* Pods-NewsDemo.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/NewsDemo/Classes/Vendor/UM/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "NewsDemo/Supporting Files/PrefixHeader.pch";
+				INFOPLIST_FILE = NewsDemo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/NewsDemo/Classes/Vendor/UMAnalytics_Sdk_3.6.4",
+					"$(PROJECT_DIR)/NewsDemo/Classes/Vendor/UM/UMSocial_Sdk_4.2.5",
+					"$(PROJECT_DIR)/NewsDemo/Classes/Vendor/UM/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
+					"$(PROJECT_DIR)/NewsDemo/Classes/Vendor/UM/UMSocial_Sdk_Extra_Frameworks/Wechat",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = news.NewsDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		EF8CD7EC2286686E00A7B431 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = NewsDemoTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = news.NewsDemoTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NewsDemo.app/NewsDemo";
+			};
+			name = Debug;
+		};
+		EF8CD7ED2286686E00A7B431 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = NewsDemoTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = news.NewsDemoTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NewsDemo.app/NewsDemo";
+			};
+			name = Release;
+		};
+		EF8CD7EF2286686E00A7B431 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = NewsDemoUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = news.NewsDemoUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = NewsDemo;
+			};
+			name = Debug;
+		};
+		EF8CD7F02286686E00A7B431 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = NewsDemoUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = news.NewsDemoUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = NewsDemo;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		EF8CD7B72286686E00A7B431 /* Build configuration list for PBXProject "NewsDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EF8CD7E62286686E00A7B431 /* Debug */,
+				EF8CD7E72286686E00A7B431 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EF8CD7E82286686E00A7B431 /* Build configuration list for PBXNativeTarget "NewsDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EF8CD7E92286686E00A7B431 /* Debug */,
+				EF8CD7EA2286686E00A7B431 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EF8CD7EB2286686E00A7B431 /* Build configuration list for PBXNativeTarget "NewsDemoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EF8CD7EC2286686E00A7B431 /* Debug */,
+				EF8CD7ED2286686E00A7B431 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EF8CD7EE2286686E00A7B431 /* Build configuration list for PBXNativeTarget "NewsDemoUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EF8CD7EF2286686E00A7B431 /* Debug */,
+				EF8CD7F02286686E00A7B431 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = EF8CD7B42286686E00A7B431 /* Project object */;
+}
