@@ -97,6 +97,8 @@
             make.size.mas_equalTo(CGSizeMake(65, 65));
         }];
         
+        [myBtn addTarget:self action:@selector(jumpToLogin) forControlEvents:UIControlEventTouchUpInside];
+        
         self.label = [UILabel new];
         self.label.text = @"注册/登陆";
         self.label.font = kSubtitleFont;
@@ -133,4 +135,16 @@
     return _tableView;
 }
 
+/*
+- (void)toLoginOrRegister{
+    [self.headView setUserInteractionEnabled:YES];
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(jumpToLogin)];
+    [self.headView addGestureRecognizer:tapGesture];
+}
+*/
+- (void)jumpToLogin{
+    RegisterLoginController *controller = [[RegisterLoginController alloc] init];
+    controller.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:controller animated:YES];
+}
 @end
