@@ -41,6 +41,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    SingletonUser *singleton = [SingletonUser sharedInstance];
+    NSLog(@"%@", singleton.username);
+    
+    
     self.navigationController.navigationBar.hidden = NO;
     [BarItem addBackItemToVC:self];
     self->currentState = 0;
@@ -102,6 +107,7 @@
     [self.confirmButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     self.confirmButton.backgroundColor = [UIColor blueColor];
     [self.view addSubview:self.confirmButton];
+    [self.confirmButton addTarget:self action:@selector(validUser) forControlEvents:UIControlEventTouchUpInside];
     
     [self.changeCurrentState addTarget:self action:@selector(changeState) forControlEvents:UIControlEventTouchUpInside];
 }
@@ -219,6 +225,11 @@
     
     // 返回新的改变大小后的图片
     return scaledImage;
+}
+
+- (void)validUser {
+    [self.navigationController popViewControllerAnimated:YES];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"userInfo" object:self userInfo:@{@"username": @"test", @"headImage": self.headImageView.image}];
 }
 
 @end

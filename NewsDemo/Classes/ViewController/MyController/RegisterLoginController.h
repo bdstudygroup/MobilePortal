@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "../../Help/Singleton/SingletonUser.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
