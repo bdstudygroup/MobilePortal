@@ -228,6 +228,9 @@
 }
 
 - (void)validUser {
+    SingletonUser *singleton = [SingletonUser sharedInstance];
+    singleton.username = @"test";
+    singleton.tag = true;
     [self.navigationController popViewControllerAnimated:YES];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"userInfo" object:self userInfo:@{@"username": @"test", @"headImage": self.headImageView.image}];
 }
