@@ -37,10 +37,6 @@
     [super viewDidLoad];
     self.view.backgroundColor = kRGBColor(244, 244, 244);
     
-    SingletonUser *singleton = [SingletonUser sharedInstance];
-    singleton.username = @"ppp";
-    NSLog(@"%@", singleton.username);
-    
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getInfo:) name:@"userInfo" object:nil];
 }
@@ -152,15 +148,36 @@
 */
 
 - (void)jumpToLogin{
-    RegisterLoginController *controller = [[RegisterLoginController alloc] init];
-    controller.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:controller animated:YES];
+    SingletonUser *singleton = [SingletonUser sharedInstance];
+    NSLog(@"%@", singleton.username);
+    if(singleton.tag) {
+        [self showAlertMessage:@"你已经登陆!"];
+    } else {
+        RegisterLoginController *controller = [[RegisterLoginController alloc] init];
+        controller.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:controller animated:YES];
+    }
 }
+
+- (void) showAlertMessage:(NSString *) myMessage{
+    //创建提示框指针
+    UIAlertController *alertMessage;
+    //用参数myMessage初始化提示框
+    alertMessage = [UIAlertController alertControllerWithTitle:@"提示" message:myMessage preferredStyle:UIAlertControllerStyleAlert];
+    //添加按钮
+    [alertMessage addAction:[UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:nil]];
+    
+    //display the message on screen  显示在屏幕上
+    [self presentViewController:alertMessage animated:YES completion:nil];
+    
+}
+
 
 //收到通知的时候调用这个方法接受到通知消息
 - (void)getInfo:(NSNotification *)noti {
     NSDictionary *dict = noti.userInfo;
     NSLog(@"%@",dict[@"username"]);
+    self.label.text = dict[@"username"];
     _myBtn.layer.cornerRadius = _myBtn.frame.size.width /2;
     _myBtn.clipsToBounds = YES;
     [_myBtn setBackgroundImage:dict[@"headImage"] forState:UIControlStateNormal];

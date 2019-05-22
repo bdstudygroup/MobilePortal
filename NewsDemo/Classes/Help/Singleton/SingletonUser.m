@@ -26,7 +26,7 @@ static SingletonUser *sharedSingleton = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         sharedSingleton = [super init];
-        sharedSingleton.username = @"Vilin";
+        sharedSingleton.username = @"";
         sharedSingleton.tag = false;
     });
     return sharedSingleton;
