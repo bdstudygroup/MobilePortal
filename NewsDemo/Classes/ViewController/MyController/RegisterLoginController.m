@@ -10,7 +10,7 @@
 #import "RegisterController.h"
 #import "MyController.h"
 
-@interface RegisterLoginController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate>{
+@interface RegisterLoginController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate, NSURLSessionDelegate>{
     NSString *username;
     NSString *password;
     NSInteger currentState;
@@ -227,12 +227,112 @@
     return scaledImage;
 }
 
+/*
+ 用post完成用户注册，get完成用户登陆
+ 在注册的情况下；post的字段是（用户名+分隔符+密码+分隔符+头像的str），应该返回允不允许用户进行注册
+ 在登陆的情况下:get的url格式是（http://127.0.0.1:18081/user?name=test&password=pass），应该返回是否成功及用户头像
+ */
 - (void)validUser {
+    //获取输入框内容
+    NSString *username = self.usernameFiled.text;
+    NSString *password = self.passwordFiled.text;
+    NSString *confirmPassword = self.confirmPasswordFiled.text;
+    NSString *SPLIT = @"--AB--";
+    //NSLog(@"%d", [username isEqualToString:@""]);
+    if(self->currentState == 0) { //登陆
+        if([username isEqualToString:@""] || [password isEqualToString:@""]) {
+            [self showAlertMessage:@"字段不能为空"];
+        } else {
+            NSURLSessionConfiguration *defaultConfigObject = [NSURLSessionConfiguration defaultSessionConfiguration];
+            NSURLSession *delegateFreeSession = [NSURLSession sessionWithConfiguration: defaultConfigObject
+                                                                              delegate: self
+                                                                         delegateQueue: [NSOperationQueue mainQueue]];
+            
+            NSMutableString *parameterString = [[NSMutableString alloc]init];
+            [parameterString appendFormat:@"%@=%@", @"http://127.0.0.1:18081/user?name", username];
+            [parameterString appendString:@"&"];
+            [parameterString appendFormat:@"%@=%@", @"password", password];
+            NSURL * url = [NSURL URLWithString:parameterString];
+            NSLog(@"%@", url);
+            
+            NSURLRequest *request = [NSURLRequest requestWithURL:url];
+            
+            NSURLSessionDataTask * dataTask = [delegateFreeSession dataTaskWithRequest:request
+                                                                     completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                                         if(error == nil)
+                                                                         {
+                                                                             NSString * text = [[NSString alloc] initWithData: data encoding: NSUTF8StringEncoding];
+                                                                             NSLog(@"Data = %@",text);
+                                                                         }
+                                                                         
+                                                                     }];
+            
+            [dataTask resume];
+        }
+    } else { //注册
+        if([username isEqualToString:@""] || [password isEqualToString:@""] || [confirmPassword isEqualToString:@""]) {
+            [self showAlertMessage:@"字段不能为空"];
+        } else if(![password isEqualToString:confirmPassword]) {
+            [self showAlertMessage:@"密码不对应"];
+        } else {
+            //传递参数的格式
+            NSString *imageStr = [self UIImageToBase64Str:self.headImageView.image];
+            NSString *params = @"";
+            params = [params stringByAppendingFormat:@"%@%@%@%@%@",username, SPLIT, password,SPLIT,imageStr];
+            
+            NSURLSessionConfiguration *defaultConfigObject = [NSURLSessionConfiguration defaultSessionConfiguration];
+            NSURLSession *delegateFreeSession = [NSURLSession sessionWithConfiguration:defaultConfigObject delegate:self delegateQueue:[NSOperationQueue mainQueue]];
+            NSURL *url = [NSURL URLWithString:@""];
+            NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
+            
+            [urlRequest setHTTPMethod:@"POST"];
+            [urlRequest setHTTPBody:[params dataUsingEncoding:NSUTF8StringEncoding]];
+            
+            NSURLSessionDataTask *dataTask = [delegateFreeSession dataTaskWithRequest:urlRequest
+                                                                    completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                                        NSLog(@"Resonse:%@ %@\n", response, error);
+                                                                        if(error == nil) {
+                                                                            NSString *text = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                                                                            NSLog(@"Data = %@", text);
+                                                                        }
+                                                                    }];
+            [dataTask resume];
+        }
+    }
     SingletonUser *singleton = [SingletonUser sharedInstance];
     singleton.username = @"test";
     singleton.tag = true;
     [self.navigationController popViewControllerAnimated:YES];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"userInfo" object:self userInfo:@{@"username": @"test", @"headImage": self.headImageView.image}];
+}
+
+- (void) showAlertMessage:(NSString *) myMessage{
+    //创建提示框指针
+    UIAlertController *alertMessage;
+    //用参数myMessage初始化提示框
+    alertMessage = [UIAlertController alertControllerWithTitle:@"提示" message:myMessage preferredStyle:UIAlertControllerStyleAlert];
+    //添加按钮
+    [alertMessage addAction:[UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:nil]];
+    
+    //display the message on screen  显示在屏幕上
+    [self presentViewController:alertMessage animated:YES completion:nil];
+    
+}
+
+//图片->字符串
+-(NSString *)UIImageToBase64Str:(UIImage *) image
+{
+    NSData *data = UIImageJPEGRepresentation(image, 0.6f);
+    NSString *encodedImageStr = [data base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    return encodedImageStr;
+}
+
+//字符串->图片
+-(UIImage *)Base64StrToUIImage:(NSString *)encodedImageStr
+{
+    NSData  *decodedImageData = [[NSData alloc]initWithBase64EncodedString:encodedImageStr options:NSDataBase64DecodingIgnoreUnknownCharacters];
+    UIImage *decodedImage = [UIImage imageWithData:decodedImageData];
+    return decodedImage;
 }
 
 @end
