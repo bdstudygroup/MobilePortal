@@ -13,6 +13,7 @@
 @interface MyController () <UITableViewDataSource, UITableViewDelegate>
 @property (strong, nonatomic) UIView *headView;
 @property (strong, nonatomic) UITableView *tableView;
+@property (strong, nonatomic) UIButton *myBtn;
 
 @end
 
@@ -35,6 +36,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = kRGBColor(244, 244, 244);
+    
+    //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getInfo:) name:@"userInfo" object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -89,15 +93,15 @@
             [self.navigationController pushViewController:vc animated:YES];
         } forControlEvents:UIControlEventTouchUpInside];
         
-        UIButton *myBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [myBtn setBackgroundImage:[UIImage imageNamed:@"login_portrait_ph"] forState:UIControlStateNormal];
-        [_headView addSubview:myBtn];
-        [myBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        _myBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_myBtn setBackgroundImage:[UIImage imageNamed:@"login_portrait_ph"] forState:UIControlStateNormal];
+        [_headView addSubview:_myBtn];
+        [_myBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.center.mas_equalTo(0);
             make.size.mas_equalTo(CGSizeMake(65, 65));
         }];
         
-        [myBtn addTarget:self action:@selector(jumpToLogin) forControlEvents:UIControlEventTouchUpInside];
+        [_myBtn addTarget:self action:@selector(jumpToLogin) forControlEvents:UIControlEventTouchUpInside];
         
         self.label = [UILabel new];
         self.label.text = @"注册/登陆";
@@ -106,9 +110,9 @@
         self.label.textAlignment = NSTextAlignmentCenter;
         [_headView addSubview:self.label];
         [self.label mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerX.mas_equalTo(myBtn);
+            make.centerX.mas_equalTo(self.myBtn);
             make.width.mas_equalTo(65);
-            make.top.mas_equalTo(myBtn.mas_bottom).mas_equalTo(5);
+            make.top.mas_equalTo(self.myBtn.mas_bottom).mas_equalTo(5);
         }];
         
         [self.view addSubview:_headView];
@@ -142,9 +146,46 @@
     [self.headView addGestureRecognizer:tapGesture];
 }
 */
+
 - (void)jumpToLogin{
-    RegisterLoginController *controller = [[RegisterLoginController alloc] init];
-    controller.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:controller animated:YES];
+    SingletonUser *singleton = [SingletonUser sharedInstance];
+    NSLog(@"%@", singleton.username);
+    if(singleton.tag) {
+        [self showAlertMessage:@"你已经登陆!"];
+    } else {
+        RegisterLoginController *controller = [[RegisterLoginController alloc] init];
+        controller.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:controller animated:YES];
+    }
 }
+
+- (void) showAlertMessage:(NSString *) myMessage{
+    //创建提示框指针
+    UIAlertController *alertMessage;
+    //用参数myMessage初始化提示框
+    alertMessage = [UIAlertController alertControllerWithTitle:@"提示" message:myMessage preferredStyle:UIAlertControllerStyleAlert];
+    //添加按钮
+    [alertMessage addAction:[UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:nil]];
+    
+    //display the message on screen  显示在屏幕上
+    [self presentViewController:alertMessage animated:YES completion:nil];
+    
+}
+
+
+//收到通知的时候调用这个方法接受到通知消息
+- (void)getInfo:(NSNotification *)noti {
+    NSDictionary *dict = noti.userInfo;
+    NSLog(@"%@",dict[@"username"]);
+    self.label.text = dict[@"username"];
+    _myBtn.layer.cornerRadius = _myBtn.frame.size.width /2;
+    _myBtn.clipsToBounds = YES;
+    [_myBtn setBackgroundImage:dict[@"headImage"] forState:UIControlStateNormal];
+    
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 @end
