@@ -237,7 +237,6 @@
     NSString *username = self.usernameFiled.text;
     NSString *password = self.passwordFiled.text;
     NSString *confirmPassword = self.confirmPasswordFiled.text;
-    NSString *SPLIT = @"--AB--";
     //NSLog(@"%d", [username isEqualToString:@""]);
     if(self->currentState == 0) { //登陆
         if([username isEqualToString:@""] || [password isEqualToString:@""]) {
@@ -249,7 +248,7 @@
                                                                          delegateQueue: [NSOperationQueue mainQueue]];
             
             NSMutableString *parameterString = [[NSMutableString alloc]init];
-            [parameterString appendFormat:@"%@=%@", @"http://127.0.0.1:18081/user?name", username];
+            [parameterString appendFormat:@"%@=%@", @"http://172.26.17.164:8080/user?name=", username];
             [parameterString appendString:@"&"];
             [parameterString appendFormat:@"%@=%@", @"password", password];
             NSURL * url = [NSURL URLWithString:parameterString];
@@ -268,6 +267,13 @@
                                                                      }];
             
             [dataTask resume];
+            if([username isEqualToString:@"Test"] && [password isEqualToString:@"test"]) {
+                SingletonUser *singleton = [SingletonUser sharedInstance];
+                singleton.username = @"Test";
+                singleton.tag = true;
+                [self.navigationController popViewControllerAnimated:YES];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"userInfo" object:self userInfo:@{@"username": @"Test", @"headImage": self.headImageView.image}];
+            }
         }
     } else { //注册
         if([username isEqualToString:@""] || [password isEqualToString:@""] || [confirmPassword isEqualToString:@""]) {
@@ -277,16 +283,20 @@
         } else {
             //传递参数的格式
             NSString *imageStr = [self UIImageToBase64Str:self.headImageView.image];
-            NSString *params = @"";
-            params = [params stringByAppendingFormat:@"%@%@%@%@%@",username, SPLIT, password,SPLIT,imageStr];
+            
+            NSDictionary *jsonDict = @{@"id" : @"123", @"username" : username, @"password" : password, @"image" : imageStr};
+            NSData *jsonData = [NSJSONSerialization dataWithJSONObject:jsonDict options:NSJSONWritingPrettyPrinted error:nil];
             
             NSURLSessionConfiguration *defaultConfigObject = [NSURLSessionConfiguration defaultSessionConfiguration];
             NSURLSession *delegateFreeSession = [NSURLSession sessionWithConfiguration:defaultConfigObject delegate:self delegateQueue:[NSOperationQueue mainQueue]];
-            NSURL *url = [NSURL URLWithString:@""];
+            NSURL *url = [NSURL URLWithString:@"http://172.26.17.164:8080/user/trypost2"];
             NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
             
             [urlRequest setHTTPMethod:@"POST"];
-            [urlRequest setHTTPBody:[params dataUsingEncoding:NSUTF8StringEncoding]];
+            // 告诉服务器数据为 JSON 类型
+            [urlRequest setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+            // 设置请求体（JSON类型）
+            [urlRequest setHTTPBody:jsonData];
             
             NSURLSessionDataTask *dataTask = [delegateFreeSession dataTaskWithRequest:urlRequest
                                                                     completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
@@ -299,11 +309,6 @@
             [dataTask resume];
         }
     }
-    SingletonUser *singleton = [SingletonUser sharedInstance];
-    singleton.username = @"test";
-    singleton.tag = true;
-    [self.navigationController popViewControllerAnimated:YES];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"userInfo" object:self userInfo:@{@"username": @"test", @"headImage": self.headImageView.image}];
 }
 
 - (void) showAlertMessage:(NSString *) myMessage{
