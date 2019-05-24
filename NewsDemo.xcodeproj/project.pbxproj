@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -33,8 +33,6 @@
 		EF8CD7C92286686E00A7B431 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EF8CD7C82286686E00A7B431 /* Assets.xcassets */; };
 		EF8CD7CC2286686E00A7B431 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF8CD7CA2286686E00A7B431 /* LaunchScreen.storyboard */; };
 		EF8CD7CF2286686E00A7B431 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8CD7CE2286686E00A7B431 /* main.m */; };
-		EF8CD7D92286686E00A7B431 /* NewsDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8CD7D82286686E00A7B431 /* NewsDemoTests.m */; };
-		EF8CD7E42286686E00A7B431 /* NewsDemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = EF8CD7E32286686E00A7B431 /* NewsDemoUITests.m */; };
 		EF8CD80A228676CD00A7B431 /* libSocialQQ.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EF8CD809228676CD00A7B431 /* libSocialQQ.a */; };
 		EF8CD80E2286770300A7B431 /* libSocialWechat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EF8CD80C2286770300A7B431 /* libSocialWechat.a */; };
 		EF8CD81B2286785200A7B431 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = EF8CD8142286785200A7B431 /* LICENSE */; };
@@ -142,11 +140,7 @@
 		EF8CD7CD2286686E00A7B431 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EF8CD7CE2286686E00A7B431 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		EF8CD7D42286686E00A7B431 /* NewsDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NewsDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		EF8CD7D82286686E00A7B431 /* NewsDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewsDemoTests.m; sourceTree = "<group>"; };
-		EF8CD7DA2286686E00A7B431 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EF8CD7DF2286686E00A7B431 /* NewsDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NewsDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		EF8CD7E32286686E00A7B431 /* NewsDemoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewsDemoUITests.m; sourceTree = "<group>"; };
-		EF8CD7E52286686E00A7B431 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EF8CD805228676AA00A7B431 /* libMobClickLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libMobClickLibrary.a; path = NewsDemo/Classes/Vendor/UMAnalytics_Sdk_3.6.4/libMobClickLibrary.a; sourceTree = "<group>"; };
 		EF8CD807228676BC00A7B431 /* libUMSocial_Sdk_4.2.5.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libUMSocial_Sdk_4.2.5.a; path = NewsDemo/Classes/Vendor/UM/UMSocial_Sdk_4.2.5/libUMSocial_Sdk_4.2.5.a; sourceTree = "<group>"; };
 		EF8CD809228676CD00A7B431 /* libSocialQQ.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSocialQQ.a; path = NewsDemo/Classes/Vendor/UM/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI/libSocialQQ.a; sourceTree = "<group>"; };
@@ -250,27 +244,6 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		9748C45A228C50EC00CDB674 /* HomeViewModel */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = HomeViewModel;
-			sourceTree = "<group>";
-		};
-		9748C45C228C511200CDB674 /* VideoViewModel */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = VideoViewModel;
-			sourceTree = "<group>";
-		};
-		9748C45D228C514400CDB674 /* WordPicViewModel */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = WordPicViewModel;
-			sourceTree = "<group>";
-		};
 		9748C45E228C518300CDB674 /* HomeView */ = {
 			isa = PBXGroup;
 			children = (
@@ -290,27 +263,6 @@
 			children = (
 			);
 			path = WordPicView;
-			sourceTree = "<group>";
-		};
-		9748C461228C51AC00CDB674 /* HomeModel */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = HomeModel;
-			sourceTree = "<group>";
-		};
-		9748C462228C51B600CDB674 /* VideoModel */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = VideoModel;
-			sourceTree = "<group>";
-		};
-		9748C463228C51C500CDB674 /* WordPicModel */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = WordPicModel;
 			sourceTree = "<group>";
 		};
 		9758CEAF228805EF0090C60D /* BarItem */ = {
@@ -349,27 +301,6 @@
 				9758CEB7228809220090C60D /* MyImageView.m */,
 			);
 			path = MyImageView;
-			sourceTree = "<group>";
-		};
-		975B4755228D588000378825 /* HomeNetManager */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = HomeNetManager;
-			sourceTree = "<group>";
-		};
-		975B4756228D588A00378825 /* VideoNetManager */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = VideoNetManager;
-			sourceTree = "<group>";
-		};
-		975B4757228D589600378825 /* WordPicNetManager */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = WordPicNetManager;
 			sourceTree = "<group>";
 		};
 		975F6E08228A562900A49B59 /* HomeController */ = {
@@ -451,8 +382,6 @@
 			isa = PBXGroup;
 			children = (
 				EF8CD7BE2286686E00A7B431 /* NewsDemo */,
-				EF8CD7D72286686E00A7B431 /* NewsDemoTests */,
-				EF8CD7E22286686E00A7B431 /* NewsDemoUITests */,
 				EF8CD7BD2286686E00A7B431 /* Products */,
 				1EB882B36BF14DDCB2067F2A /* Pods */,
 				C789411124A1B3A51F63B025 /* Frameworks */,
@@ -481,36 +410,14 @@
 			path = NewsDemo;
 			sourceTree = "<group>";
 		};
-		EF8CD7D72286686E00A7B431 /* NewsDemoTests */ = {
-			isa = PBXGroup;
-			children = (
-				EF8CD7D82286686E00A7B431 /* NewsDemoTests.m */,
-				EF8CD7DA2286686E00A7B431 /* Info.plist */,
-			);
-			path = NewsDemoTests;
-			sourceTree = "<group>";
-		};
-		EF8CD7E22286686E00A7B431 /* NewsDemoUITests */ = {
-			isa = PBXGroup;
-			children = (
-				EF8CD7E32286686E00A7B431 /* NewsDemoUITests.m */,
-				EF8CD7E52286686E00A7B431 /* Info.plist */,
-			);
-			path = NewsDemoUITests;
-			sourceTree = "<group>";
-		};
 		EF8CD7F12286687500A7B431 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
 				EF8CD7F42286693500A7B431 /* Define */,
 				EF8CD7FF2286755E00A7B431 /* Vendor */,
-				EF8CD7FC2286698B00A7B431 /* Resource */,
 				EF8CD7FA2286697B00A7B431 /* Help */,
-				EF8CD7F92286697200A7B431 /* ViewModel */,
 				EF8CD7F82286696600A7B431 /* ViewController */,
 				EF8CD7F72286696000A7B431 /* View */,
-				EF8CD7F62286695900A7B431 /* Model */,
-				EF8CD7F52286694F00A7B431 /* NetManager */,
 				EF8CD7F3228668FF00A7B431 /* Other */,
 			);
 			path = Classes;
@@ -545,26 +452,6 @@
 			path = Define;
 			sourceTree = "<group>";
 		};
-		EF8CD7F52286694F00A7B431 /* NetManager */ = {
-			isa = PBXGroup;
-			children = (
-				975B4757228D589600378825 /* WordPicNetManager */,
-				975B4756228D588A00378825 /* VideoNetManager */,
-				975B4755228D588000378825 /* HomeNetManager */,
-			);
-			path = NetManager;
-			sourceTree = "<group>";
-		};
-		EF8CD7F62286695900A7B431 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				9748C463228C51C500CDB674 /* WordPicModel */,
-				9748C462228C51B600CDB674 /* VideoModel */,
-				9748C461228C51AC00CDB674 /* HomeModel */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
 		EF8CD7F72286696000A7B431 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -586,16 +473,6 @@
 			path = ViewController;
 			sourceTree = "<group>";
 		};
-		EF8CD7F92286697200A7B431 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				9748C45D228C514400CDB674 /* WordPicViewModel */,
-				9748C45C228C511200CDB674 /* VideoViewModel */,
-				9748C45A228C50EC00CDB674 /* HomeViewModel */,
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
 		EF8CD7FA2286697B00A7B431 /* Help */ = {
 			isa = PBXGroup;
 			children = (
@@ -606,13 +483,6 @@
 				9758CEAF228805EF0090C60D /* BarItem */,
 			);
 			path = Help;
-			sourceTree = "<group>";
-		};
-		EF8CD7FC2286698B00A7B431 /* Resource */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Resource;
 			sourceTree = "<group>";
 		};
 		EF8CD7FF2286755E00A7B431 /* Vendor */ = {
@@ -938,28 +808,11 @@
 			files = (
 			);
 			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-NewsDemo/Pods-NewsDemo-resources.sh",
-				"${PODS_ROOT}/FlatUIKit/Resources/flat-ui-icons-regular.ttf",
-				"${PODS_ROOT}/FlatUIKit/Resources/Lato-Bold.ttf",
-				"${PODS_ROOT}/FlatUIKit/Resources/Lato-Italic.ttf",
-				"${PODS_ROOT}/FlatUIKit/Resources/Lato-Light.ttf",
-				"${PODS_ROOT}/FlatUIKit/Resources/Lato-Regular.ttf",
-				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
-				"${PODS_CONFIGURATION_BUILD_DIR}/MWPhotoBrowser/MWPhotoBrowser.bundle",
+				"${PODS_ROOT}/Target Support Files/Pods-NewsDemo/Pods-NewsDemo-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/flat-ui-icons-regular.ttf",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Lato-Bold.ttf",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Lato-Italic.ttf",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Lato-Light.ttf",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Lato-Regular.ttf",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MJRefresh.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MWPhotoBrowser.bundle",
+				"${PODS_ROOT}/Target Support Files/Pods-NewsDemo/Pods-NewsDemo-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1003,7 +856,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EF8CD7D92286686E00A7B431 /* NewsDemoTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1011,7 +863,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EF8CD7E42286686E00A7B431 /* NewsDemoUITests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

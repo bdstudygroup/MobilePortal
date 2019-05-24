@@ -14,5 +14,6 @@ target 'NewsDemo' do
   pod 'WMPageController', '~> 1.8.0'
   pod 'SDWebImage', '~> 3.8.1'
   pod 'TPKeyboardAvoiding', '~> 1.3'
+  pod 'PYSearch', '~> 0.9.1'
 
 end
