@@ -90,27 +90,8 @@
     
 }
 
-//进度值的监听
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context
-{
-    
-    self.progressView.progress = self.wkWebView.estimatedProgress;
-    //    NSLog(@"%f", self.progressView.progress);
-    
-    //我这里之所以判断加载到大于60%，睡1s的原因是网速太快了，看不到进度条更新，所以停顿一下，主要是想明显看到进度条进度改变，没有其他意思的
-    if (self.progressView.progress >0.6) {
-        sleep(1);
-    }
-    //网页加载完毕隐藏进度条
-    self.progressView.hidden = (self.wkWebView.estimatedProgress >= 1.0);
-    
-}
 
-- (void)dealloc
-{
-    [self removeObserver:self forKeyPath:@"estimatedProgress"];
-    
-}
+
 
 -(void)loadingHtmlNews{
     NSString* body = [self.htmlDict objectForKey:@"article_content"];
@@ -135,7 +116,6 @@
     preference.javaScriptEnabled = YES;
     WKWebView* wkWebView = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0, kWindowW, kWindowH) configuration:configur];
     //WKWebview的estimatedProgress属性，就是加载进度，它是支持KVO监听进度改变的
-    [wkWebView addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:nil];
     
     [self.view addSubview:wkWebView];
     self.wkWebView = wkWebView;
