@@ -24,9 +24,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    [self initializeWithApplication:application];
     [self configGlobalUIStyle];
-    [Bmob registerWithAppKey:@"ce4b84c6b6c43548636335b146fb98fc"];
     [self setupViewControllers];
     self.window.rootViewController = self.tabBarController;
     
@@ -36,7 +34,7 @@
 //导航栏设置
 -(void) configGlobalUIStyle{
     UINavigationBar* bar = [UINavigationBar appearance];
-    [bar setBackgroundImage:[UIImage imageNamed:@"backgroundImage"] forBarMetrics:UIBarMetricsDefault];
+    [bar setBackgroundImage:[UIImage imageNamed:@"background"] forBarMetrics:UIBarMetricsDefault];
     bar.translucent = NO;
     [bar setTitleTextAttributes:@{NSFontAttributeName: [UIFont boldSystemFontOfSize:19],NSForegroundColorAttributeName: [UIColor whiteColor]}];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];

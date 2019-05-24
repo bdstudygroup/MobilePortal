@@ -136,6 +136,8 @@ kRemoveCellSeparator
             [self.navigationController pushViewController:vc animated:YES];
         } forControlEvents:UIControlEventTouchUpInside];
     }
+    SingletonUser *singleton = [SingletonUser sharedInstance];
+    singleton.tag = false;
     return _exitBtn;
 }
 

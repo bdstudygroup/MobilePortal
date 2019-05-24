@@ -1,0 +1,9 @@
+${PODS_ROOT}/Target Support Files/Pods-NewsDemo/Pods-NewsDemo-resources.sh
+${PODS_ROOT}/FlatUIKit/Resources/flat-ui-icons-regular.ttf
+${PODS_ROOT}/FlatUIKit/Resources/Lato-Bold.ttf
+${PODS_ROOT}/FlatUIKit/Resources/Lato-Italic.ttf
+${PODS_ROOT}/FlatUIKit/Resources/Lato-Light.ttf
+${PODS_ROOT}/FlatUIKit/Resources/Lato-Regular.ttf
+${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle
+${PODS_CONFIGURATION_BUILD_DIR}/MWPhotoBrowser/MWPhotoBrowser.bundle
+${PODS_ROOT}/PYSearch/PYSearch/PYSearch.bundle

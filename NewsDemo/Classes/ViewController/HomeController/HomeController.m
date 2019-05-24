@@ -8,8 +8,9 @@
 
 #import "HomeController.h"
 #import "HomeListController.h"
+#import "HomeDetailController.h"
 
-@interface HomeController ()
+@interface HomeController ()<PYSearchViewControllerDelegate>
 
 @end
 
@@ -28,7 +29,7 @@
 }
 
 + (NSArray *)itemNames {
-    return @[@"最新",@"新闻",@"评测",@"导购",@"用车",@"技术",@"文化",@"改装",@"游记",];
+    return @[@""];
 }
 
 + (NSArray *)viewControllerClasses {
@@ -55,9 +56,38 @@
     return [mArr copy];
 }
 
+-(void)searchButton{
+    NSArray *hotSeaches = @[@"NBA", @"科技", @"民生", @"游戏", @"小说", @"音乐", @"影视"];
+    PYSearchViewController *searchViewController = [PYSearchViewController searchViewControllerWithHotSearches:hotSeaches searchBarPlaceholder:NSLocalizedString(@"搜索新闻", @"搜索新闻") didSearchBlock:^(PYSearchViewController *searchViewController, UISearchBar *searchBar, NSString *searchText) {
+        [searchViewController.navigationController pushViewController:[[HomeDetailController alloc] init] animated:YES];
+    }];
+    searchViewController.searchHistoryStyle = PYHotSearchStyleDefault;
+    searchViewController.delegate = self;
+    searchViewController.searchViewControllerShowMode = PYSearchViewControllerShowModePush;
+    [self.navigationController pushViewController:searchViewController animated:YES];
+}
+
+- (void)searchViewController:(PYSearchViewController *)searchViewController searchTextDidChange:(UISearchBar *)seachBar searchText:(NSString *)searchText
+{
+    if (searchText.length) {
+        // Simulate a send request to get a search suggestions
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            NSMutableArray *searchSuggestionsM = [NSMutableArray array];
+            for (int i = 0; i < arc4random_uniform(5) + 10; i++) {
+                NSString *searchSuggestion = [NSString stringWithFormat:@"Search suggestion %d", i];
+                [searchSuggestionsM addObject:searchSuggestion];
+            }
+            // Refresh and display the search suggustions
+            searchViewController.searchSuggestions = searchSuggestionsM;
+        });
+    }
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"新闻来了";
+    self.title = @"今日热点";
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(searchButton)];
+    self.navigationItem.rightBarButtonItem.tintColor = [UIColor blueColor];
 }
 
 @end
