@@ -8,8 +8,6 @@
 
 #import "HomeListController.h"
 #import "HomeDetailController.h"
-#import "iCarousel.h"
-#import <MJRefresh.h>
 #import "HomeListManager.h"
 
 #define kHomeListCell @"kHomeListCell"
@@ -49,7 +47,7 @@ UITableViewDelegate
         strongSelf.articleList = articleFeed;
         NSLog(@"%@",strongSelf.articleList);
         //[strongSelf.tableView reloadData];
-        
+
     }];
 }
 
@@ -65,7 +63,7 @@ UITableViewDelegate
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+
     UITableViewCell *cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
     cell.textLabel.text = self.articleList[indexPath.row][@"title"];
     return cell;
@@ -78,7 +76,7 @@ UITableViewDelegate
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.tableView reloadData];
     });
-    
+
 }
 
 @end

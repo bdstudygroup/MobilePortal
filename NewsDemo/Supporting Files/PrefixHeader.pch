@@ -71,4 +71,6 @@ static const int ddLogLevel = DDLogLevelError;
 //方便形成如同网易新闻首页，控制器滑动翻页效果的控制器
 #import <WMPageController.h>
 
+#import <PYSearch.h>
+
 #endif /* PrefixHeader_pch */
