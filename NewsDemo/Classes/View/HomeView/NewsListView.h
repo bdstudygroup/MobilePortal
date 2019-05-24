@@ -15,10 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic, strong)NSMutableArray* titles;
 @property(nonatomic, strong)NSMutableArray* groupIds;
-
--(void)httpPostWithCustomDelegate:(int) count;
--(NSMutableArray*)getTitles;
--(NSMutableArray*)getgroupIds;
+-(void)initWithCount:(int) count;
 
 @end
 

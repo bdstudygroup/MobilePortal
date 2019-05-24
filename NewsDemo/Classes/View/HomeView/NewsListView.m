@@ -15,14 +15,9 @@
 
 @implementation NewsListView
 
--(NSMutableArray*)getTitles{
-    return self.titles;
-}
--(NSMutableArray*)getgroupIds{
-    return self.groupIds;
-}
 
--(void)httpPostWithCustomDelegate:(int) count{
+
+-(void)initWithCount:(int) count{
     self.titles = [[NSMutableArray alloc] initWithCapacity:100];
     self.groupIds = [[NSMutableArray alloc] initWithCapacity:100];
     NSURLSessionConfiguration *defaultConfigObject = [NSURLSessionConfiguration defaultSessionConfiguration];
@@ -49,13 +44,14 @@
                 [self.titles addObject: [article_list[i] objectForKey:@"title"]];
                 [self.groupIds addObject: article_list[i][@"group_id"]];
             }
-            NSLog(@"titles = %@ \n", [self getTitles][1]);
+            NSLog(@"titles = %@ \n", self.titles[1]);
             NSLog(@"groupIds = %@", self.groupIds[1]);
         }
     }];
     
     
     [dataTask resume];
+    
 }
 
 @end
