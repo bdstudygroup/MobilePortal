@@ -8,7 +8,7 @@
 
 #import "HomeListController.h"
 #import "HomeDetailController.h"
-#import "HomeListManager.h"
+//#import "HomeListManager.h"
 
 #define kHomeListCell @"kHomeListCell"
 
@@ -42,6 +42,7 @@ UITableViewDelegate
 
 - (void)update {
     __weak __typeof(self) weakSelf = self;
+    /*
     [[HomeListManager sharedManager] updateWithCompletion:^(NSArray * _Nonnull articleFeed) {
         __strong __typeof(weakSelf) strongSelf = weakSelf;
         strongSelf.articleList = articleFeed;
@@ -49,6 +50,7 @@ UITableViewDelegate
         //[strongSelf.tableView reloadData];
 
     }];
+     */
 }
 
 - (void)viewDidLayoutSubviews {
