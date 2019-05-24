@@ -9,6 +9,7 @@
 #import "HomeController.h"
 #import "HomeListController.h"
 #import "HomeDetailController.h"
+#import "NewsListView.h"
 
 @interface HomeController ()<PYSearchViewControllerDelegate>
 
@@ -69,6 +70,12 @@
 
 - (void)searchViewController:(PYSearchViewController *)searchViewController searchTextDidChange:(UISearchBar *)seachBar searchText:(NSString *)searchText
 {
+    NewsListView* list = [[NewsListView alloc] init];
+    [list httpPostWithCustomDelegate:100];
+    NSMutableArray* titles = [[NSMutableArray alloc] initWithCapacity:100];
+    NSMutableArray* groupIds = [[NSMutableArray alloc] initWithCapacity:100];
+    titles = [list getTitles];
+    groupIds = [list getgroupIds];
     if (searchText.length) {
         // Simulate a send request to get a search suggestions
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
