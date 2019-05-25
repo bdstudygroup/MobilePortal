@@ -72,7 +72,6 @@
 {
     NewsListView* list = [[NewsListView alloc] init];
     [list initWithCount:100];
-    NSLog(@"count=%d", list.titles.count);
     if (searchText.length) {
         
         // Simulate a send request to get a search suggestions

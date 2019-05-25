@@ -10,6 +10,6 @@
 
 @interface HomeDetailController : UIViewController
 
-
+@property(nonatomic, strong)NSString* groupId;
 
 @end

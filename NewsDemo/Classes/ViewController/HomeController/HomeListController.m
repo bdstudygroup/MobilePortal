@@ -69,6 +69,11 @@ UITableViewDelegate
     cell.textLabel.text = self.articleList[indexPath.row][@"title"];
     return cell;
 }
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    HomeDetailController* detailController = [[HomeDetailController alloc] init];
+    detailController.groupId = self.articleList[indexPath.row][@"group_id"];
+    [self.navigationController pushViewController:detailController animated:YES];
+}
 
 #pragma mark - Setter
 

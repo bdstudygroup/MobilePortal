@@ -45,7 +45,7 @@
     [self setupWebView];
 }
 
--(void) httpPostWithCustomDelegate
+-(void) httpPostWithCustomDelegate: (NSString*)groupId
 {
     NSURLSessionConfiguration *defaultConfigObject = [NSURLSessionConfiguration defaultSessionConfiguration];
     NSURLSession *delegateFreeSession = [NSURLSession sessionWithConfiguration: defaultConfigObject
@@ -58,7 +58,7 @@
     //urlencode
     NSString * charaters = @"?!@#$^&%*+,:;='\"`<>()[]{}/\\| ";
     NSCharacterSet * set = [[NSCharacterSet characterSetWithCharactersInString:charaters] invertedSet];
-    NSString * hStr2 = @"bfWfBiBooCMbXpgjdf+OMA==";
+    NSString * hStr2 = groupId;
     NSString * hString2 = [hStr2 stringByAddingPercentEncodingWithAllowedCharacters:set];
     
     NSString * params =[NSString stringWithFormat:@"groupId=%@", hString2];
@@ -115,7 +115,6 @@
     configur.preferences = preference;
     preference.javaScriptEnabled = YES;
     WKWebView* wkWebView = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0, kWindowW, kWindowH) configuration:configur];
-    //WKWebview的estimatedProgress属性，就是加载进度，它是支持KVO监听进度改变的
     
     [self.view addSubview:wkWebView];
     self.wkWebView = wkWebView;
@@ -131,7 +130,7 @@
     self.wkWebView.navigationDelegate = self;
     
     //自定义的方法，发送网络请求，获取新闻数据
-    [self httpPostWithCustomDelegate];
+    [self httpPostWithCustomDelegate: self.groupId];
     
 }
 
