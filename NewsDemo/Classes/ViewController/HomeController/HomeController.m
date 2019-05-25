@@ -10,8 +10,11 @@
 #import "HomeListController.h"
 #import "HomeDetailController.h"
 #import "NewsListView.h"
+#import "HomeListManager.h"
 
 @interface HomeController ()<PYSearchViewControllerDelegate>
+
+@property(nonatomic, strong)NSArray<NSDictionary *> *articleList;
 
 @end
 
@@ -70,21 +73,35 @@
 
 - (void)searchViewController:(PYSearchViewController *)searchViewController searchTextDidChange:(UISearchBar *)seachBar searchText:(NSString *)searchText
 {
-    NewsListView* list = [[NewsListView alloc] init];
-    [list initWithCount:100];
+    
     if (searchText.length) {
         
         // Simulate a send request to get a search suggestions
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             NSMutableArray *searchSuggestionsM = [NSMutableArray array];
-            for (int i = 0; i < arc4random_uniform(5) + 10; i++) {
-                NSString *searchSuggestion = [NSString stringWithFormat:@"Search suggestion %d", i];
-                [searchSuggestionsM addObject:searchSuggestion];
+//            for (int i = 0; i < arc4random_uniform(5) + 10; i++) {
+//                NSString *searchSuggestion = [NSString stringWithFormat:@"Search suggestion %d", i];
+//                [searchSuggestionsM addObject:searchSuggestion];
+//            }
+            for (int i=0; i<self.articleList.count; i++) {
+                if ([self.articleList[i][@"title"] containsString:searchText]) {
+                    
+                }
             }
             // Refresh and display the search suggustions
             searchViewController.searchSuggestions = searchSuggestionsM;
         });
     }
+}
+
+-(void)update{
+    __weak __typeof(self) weakSelf = self;
+    [[HomeListManager sharedManager] updateWithCompletion:^(NSArray * _Nonnull articleFeed) {
+        __strong __typeof(weakSelf) strongSelf = weakSelf;
+        strongSelf.articleList = articleFeed;
+        NSLog(@"%@",strongSelf.articleList);
+    }];
+    
 }
 
 - (void)viewDidLoad {

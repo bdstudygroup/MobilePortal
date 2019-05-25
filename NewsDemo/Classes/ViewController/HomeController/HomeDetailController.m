@@ -76,6 +76,9 @@
         self.htmlDict = article_data;
         NSString* article_content = [article_data objectForKey:@"article_content"];
         NSLog(@"content=%@ \n", article_content);
+        NSArray* imgFilter = [self filterImage:article_content];
+        NSString* imgString = imgFilter[0];
+        
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
             
             self.navigationItem.title= @"新闻详情";
@@ -90,7 +93,36 @@
     
 }
 
-
+- (NSArray *)filterImage:(NSString *)html
+{
+    NSMutableArray *resultArray = [NSMutableArray array];
+    
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"<(img|IMG)(.*?)(/>|></img>|>)" options:NSRegularExpressionAllowCommentsAndWhitespace error:nil];
+    NSArray *result = [regex matchesInString:html options:NSMatchingReportCompletion range:NSMakeRange(0, html.length)];
+    
+    NSLog(@"result=%@", result[0]);
+    
+    for (NSTextCheckingResult *item in result) {
+        NSString *imgHtml = [html substringWithRange:[item rangeAtIndex:0]];
+        
+        NSArray *tmpArray = nil;
+        if ([imgHtml rangeOfString:@"<img src=\"{{image_domain}}"].location != NSNotFound) {
+            tmpArray = [imgHtml componentsSeparatedByString:@"<img src=\"{{image_domain}}"];
+        }
+        
+        if (tmpArray.count >= 2) {
+            NSString *src = tmpArray[1];
+            
+            NSUInteger loc = [src rangeOfString:@"\">"].location;
+            if (loc != NSNotFound) {
+                src = [src substringToIndex:loc];
+                [resultArray addObject:src];
+            }
+        }
+    }
+    
+    return resultArray;
+}
 
 
 -(void)loadingHtmlNews{
@@ -106,7 +138,14 @@
                       </html>"\
                       ,body];
     [self.wkWebView loadHTMLString:html baseURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] resourcePath]]];
-    
+    NSRange range;
+    NSString* tempStr = @"<p></p><img />";
+    range = [tempStr rangeOfString:@"<"];
+    if (range.location != NSNotFound) {
+        NSLog(@"found at location = %d, length = %d",range.location,range.length);
+    }else{
+        NSLog(@"Not Found");
+    }
 }
 
 -(void)setupWebView{
