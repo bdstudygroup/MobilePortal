@@ -14,7 +14,6 @@
 		9758CEC1228809FC0090C60D /* NSObject+Hint.m in Sources */ = {isa = PBXBuildFile; fileRef = 9758CEC0228809FC0090C60D /* NSObject+Hint.m */; };
 		9758CEC422880A1A0090C60D /* AppDelegate+DDLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 9758CEC322880A1A0090C60D /* AppDelegate+DDLog.m */; };
 		978742C222984BAB00C7EAE0 /* HomeListManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 978742C122984BAB00C7EAE0 /* HomeListManager.m */; };
-		97A373A022980FD400C38B53 /* NewsListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A3739F22980FD400C38B53 /* NewsListView.m */; };
 		EC05F92422945B75008E6027 /* SingletonUser.m in Sources */ = {isa = PBXBuildFile; fileRef = EC05F92322945B75008E6027 /* SingletonUser.m */; };
 		EF61625B228F972300EB7367 /* HomeController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF61625A228F972300EB7367 /* HomeController.m */; };
 		EF61625E228F973200EB7367 /* HomeListController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF61625D228F973200EB7367 /* HomeListController.m */; };
@@ -105,8 +104,6 @@
 		9758CEC322880A1A0090C60D /* AppDelegate+DDLog.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "AppDelegate+DDLog.m"; sourceTree = "<group>"; };
 		978742C022984BAB00C7EAE0 /* HomeListManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeListManager.h; sourceTree = "<group>"; };
 		978742C122984BAB00C7EAE0 /* HomeListManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeListManager.m; sourceTree = "<group>"; };
-		97A3739E22980FD400C38B53 /* NewsListView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewsListView.h; sourceTree = "<group>"; };
-		97A3739F22980FD400C38B53 /* NewsListView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewsListView.m; sourceTree = "<group>"; };
 		CBD97A0A5912800A232F996B /* libPods-NewsDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-NewsDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC05F92222945B75008E6027 /* SingletonUser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SingletonUser.h; sourceTree = "<group>"; };
 		EC05F92322945B75008E6027 /* SingletonUser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SingletonUser.m; sourceTree = "<group>"; };
@@ -253,8 +250,6 @@
 		9748C45E228C518300CDB674 /* HomeView */ = {
 			isa = PBXGroup;
 			children = (
-				97A3739E22980FD400C38B53 /* NewsListView.h */,
-				97A3739F22980FD400C38B53 /* NewsListView.m */,
 			);
 			path = HomeView;
 			sourceTree = "<group>";
@@ -841,7 +836,6 @@
 				EF616279228F9A2300EB7367 /* PicController.m in Sources */,
 				EF8CD7C42286686E00A7B431 /* ViewController.m in Sources */,
 				EC05F92422945B75008E6027 /* SingletonUser.m in Sources */,
-				97A373A022980FD400C38B53 /* NewsListView.m in Sources */,
 				EF616270228F99B500EB7367 /* VideoController.m in Sources */,
 				EF616273228F9A0200EB7367 /* WordController.m in Sources */,
 				EF61627C228F9A3100EB7367 /* PicDetailController.m in Sources */,

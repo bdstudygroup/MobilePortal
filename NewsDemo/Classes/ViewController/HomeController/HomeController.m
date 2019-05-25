@@ -9,12 +9,13 @@
 #import "HomeController.h"
 #import "HomeListController.h"
 #import "HomeDetailController.h"
-#import "NewsListView.h"
 #import "HomeListManager.h"
 
 @interface HomeController ()<PYSearchViewControllerDelegate>
 
 @property(nonatomic, strong)NSArray<NSDictionary *> *articleList;
+@property(nonatomic, strong)NSMutableArray<NSString *>* titles;
+@property(nonatomic, strong)NSMutableArray<NSString *>* groupIds;
 
 @end
 
@@ -63,7 +64,13 @@
 -(void)searchButton{
     NSArray *hotSeaches = @[@"NBA", @"科技", @"民生", @"游戏", @"小说", @"音乐", @"影视"];
     PYSearchViewController *searchViewController = [PYSearchViewController searchViewControllerWithHotSearches:hotSeaches searchBarPlaceholder:NSLocalizedString(@"搜索新闻", @"搜索新闻") didSearchBlock:^(PYSearchViewController *searchViewController, UISearchBar *searchBar, NSString *searchText) {
-        [searchViewController.navigationController pushViewController:[[HomeDetailController alloc] init] animated:YES];
+        HomeDetailController* controller = [[HomeDetailController alloc] init];
+        for (int i=0; i<self.articleList.count; i++) {
+            if ([self.articleList[i][@"title"] containsString:searchText]) {
+                controller.groupId = self.articleList[i][@"group_id"];
+            }
+        }
+        [searchViewController.navigationController pushViewController:controller animated:YES];
     }];
     searchViewController.searchHistoryStyle = PYHotSearchStyleDefault;
     searchViewController.delegate = self;
@@ -73,6 +80,7 @@
 
 - (void)searchViewController:(PYSearchViewController *)searchViewController searchTextDidChange:(UISearchBar *)seachBar searchText:(NSString *)searchText
 {
+    [self update];
     
     if (searchText.length) {
         
@@ -85,7 +93,7 @@
 //            }
             for (int i=0; i<self.articleList.count; i++) {
                 if ([self.articleList[i][@"title"] containsString:searchText]) {
-                    
+                    [searchSuggestionsM addObject: self.articleList[i][@"title"]];
                 }
             }
             // Refresh and display the search suggustions
@@ -101,7 +109,6 @@
         strongSelf.articleList = articleFeed;
         NSLog(@"%@",strongSelf.articleList);
     }];
-    
 }
 
 - (void)viewDidLoad {
