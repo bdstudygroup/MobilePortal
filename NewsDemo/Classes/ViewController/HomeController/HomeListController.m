@@ -9,7 +9,8 @@
 #import "HomeListController.h"
 #import "HomeDetailController.h"
 #import "HomeListManager.h"
-
+#import "../../View/HomeView/OneImageTableViewCell.h"
+#import "../../View/HomeView/ThreeImageTableViewCell.h"
 #define kHomeListCell @"kHomeListCell"
 
 @interface HomeListController ()
@@ -37,6 +38,7 @@ UITableViewDelegate
     self.tableView = [[UITableView alloc] init];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
+    self.tableView.tableFooterView = [UIView new];
     [self.view addSubview:self.tableView];
 }
 
@@ -47,9 +49,9 @@ UITableViewDelegate
         strongSelf.articleList = articleFeed;
         NSLog(@"%@",strongSelf.articleList);
         [strongSelf.tableView reloadData];
-
+        
     }];
-     
+    
 }
 
 - (void)viewDidLayoutSubviews {
@@ -61,17 +63,59 @@ UITableViewDelegate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [self.articleList count];
+    //return 4;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-
-    UITableViewCell *cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
-    cell.textLabel.text = self.articleList[indexPath.row][@"title"];
-    return cell;
+    /*
+     UITableViewCell *cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+     cell.textLabel.text = self.articleList[indexPath.row][@"title"];
+     */
+    //NSDictionary  *dict = [[NSDictionary alloc]initWithDictionary:self.articleList[indexPath.row][@"image_infos"]];
+    NSArray *arr = [[NSArray alloc]initWithArray:self.articleList[indexPath.row][@"image_infos"]];
+    NSError *err = nil;
+    //NSLog(@"arr %d %@", [arr count], arr);
+    if([arr count] == 0) {
+        UITableViewCell *cell = [[OneImageTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+        ((OneImageTableViewCell*)cell).content.text = self.articleList[indexPath.row][@"title"];
+        
+        
+        return cell;
+    }else if([arr count] == 1) {
+        //NSLog(@"%d", self.articleList[indexPath.row][@"image_infos"].count);
+        UITableViewCell *cell = [[OneImageTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+        ((OneImageTableViewCell*)cell).content.text = self.articleList[indexPath.row][@"title"];
+        
+        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:arr[0] options:kNilOptions error:&err];
+        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:&err];
+        NSString *url = json[@"url_prefix"];
+        url = [url stringByAppendingString:json[@"web_uri"]];
+        NSLog(@"%@", url);
+        
+        [((OneImageTableViewCell*)cell).headImageView setImageWithURL:url];
+        return cell;
+    }else{
+        NSMutableArray *url_arr = [[NSMutableArray alloc]init];
+        for(int i = 0; i < 3; i++) {
+            NSData *jsonData = [NSJSONSerialization dataWithJSONObject:arr[i] options:kNilOptions error:&err];
+            NSDictionary *json = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:&err];
+            NSString *url = json[@"url_prefix"];
+            url = [url stringByAppendingString:json[@"web_uri"]];
+            [url_arr addObject:url];
+        }
+        UITableViewCell *cell = [[ThreeImageTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+        ((ThreeImageTableViewCell*)cell).content.text = self.articleList[indexPath.row][@"title"];
+        [((ThreeImageTableViewCell*)cell).imageFirst setImageWithURL:url_arr[0]];
+        [((ThreeImageTableViewCell*)cell).imageSecond setImageWithURL:url_arr[1]];
+        [((ThreeImageTableViewCell*)cell).imageThird setImageWithURL:url_arr[2]];
+        return cell;
+    }
+    
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     HomeDetailController* detailController = [[HomeDetailController alloc] init];
     detailController.groupId = self.articleList[indexPath.row][@"group_id"];
+    NSLog(@"%@", self.articleList[indexPath.row][@"image_infos"]);
     [self.navigationController pushViewController:detailController animated:YES];
 }
 
@@ -82,7 +126,20 @@ UITableViewDelegate
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.tableView reloadData];
     });
-
+    
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    NSArray *arr = [[NSArray alloc]initWithArray:self.articleList[indexPath.row][@"image_infos"]];
+    NSError *err = nil;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:arr[0] options:kNilOptions error:&err];
+    NSDictionary *json = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:&err];
+    if([arr count] == 0) {
+        return 50;
+    } else if([arr count] == 1) {
+        return 100;
+    } {
+        return 150;
+    }
+}
 @end
