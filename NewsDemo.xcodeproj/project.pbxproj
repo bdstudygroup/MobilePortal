@@ -256,15 +256,10 @@
 		9748C45E228C518300CDB674 /* HomeView */ = {
 			isa = PBXGroup;
 			children = (
-<<<<<<< HEAD
-				97A3739E22980FD400C38B53 /* NewsListView.h */,
-				97A3739F22980FD400C38B53 /* NewsListView.m */,
 				ECB25E1D22996283005EB072 /* OneImageTableViewCell.h */,
 				ECB25E1E22996283005EB072 /* OneImageTableViewCell.m */,
 				ECB25E232299632B005EB072 /* ThreeImageTableViewCell.h */,
 				ECB25E242299632B005EB072 /* ThreeImageTableViewCell.m */,
-=======
->>>>>>> 88d05365b11db953b0aef93d0d72196ae4264d99
 			);
 			path = HomeView;
 			sourceTree = "<group>";
@@ -851,11 +846,7 @@
 				EF616279228F9A2300EB7367 /* PicController.m in Sources */,
 				EF8CD7C42286686E00A7B431 /* ViewController.m in Sources */,
 				EC05F92422945B75008E6027 /* SingletonUser.m in Sources */,
-<<<<<<< HEAD
-				97A373A022980FD400C38B53 /* NewsListView.m in Sources */,
 				ECB25E1F22996283005EB072 /* OneImageTableViewCell.m in Sources */,
-=======
->>>>>>> 88d05365b11db953b0aef93d0d72196ae4264d99
 				EF616270228F99B500EB7367 /* VideoController.m in Sources */,
 				EF616273228F9A0200EB7367 /* WordController.m in Sources */,
 				EF61627C228F9A3100EB7367 /* PicDetailController.m in Sources */,
