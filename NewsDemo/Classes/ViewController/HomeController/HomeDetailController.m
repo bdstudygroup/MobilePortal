@@ -26,6 +26,9 @@
 
 /** 进度条 */
 @property (nonatomic, strong) UIProgressView *progressView;
+@property (nonatomic, strong) NSMutableArray<NSString*>* img_uri;
+@property (nonatomic, strong) NSMutableArray<NSString*>* height;
+@property (nonatomic, strong) NSMutableArray<NSString*>* width;
 
 
 @end
@@ -47,6 +50,11 @@
 
 -(void) httpPostWithCustomDelegate: (NSString*)groupId
 {
+    //初始化
+    self.img_uri = [[NSMutableArray alloc] initWithCapacity:30];
+    self.width = [[NSMutableArray alloc] initWithCapacity:30];
+    self.height = [[NSMutableArray alloc] initWithCapacity:30];
+    
     NSURLSessionConfiguration *defaultConfigObject = [NSURLSessionConfiguration defaultSessionConfiguration];
     NSURLSession *delegateFreeSession = [NSURLSession sessionWithConfiguration: defaultConfigObject
                                                                       delegate: nil delegateQueue: [NSOperationQueue mainQueue]];
@@ -67,7 +75,7 @@
     
     
     NSURLSessionDataTask * dataTask =[delegateFreeSession dataTaskWithRequest:urlRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-    NSLog(@"Response:%@ %@\n", response, error);
+//    NSLog(@"Response:%@ %@\n", response, error);
     if(error == nil) {
         NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
 
@@ -75,10 +83,23 @@
 
         self.htmlDict = article_data;
         NSString* article_content = [article_data objectForKey:@"article_content"];
-        NSLog(@"content=%@ \n", article_content);
+        NSString* img_prefix = [article_data objectForKey:@"image_url_prefix"];
+//        NSLog(@"content=%@ \n", article_content);
         NSArray* imgFilter = [self filterImage:article_content];
-        NSString* imgString = imgFilter[0];
-        
+        if (imgFilter.count > 0) {
+            for (int i=0; i<imgFilter.count; i++) {
+                NSString* imgString = imgFilter[i];
+                NSData *stringData = [imgString dataUsingEncoding:NSUTF8StringEncoding];
+                NSDictionary* json = [NSJSONSerialization JSONObjectWithData:stringData options:0 error:nil];
+                [self.img_uri addObject: [img_prefix stringByAppendingString:json[@"web_uri"]]];
+                [self.width addObject: json[@"width"]];
+                [self.height addObject: json[@"height"]];
+                
+//                NSLog(@"first img= %@ \n", self.img_uri[i]);
+//                NSLog(@"second img= %@ \n", self.width[i]);
+//                NSLog(@"third img= %@ \n", self.height[i]);
+            }
+        }
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
             
             self.navigationItem.title= @"新闻详情";
@@ -93,14 +114,40 @@
     
 }
 
+-(NSArray *) filterString:(NSString *)html{
+    NSMutableArray *resultArray = [NSMutableArray array];
+    
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"<(img|IMG)(.*?)(/>|></img>|>)" options:NSRegularExpressionAllowCommentsAndWhitespace error:nil];
+    NSArray *result = [regex matchesInString:html options:NSMatchingReportCompletion range:NSMakeRange(0, html.length)];
+    
+    for (NSTextCheckingResult *item in result) {
+        NSString *imgHtml = [html substringWithRange:[item rangeAtIndex:0]];
+        
+        NSArray *tmpArray = nil;
+        if ([imgHtml rangeOfString:@"<img "].location != NSNotFound) {
+            tmpArray = [imgHtml componentsSeparatedByString:@"<img "];
+        }
+        
+        if (tmpArray.count >= 2) {
+            NSString *src = tmpArray[1];
+            
+            NSUInteger loc = [src rangeOfString:@">"].location;
+            if (loc != NSNotFound) {
+                src = [src substringToIndex:loc];
+                [resultArray addObject:src];
+            }
+        }
+    }
+    
+    return resultArray;
+}
+
 - (NSArray *)filterImage:(NSString *)html
 {
     NSMutableArray *resultArray = [NSMutableArray array];
     
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"<(img|IMG)(.*?)(/>|></img>|>)" options:NSRegularExpressionAllowCommentsAndWhitespace error:nil];
     NSArray *result = [regex matchesInString:html options:NSMatchingReportCompletion range:NSMakeRange(0, html.length)];
-    
-    NSLog(@"result=%@", result[0]);
     
     for (NSTextCheckingResult *item in result) {
         NSString *imgHtml = [html substringWithRange:[item rangeAtIndex:0]];
@@ -127,6 +174,19 @@
 
 -(void)loadingHtmlNews{
     NSString* body = [self.htmlDict objectForKey:@"article_content"];
+    NSArray* stringFilter = [self filterString:body];
+    
+    if (stringFilter > 0) {
+        for (int i=0; i<stringFilter.count; i++) {
+//            NSLog(@"string=%@\n", stringFilter[i]);
+//            NSLog(@"img=%@", self.img_uri[i]);
+//            NSLog(@"width=%@", self.width[i]);
+//            NSLog(@"height=%@", self.height[i]);
+            NSString *str = [NSString stringWithFormat:@"src=\"%@\" height=%@ width=%@", self.img_uri[i], self.height[i], self.width[i]];
+            body=[body stringByReplacingOccurrencesOfString:stringFilter[i] withString:str];
+        }
+    }
+    
     NSString *html = [NSString stringWithFormat:@"\
                       <html lang=\"en\">\
                       <head>\
@@ -138,14 +198,6 @@
                       </html>"\
                       ,body];
     [self.wkWebView loadHTMLString:html baseURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] resourcePath]]];
-    NSRange range;
-    NSString* tempStr = @"<p></p><img />";
-    range = [tempStr rangeOfString:@"<"];
-    if (range.location != NSNotFound) {
-        NSLog(@"found at location = %d, length = %d",range.location,range.length);
-    }else{
-        NSLog(@"Not Found");
-    }
 }
 
 -(void)setupWebView{
