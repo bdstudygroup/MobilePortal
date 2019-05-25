@@ -9,9 +9,13 @@
 #import "HomeController.h"
 #import "HomeListController.h"
 #import "HomeDetailController.h"
-#import "NewsListView.h"
+#import "HomeListManager.h"
 
 @interface HomeController ()<PYSearchViewControllerDelegate>
+
+@property(nonatomic, strong)NSArray<NSDictionary *> *articleList;
+@property(nonatomic, strong)NSMutableArray<NSString *>* titles;
+@property(nonatomic, strong)NSMutableArray<NSString *>* groupIds;
 
 @end
 
@@ -60,7 +64,13 @@
 -(void)searchButton{
     NSArray *hotSeaches = @[@"NBA", @"科技", @"民生", @"游戏", @"小说", @"音乐", @"影视"];
     PYSearchViewController *searchViewController = [PYSearchViewController searchViewControllerWithHotSearches:hotSeaches searchBarPlaceholder:NSLocalizedString(@"搜索新闻", @"搜索新闻") didSearchBlock:^(PYSearchViewController *searchViewController, UISearchBar *searchBar, NSString *searchText) {
-        [searchViewController.navigationController pushViewController:[[HomeDetailController alloc] init] animated:YES];
+        HomeDetailController* controller = [[HomeDetailController alloc] init];
+        for (int i=0; i<self.articleList.count; i++) {
+            if ([self.articleList[i][@"title"] containsString:searchText]) {
+                controller.groupId = self.articleList[i][@"group_id"];
+            }
+        }
+        [searchViewController.navigationController pushViewController:controller animated:YES];
     }];
     searchViewController.searchHistoryStyle = PYHotSearchStyleDefault;
     searchViewController.delegate = self;
@@ -70,21 +80,35 @@
 
 - (void)searchViewController:(PYSearchViewController *)searchViewController searchTextDidChange:(UISearchBar *)seachBar searchText:(NSString *)searchText
 {
-    NewsListView* list = [[NewsListView alloc] init];
-    [list initWithCount:100];
+    [self update];
+    
     if (searchText.length) {
         
         // Simulate a send request to get a search suggestions
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             NSMutableArray *searchSuggestionsM = [NSMutableArray array];
-            for (int i = 0; i < arc4random_uniform(5) + 10; i++) {
-                NSString *searchSuggestion = [NSString stringWithFormat:@"Search suggestion %d", i];
-                [searchSuggestionsM addObject:searchSuggestion];
+//            for (int i = 0; i < arc4random_uniform(5) + 10; i++) {
+//                NSString *searchSuggestion = [NSString stringWithFormat:@"Search suggestion %d", i];
+//                [searchSuggestionsM addObject:searchSuggestion];
+//            }
+            for (int i=0; i<self.articleList.count; i++) {
+                if ([self.articleList[i][@"title"] containsString:searchText]) {
+                    [searchSuggestionsM addObject: self.articleList[i][@"title"]];
+                }
             }
             // Refresh and display the search suggustions
             searchViewController.searchSuggestions = searchSuggestionsM;
         });
     }
+}
+
+-(void)update{
+    __weak __typeof(self) weakSelf = self;
+    [[HomeListManager sharedManager] updateWithCompletion:^(NSArray * _Nonnull articleFeed) {
+        __strong __typeof(weakSelf) strongSelf = weakSelf;
+        strongSelf.articleList = articleFeed;
+        NSLog(@"%@",strongSelf.articleList);
+    }];
 }
 
 - (void)viewDidLoad {
