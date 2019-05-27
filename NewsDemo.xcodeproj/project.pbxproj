@@ -15,6 +15,7 @@
 		9758CEC422880A1A0090C60D /* AppDelegate+DDLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 9758CEC322880A1A0090C60D /* AppDelegate+DDLog.m */; };
 		978742C222984BAB00C7EAE0 /* HomeListManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 978742C122984BAB00C7EAE0 /* HomeListManager.m */; };
 		EC05F92422945B75008E6027 /* SingletonUser.m in Sources */ = {isa = PBXBuildFile; fileRef = EC05F92322945B75008E6027 /* SingletonUser.m */; };
+		EC100B56229BA2D100D5907A /* NoImageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EC100B55229BA2D100D5907A /* NoImageTableViewCell.m */; };
 		ECB25E1F22996283005EB072 /* OneImageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ECB25E1E22996283005EB072 /* OneImageTableViewCell.m */; };
 		ECB25E252299632B005EB072 /* ThreeImageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ECB25E242299632B005EB072 /* ThreeImageTableViewCell.m */; };
 		EF61625B228F972300EB7367 /* HomeController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF61625A228F972300EB7367 /* HomeController.m */; };
@@ -109,6 +110,8 @@
 		CBD97A0A5912800A232F996B /* libPods-NewsDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-NewsDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC05F92222945B75008E6027 /* SingletonUser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SingletonUser.h; sourceTree = "<group>"; };
 		EC05F92322945B75008E6027 /* SingletonUser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SingletonUser.m; sourceTree = "<group>"; };
+		EC100B54229BA2D100D5907A /* NoImageTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NoImageTableViewCell.h; sourceTree = "<group>"; };
+		EC100B55229BA2D100D5907A /* NoImageTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NoImageTableViewCell.m; sourceTree = "<group>"; };
 		ECB25E1D22996283005EB072 /* OneImageTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OneImageTableViewCell.h; sourceTree = "<group>"; };
 		ECB25E1E22996283005EB072 /* OneImageTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OneImageTableViewCell.m; sourceTree = "<group>"; };
 		ECB25E232299632B005EB072 /* ThreeImageTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ThreeImageTableViewCell.h; sourceTree = "<group>"; };
@@ -260,6 +263,8 @@
 				ECB25E1E22996283005EB072 /* OneImageTableViewCell.m */,
 				ECB25E232299632B005EB072 /* ThreeImageTableViewCell.h */,
 				ECB25E242299632B005EB072 /* ThreeImageTableViewCell.m */,
+				EC100B54229BA2D100D5907A /* NoImageTableViewCell.h */,
+				EC100B55229BA2D100D5907A /* NoImageTableViewCell.m */,
 			);
 			path = HomeView;
 			sourceTree = "<group>";
@@ -866,6 +871,7 @@
 				9758CEB8228809220090C60D /* MyImageView.m in Sources */,
 				EF616276228F9A1000EB7367 /* WordDetailController.m in Sources */,
 				9758CEC422880A1A0090C60D /* AppDelegate+DDLog.m in Sources */,
+				EC100B56229BA2D100D5907A /* NoImageTableViewCell.m in Sources */,
 				EF61625E228F973200EB7367 /* HomeListController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

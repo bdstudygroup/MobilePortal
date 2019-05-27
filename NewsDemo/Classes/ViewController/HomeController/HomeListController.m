@@ -40,8 +40,11 @@ UITableViewDelegate
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.tableFooterView = [UIView new];
+    //下拉刷新
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadData)];
     [self.tableView.mj_header beginRefreshing];
+    //上拉加载更多
+    self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
     [self.view addSubview:self.tableView];
 }
 
@@ -137,6 +140,10 @@ UITableViewDelegate
 }
 
 - (void)loadData {
+    
+}
+
+- (void)loadMoreData {
     
 }
 @end
