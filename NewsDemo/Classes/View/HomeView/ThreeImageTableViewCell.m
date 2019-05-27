@@ -18,18 +18,44 @@
     if(self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         CGFloat width = [[UIScreen mainScreen] bounds].size.width;
         self.content = [[UILabel alloc]init];
-        self.content.frame = CGRectMake(5,5,width - 10,50);
+        //self.content.frame = CGRectMake(5,5,width - 10,50);
         self.content.numberOfLines = 0;
         self.imageFirst = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"login_portrait_ph"]];
         self.imageSecond = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"login_portrait_ph"]];
         self.imageThird = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"login_portrait_ph"]];
-        self.imageFirst.frame = CGRectMake(5, 60, (width - 20)/3, 70);
-        self.imageSecond.frame = CGRectMake(10 + width/3, 60, (width - 20)/3, 70);
-        self.imageThird.frame = CGRectMake(15 + 2*width/3, 60, (width - 20)/3, 70);
-        [self addSubview:self.content];
-        [self addSubview:self.imageFirst];
-        [self addSubview:self.imageSecond];
-        [self addSubview:self.imageThird];
+        //self.imageFirst.frame = CGRectMake(5, 60, (width - 14)/3, 70);
+        //self.imageSecond.frame = CGRectMake(7 + (width-14)/3, 60, (width - 14)/3, (width - 14)/3*0.7);
+        //self.imageThird.frame = CGRectMake(9 + 2*(width - 14)/3, 60, (width - 14)/3, (width - 14)/3*0.7);
+        [self.contentView addSubview:self.content];
+        [self.contentView addSubview:self.imageFirst];
+        [self.contentView addSubview:self.imageSecond];
+        [self.contentView addSubview:self.imageThird];
+        [self.content mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.contentView.mas_top).offset(5.0);
+            make.left.equalTo(self.contentView.mas_left).offset(2.0);
+            make.width.mas_equalTo(width - 10);
+        }];
+        [self.imageFirst mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.content.mas_bottom).offset(5.0);
+            make.left.equalTo(self.content.mas_left);
+            make.width.mas_equalTo((width - 14)/3);
+            make.height.mas_equalTo((width - 14)/3*0.7);
+            make.bottom.mas_equalTo(self.contentView.mas_bottom).offset(-5.0);
+        }];
+        
+        [self.imageSecond mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.content.mas_bottom).offset(5.0);
+            make.left.equalTo(self.imageFirst.mas_right).offset(2.0);
+            make.width.mas_equalTo((width - 14)/3);
+            make.height.mas_equalTo((width - 14)/3*0.7);
+        }];
+        
+        [self.imageThird mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.content.mas_bottom).offset(5.0);
+            make.left.equalTo(self.imageSecond.mas_right).offset(2.0);
+            make.width.mas_equalTo((width - 14)/3);
+            make.height.mas_equalTo((width - 14)/3*0.7);
+        }];
     }
     return self;
 }

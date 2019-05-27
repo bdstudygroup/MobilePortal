@@ -18,13 +18,24 @@
     if(self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         CGFloat width = [[UIScreen mainScreen] bounds].size.width;
         self.content = [[UILabel alloc]init];
-        self.content.text = @"text";
         self.headImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"login_portrait_ph"]];
-        self.content.frame = CGRectMake(5, 5, 0.6 * width, 90);
         self.content.numberOfLines = 0;
-        self.headImageView.frame = CGRectMake(0.6 * width + 5, 5, 0.4 * width - 10, 90);
-        [self addSubview:self.content];
-        [self addSubview:self.headImageView];
+        [self.contentView addSubview:self.content];
+        [self.contentView addSubview:self.headImageView];
+        [self.content mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.contentView.mas_top).offset(5.0);
+            make.left.equalTo(self.contentView.mas_left).offset(5.0);
+            make.width.mas_equalTo(width*0.6);
+        }];
+        
+        [self.headImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.contentView.mas_top).offset(5.0);
+            make.left.equalTo(self.content.mas_right).offset(5.0);
+            make.size.mas_equalTo(CGSizeMake((0.4*width - 15), ((0.4*width - 15)*0.56)));
+            make.bottom.equalTo(self.contentView.mas_bottom).offset(-5.0);
+        }];
+        
+        
     }
     return self;
 }

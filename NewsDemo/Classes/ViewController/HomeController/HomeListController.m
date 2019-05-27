@@ -11,6 +11,7 @@
 #import "HomeListManager.h"
 #import "../../View/HomeView/OneImageTableViewCell.h"
 #import "../../View/HomeView/ThreeImageTableViewCell.h"
+#import "../../View/HomeView/NoImageTableViewCell.h"
 #define kHomeListCell @"kHomeListCell"
 
 @interface HomeListController ()
@@ -39,6 +40,8 @@ UITableViewDelegate
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.tableFooterView = [UIView new];
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadData)];
+    [self.tableView.mj_header beginRefreshing];
     [self.view addSubview:self.tableView];
 }
 
@@ -67,23 +70,17 @@ UITableViewDelegate
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    /*
-     UITableViewCell *cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
-     cell.textLabel.text = self.articleList[indexPath.row][@"title"];
-     */
-    //NSDictionary  *dict = [[NSDictionary alloc]initWithDictionary:self.articleList[indexPath.row][@"image_infos"]];
     NSArray *arr = [[NSArray alloc]initWithArray:self.articleList[indexPath.row][@"image_infos"]];
     NSError *err = nil;
-    //NSLog(@"arr %d %@", [arr count], arr);
+    NSString *cellID = [NSString stringWithFormat:@"cellID:%ld", indexPath.row];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
     if([arr count] == 0) {
-        UITableViewCell *cell = [[OneImageTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
-        ((OneImageTableViewCell*)cell).content.text = self.articleList[indexPath.row][@"title"];
-        
-        
+        cell = [[NoImageTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
+        ((NoImageTableViewCell*)cell).content.text = self.articleList[indexPath.row][@"title"];
         return cell;
-    }else if([arr count] == 1) {
+    }else if([arr count] == 1 || [arr count] == 2) {
         //NSLog(@"%d", self.articleList[indexPath.row][@"image_infos"].count);
-        UITableViewCell *cell = [[OneImageTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+        cell = [[OneImageTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
         ((OneImageTableViewCell*)cell).content.text = self.articleList[indexPath.row][@"title"];
         
         NSData *jsonData = [NSJSONSerialization dataWithJSONObject:arr[0] options:kNilOptions error:&err];
@@ -103,7 +100,7 @@ UITableViewDelegate
             url = [url stringByAppendingString:json[@"web_uri"]];
             [url_arr addObject:url];
         }
-        UITableViewCell *cell = [[ThreeImageTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+        cell = [[ThreeImageTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
         ((ThreeImageTableViewCell*)cell).content.text = self.articleList[indexPath.row][@"title"];
         [((ThreeImageTableViewCell*)cell).imageFirst setImageWithURL:url_arr[0]];
         [((ThreeImageTableViewCell*)cell).imageSecond setImageWithURL:url_arr[1]];
@@ -129,17 +126,17 @@ UITableViewDelegate
     
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
-    NSArray *arr = [[NSArray alloc]initWithArray:self.articleList[indexPath.row][@"image_infos"]];
-    NSError *err = nil;
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:arr[0] options:kNilOptions error:&err];
-    NSDictionary *json = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:&err];
-    if([arr count] == 0) {
-        return 50;
-    } else if([arr count] == 1) {
-        return 100;
-    } {
-        return 150;
-    }
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return UITableViewAutomaticDimension;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 44;
+}
+
+- (void)loadData {
+    
 }
 @end
