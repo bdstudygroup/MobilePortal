@@ -32,6 +32,7 @@
 @property (nonatomic, strong) NSMutableArray<NSString*>* img_uri;
 @property (nonatomic, strong) NSMutableArray<NSString*>* height;
 @property (nonatomic, strong) NSMutableArray<NSString*>* width;
+@property (nonatomic, strong) NSMutableArray<NSString*>* video_post;
 
 
 @end
@@ -60,6 +61,7 @@ static NSString * const videoMethodName = @"openVideoPlayer:";
     self.img_uri = [[NSMutableArray alloc] initWithCapacity:30];
     self.width = [[NSMutableArray alloc] initWithCapacity:30];
     self.height = [[NSMutableArray alloc] initWithCapacity:30];
+    self.video_post = [[NSMutableArray alloc] initWithCapacity:30];
     
     NSURLSessionConfiguration *defaultConfigObject = [NSURLSessionConfiguration defaultSessionConfiguration];
     NSURLSession *delegateFreeSession = [NSURLSession sessionWithConfiguration: defaultConfigObject
@@ -90,8 +92,18 @@ static NSString * const videoMethodName = @"openVideoPlayer:";
             self.htmlDict = article_data;
             NSString* article_content = [article_data objectForKey:@"article_content"];
             NSString* img_prefix = [article_data objectForKey:@"image_url_prefix"];
-    //        NSLog(@"content=%@ \n", article_content);
+            NSLog(@"content=%@ \n", article_content);
             NSArray* imgFilter = [self filterImage:article_content];
+            NSArray* videoFilter = [self filterVideo:article_content];
+            if(videoFilter.count > 0){
+                for (int i=0; i<videoFilter.count; i++) {
+                    NSString* imgString = videoFilter[i];
+                    NSData *stringData = [imgString dataUsingEncoding:NSUTF8StringEncoding];
+                    NSDictionary* json = [NSJSONSerialization JSONObjectWithData:stringData options:0 error:nil];
+                    [self.video_post addObject:json[@"vposter"]];
+                    NSLog(@"first post= %@ \n", self.video_post[i]);
+                }
+            }
             if (imgFilter.count > 0) {
                 for (int i=0; i<imgFilter.count; i++) {
                     NSString* imgString = imgFilter[i];
@@ -148,6 +160,36 @@ static NSString * const videoMethodName = @"openVideoPlayer:";
     return resultArray;
 }
 
+-(NSArray *) filterStringVideo:(NSString *)html{
+    NSMutableArray *resultArray = [NSMutableArray array];
+    
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"(>\\{!--)(.*?)(--\\}<)" options:NSRegularExpressionAllowCommentsAndWhitespace error:nil];
+    NSArray *result = [regex matchesInString:html options:NSMatchingReportCompletion range:NSMakeRange(0, html.length)];
+    
+    for (NSTextCheckingResult *item in result) {
+        NSString *imgHtml = [html substringWithRange:[item rangeAtIndex:0]];
+        
+        NSArray *tmpArray = nil;
+        if ([imgHtml rangeOfString:@">"].location != NSNotFound) {
+            tmpArray = [imgHtml componentsSeparatedByString:@">"];
+        }
+        
+        if (tmpArray.count >= 2) {
+            NSString *src = tmpArray[1];
+            
+            NSUInteger loc = [src rangeOfString:@"<"].location;
+            if (loc != NSNotFound) {
+                src = [src substringToIndex:loc];
+                [resultArray addObject:src];
+            }
+        }
+    }
+    if (resultArray.count > 0) {
+        NSLog(@"video result=%@", resultArray[0]);
+    }
+    return resultArray;
+}
+
 - (NSArray *)filterImage:(NSString *)html
 {
     NSMutableArray *resultArray = [NSMutableArray array];
@@ -173,17 +215,51 @@ static NSString * const videoMethodName = @"openVideoPlayer:";
             }
         }
     }
-    
     return resultArray;
 }
+
+-(NSArray *)filterVideo:(NSString *) html{
+    NSMutableArray *resultArray = [NSMutableArray array];
+    
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"(\\{!--)(.*?)(--\\})" options:NSRegularExpressionAllowCommentsAndWhitespace error:nil];
+    NSArray *result = [regex matchesInString:html options:NSMatchingReportCompletion range:NSMakeRange(0, html.length)];
+    
+    for (NSTextCheckingResult *item in result) {
+        NSString *imgHtml = [html substringWithRange:[item rangeAtIndex:0]];
+        
+        NSArray *tmpArray = nil;
+        if ([imgHtml rangeOfString:@"{!-- PGC_VIDEO:"].location != NSNotFound) {
+            tmpArray = [imgHtml componentsSeparatedByString:@"{!-- PGC_VIDEO:"];
+        }
+        
+        if (tmpArray.count >= 2) {
+            NSString *src = tmpArray[1];
+            
+            NSUInteger loc = [src rangeOfString:@" --}"].location;
+            if (loc != NSNotFound) {
+                src = [src substringToIndex:loc];
+                [resultArray addObject:src];
+            }
+        }
+    }
+    return resultArray;
+}
+
 
 
 -(void)loadingHtmlNews{
     NSString* body = [self.htmlDict objectForKey:@"article_content"];
     NSArray* stringFilter = [self filterString:body];
+    NSArray* videoStringFilter = [self filterStringVideo:body];
+    if(videoStringFilter.count > 0){
+//        NSLog(@"string=%@", videoStringFilter[0]);
+        for (int i=0; i<videoStringFilter.count; i++) {
+            NSString *str=[NSString stringWithFormat:@"<img src=\"%@\" \\>", self.video_post[i]];
+            body = [body stringByReplacingOccurrencesOfString:videoStringFilter[i] withString:str];
+        }
+    }
     
-    
-    if (stringFilter > 0) {
+    if (stringFilter > 0){
         for (int i=0; i<stringFilter.count; i++) {
 //            NSLog(@"string=%@\n", stringFilter[i]);
 //            NSLog(@"img=%@", self.img_uri[i]);
