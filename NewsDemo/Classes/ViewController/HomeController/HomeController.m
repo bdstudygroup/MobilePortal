@@ -87,10 +87,6 @@
         // Simulate a send request to get a search suggestions
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             NSMutableArray *searchSuggestionsM = [NSMutableArray array];
-//            for (int i = 0; i < arc4random_uniform(5) + 10; i++) {
-//                NSString *searchSuggestion = [NSString stringWithFormat:@"Search suggestion %d", i];
-//                [searchSuggestionsM addObject:searchSuggestion];
-//            }
             for (int i=0; i<self.articleList.count; i++) {
                 if ([self.articleList[i][@"title"] containsString:searchText]) {
                     [searchSuggestionsM addObject: self.articleList[i][@"title"]];

@@ -15,6 +15,33 @@
 
 @implementation PicDetailController
 
+- (instancetype)initWithPicModel:(NSString* )imgURL {
+    if (self = [super init]) {
+        self.imgURL = imgURL;
+    }
+    return self;
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.view.backgroundColor = [UIColor whiteColor];
+    [BarItem addBackItemToVC:self];
+    
+    MWPhotoBrowser *pb = [[MWPhotoBrowser alloc] initWithDelegate:self];
+    NSMutableArray *naviVCs = [NSMutableArray arrayWithArray:self.navigationController.viewControllers];
+    [naviVCs removeLastObject];
+    [naviVCs addObject:pb];
+    self.navigationController.viewControllers = naviVCs;
+}
+
+#pragma mark - <MWPhotoBrowserDelegate>
+- (NSUInteger)numberOfPhotosInPhotoBrowser:(MWPhotoBrowser *)photoBrowser {
+    return 10;
+}
+- (id<MWPhoto>)photoBrowser:(MWPhotoBrowser *)photoBrowser photoAtIndex:(NSUInteger)index {
+    MWPhoto *photo = [MWPhoto photoWithURL:[NSURL URLWithString:self.imgURL]];
+    return photo;
+}
 
 
 @end

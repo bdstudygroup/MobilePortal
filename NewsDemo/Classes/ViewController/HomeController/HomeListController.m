@@ -9,6 +9,7 @@
 #import "HomeListController.h"
 #import "HomeDetailController.h"
 #import "HomeListManager.h"
+#import "PicDetailController.h"
 #import "../../View/HomeView/OneImageTableViewCell.h"
 #import "../../View/HomeView/ThreeImageTableViewCell.h"
 #import "../../View/HomeView/NoImageTableViewCell.h"
@@ -53,7 +54,7 @@ UITableViewDelegate
     [[HomeListManager sharedManager] updateWithCompletion:^(NSArray * _Nonnull articleFeed) {
         __strong __typeof(weakSelf) strongSelf = weakSelf;
         strongSelf.articleList = articleFeed;
-        NSLog(@"%@",strongSelf.articleList);
+        //NSLog(@"%@",strongSelf.articleList);
         [strongSelf.tableView reloadData];
         
     }];
@@ -90,7 +91,7 @@ UITableViewDelegate
         NSDictionary *json = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:&err];
         NSString *url = json[@"url_prefix"];
         url = [url stringByAppendingString:json[@"web_uri"]];
-        NSLog(@"%@", url);
+        //NSLog(@"%@", url);
         
         [((OneImageTableViewCell*)cell).headImageView setImageWithURL:url];
         return cell;
@@ -115,7 +116,7 @@ UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     HomeDetailController* detailController = [[HomeDetailController alloc] init];
     detailController.groupId = self.articleList[indexPath.row][@"group_id"];
-    NSLog(@"%@", self.articleList[indexPath.row][@"image_infos"]);
+    //NSLog(@"%@", self.articleList[indexPath.row][@"image_infos"]);
     [self.navigationController pushViewController:detailController animated:YES];
 }
 
