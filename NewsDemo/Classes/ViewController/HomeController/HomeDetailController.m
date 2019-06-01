@@ -10,8 +10,11 @@
 #import "HomeDetailController.h"
 #import "BarItem.h"
 #import "NSObject+Hint.h"
+#import "WKWebView+XHShowImage.h"
 #import <Masonry.h>
 #import <WebKit/WebKit.h>
+#import "PicDetailController.h"
+#import "LBVideoPlayerController.h"
 
 
 @interface HomeDetailController () <WKNavigationDelegate,WKUIDelegate>
@@ -22,6 +25,7 @@
 
 /** 浏览器 */
 @property (nonatomic, strong) WKWebView *wkWebView;
+@property (nonatomic, strong) UIView* comment;
 
 
 /** 进度条 */
@@ -29,6 +33,7 @@
 @property (nonatomic, strong) NSMutableArray<NSString*>* img_uri;
 @property (nonatomic, strong) NSMutableArray<NSString*>* height;
 @property (nonatomic, strong) NSMutableArray<NSString*>* width;
+@property (nonatomic, strong) NSMutableArray<NSString*>* video_post;
 
 
 @end
@@ -46,6 +51,13 @@
 - (void)viewDidLoad{
     [super viewDidLoad];
     [self setupWebView];
+    [self.comment mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(kWindowW, 50));
+        make.top.mas_equalTo(self.wkWebView.mas_bottom).mas_equalTo(10);
+    }];
+    self.comment.backgroundColor = [UIColor blueColor];
+    [self.view addSubview:self.comment];
+    
 }
 
 -(void) httpPostWithCustomDelegate: (NSString*)groupId
@@ -54,6 +66,7 @@
     self.img_uri = [[NSMutableArray alloc] initWithCapacity:30];
     self.width = [[NSMutableArray alloc] initWithCapacity:30];
     self.height = [[NSMutableArray alloc] initWithCapacity:30];
+    self.video_post = [[NSMutableArray alloc] initWithCapacity:30];
     
     NSURLSessionConfiguration *defaultConfigObject = [NSURLSessionConfiguration defaultSessionConfiguration];
     NSURLSession *delegateFreeSession = [NSURLSession sessionWithConfiguration: defaultConfigObject
@@ -76,35 +89,46 @@
     
     NSURLSessionDataTask * dataTask =[delegateFreeSession dataTaskWithRequest:urlRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
 //    NSLog(@"Response:%@ %@\n", response, error);
-    if(error == nil) {
-        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+        if(error == nil) {
+            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
 
-        NSDictionary* article_data = [dict objectForKey:@"data"];
+            NSDictionary* article_data = [dict objectForKey:@"data"];
 
-        self.htmlDict = article_data;
-        NSString* article_content = [article_data objectForKey:@"article_content"];
-        NSString* img_prefix = [article_data objectForKey:@"image_url_prefix"];
-//        NSLog(@"content=%@ \n", article_content);
-        NSArray* imgFilter = [self filterImage:article_content];
-        if (imgFilter.count > 0) {
-            for (int i=0; i<imgFilter.count; i++) {
-                NSString* imgString = imgFilter[i];
-                NSData *stringData = [imgString dataUsingEncoding:NSUTF8StringEncoding];
-                NSDictionary* json = [NSJSONSerialization JSONObjectWithData:stringData options:0 error:nil];
-                [self.img_uri addObject: [img_prefix stringByAppendingString:json[@"web_uri"]]];
-                [self.width addObject: json[@"width"]];
-                [self.height addObject: json[@"height"]];
-                
-//                NSLog(@"first img= %@ \n", self.img_uri[i]);
-//                NSLog(@"second img= %@ \n", self.width[i]);
-//                NSLog(@"third img= %@ \n", self.height[i]);
+            self.htmlDict = article_data;
+            NSString* article_content = [article_data objectForKey:@"article_content"];
+            NSString* img_prefix = [article_data objectForKey:@"image_url_prefix"];
+            NSLog(@"content=%@ \n", article_content);
+            NSLog(@"prefix=%@", img_prefix);
+            NSArray* imgFilter = [self filterImage:article_content];
+            NSArray* videoFilter = [self filterVideo:article_content];
+            if(videoFilter.count > 0){
+                for (int i=0; i<videoFilter.count; i++) {
+                    NSString* imgString = videoFilter[i];
+                    NSData *stringData = [imgString dataUsingEncoding:NSUTF8StringEncoding];
+                    NSDictionary* json = [NSJSONSerialization JSONObjectWithData:stringData options:0 error:nil];
+                    [self.video_post addObject:json[@"vposter"]];
+                    NSLog(@"first post= %@ \n", self.video_post[i]);
+                }
             }
-        }
-        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-            
-            self.navigationItem.title= @"新闻详情";
-        }];
-        [self loadingHtmlNews];
+            if (imgFilter.count > 0) {
+                for (int i=0; i<imgFilter.count; i++) {
+                    NSString* imgString = imgFilter[i];
+                    NSData *stringData = [imgString dataUsingEncoding:NSUTF8StringEncoding];
+                    NSDictionary* json = [NSJSONSerialization JSONObjectWithData:stringData options:0 error:nil];
+                    [self.img_uri addObject: [img_prefix stringByAppendingString:json[@"web_uri"]]];
+                    [self.width addObject: json[@"width"]];
+                    [self.height addObject: json[@"height"]];
+                    
+    //                NSLog(@"first img= %@ \n", self.img_uri[i]);
+    //                NSLog(@"second img= %@ \n", self.width[i]);
+    //                NSLog(@"third img= %@ \n", self.height[i]);
+                }
+            }
+            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                
+                self.navigationItem.title= @"新闻详情";
+            }];
+            [self loadingHtmlNews];
                                                                     
         }
     }];
@@ -134,11 +158,43 @@
             NSUInteger loc = [src rangeOfString:@">"].location;
             if (loc != NSNotFound) {
                 src = [src substringToIndex:loc];
-                [resultArray addObject:src];
+                if ([src containsString:@"{{image_domain}}"]) {
+                    [resultArray addObject:src];
+                }
             }
         }
     }
     
+    return resultArray;
+}
+
+-(NSArray *) filterStringVideo:(NSString *)html{
+    NSMutableArray *resultArray = [NSMutableArray array];
+    
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"(>\\{!--)(.*?)(--\\}<)" options:NSRegularExpressionAllowCommentsAndWhitespace error:nil];
+    NSArray *result = [regex matchesInString:html options:NSMatchingReportCompletion range:NSMakeRange(0, html.length)];
+    
+    for (NSTextCheckingResult *item in result) {
+        NSString *imgHtml = [html substringWithRange:[item rangeAtIndex:0]];
+        
+        NSArray *tmpArray = nil;
+        if ([imgHtml rangeOfString:@">"].location != NSNotFound) {
+            tmpArray = [imgHtml componentsSeparatedByString:@">"];
+        }
+        
+        if (tmpArray.count >= 2) {
+            NSString *src = tmpArray[1];
+            
+            NSUInteger loc = [src rangeOfString:@"<"].location;
+            if (loc != NSNotFound) {
+                src = [src substringToIndex:loc];
+                [resultArray addObject:src];
+            }
+        }
+    }
+    if (resultArray.count > 0) {
+        NSLog(@"video result=%@", resultArray[0]);
+    }
     return resultArray;
 }
 
@@ -167,22 +223,52 @@
             }
         }
     }
-    
     return resultArray;
 }
+
+-(NSArray *)filterVideo:(NSString *) html{
+    NSMutableArray *resultArray = [NSMutableArray array];
+    
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"(\\{!--)(.*?)(--\\})" options:NSRegularExpressionAllowCommentsAndWhitespace error:nil];
+    NSArray *result = [regex matchesInString:html options:NSMatchingReportCompletion range:NSMakeRange(0, html.length)];
+    
+    for (NSTextCheckingResult *item in result) {
+        NSString *imgHtml = [html substringWithRange:[item rangeAtIndex:0]];
+        
+        NSArray *tmpArray = nil;
+        if ([imgHtml rangeOfString:@"{!-- PGC_VIDEO:"].location != NSNotFound) {
+            tmpArray = [imgHtml componentsSeparatedByString:@"{!-- PGC_VIDEO:"];
+        }
+        
+        if (tmpArray.count >= 2) {
+            NSString *src = tmpArray[1];
+            
+            NSUInteger loc = [src rangeOfString:@" --}"].location;
+            if (loc != NSNotFound) {
+                src = [src substringToIndex:loc];
+                [resultArray addObject:src];
+            }
+        }
+    }
+    return resultArray;
+}
+
 
 
 -(void)loadingHtmlNews{
     NSString* body = [self.htmlDict objectForKey:@"article_content"];
     NSArray* stringFilter = [self filterString:body];
+    NSArray* videoStringFilter = [self filterStringVideo:body];
+    if(videoStringFilter.count > 0){
+        for (int i=0; i<videoStringFilter.count; i++) {
+            NSString *str=[NSString stringWithFormat:@"<img src=\"%@\" \\>", self.video_post[i]];
+            body = [body stringByReplacingOccurrencesOfString:videoStringFilter[i] withString:str];
+        }
+    }
     
-    if (stringFilter > 0) {
+    if (stringFilter > 0){
         for (int i=0; i<stringFilter.count; i++) {
-//            NSLog(@"string=%@\n", stringFilter[i]);
-//            NSLog(@"img=%@", self.img_uri[i]);
-//            NSLog(@"width=%@", self.width[i]);
-//            NSLog(@"height=%@", self.height[i]);
-            NSString *str = [NSString stringWithFormat:@"src=\"%@\" height=%@ width=%@", self.img_uri[i], self.height[i], self.width[i]];
+            NSString *str = [NSString stringWithFormat:@"src=\"%@\" height=%@ width=%@ ", self.img_uri[i], self.height[i], self.width[i]];
             body=[body stringByReplacingOccurrencesOfString:stringFilter[i] withString:str];
         }
     }
@@ -191,21 +277,34 @@
                       <html lang=\"en\">\
                       <head>\
                       <meta charset=\"UTF-8\">\
+                      <style type=\"text/css\">\
+                        body {font-size:25px;}\
+                      </style>\
                       </head>\
                       <body>\
-                      <div>%@</div>\
+                      <script>\
+                      window.onload = function(){\
+                      var imageArray = document.getElementsByTagName('img');\
+                      for(var p in  imageArray){\
+                          imageArray[p].style.width = '100%%';\
+                          imageArray[p].style.height ='auto'\
+                      }\
+                      }\
+                      </script>\
+                      <div >%@</div>\
                       </body>\
                       </html>"\
                       ,body];
     [self.wkWebView loadHTMLString:html baseURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] resourcePath]]];
 }
 
+
 -(void)setupWebView{
     WKWebViewConfiguration* configur = [[WKWebViewConfiguration alloc] init];
     WKPreferences* preference = [[WKPreferences alloc] init];
     configur.preferences = preference;
     preference.javaScriptEnabled = YES;
-    WKWebView* wkWebView = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0, kWindowW, kWindowH) configuration:configur];
+    WKWebView* wkWebView = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0, kWindowW, kWindowH-100) configuration:configur];
     
     [self.view addSubview:wkWebView];
     self.wkWebView = wkWebView;
@@ -224,5 +323,50 @@
     [self httpPostWithCustomDelegate: self.groupId];
     
 }
+
+#pragma mark - show big picture
+- (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation {
+    [webView xh_getImageUrlWithWebView:webView];
+}
+
+- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
+    
+    [self showBigImage:navigationAction.request];
+    
+    decisionHandler(WKNavigationActionPolicyAllow);
+}
+
+- (void)showBigImage:(NSURLRequest *)request {
+    NSString *str = request.URL.absoluteString;
+    if ([str hasPrefix:@"myweb:imageClick:"]) {
+        NSString *imageUrl = [str substringFromIndex:@"myweb:imageClick:".length];
+        NSArray *imgUrlArr = [self.wkWebView getImgUrlArray];
+        NSInteger index = 0;
+        for (NSInteger i = 0; i < [imgUrlArr count]; i++) {
+            if([imageUrl isEqualToString:imgUrlArr[i]]){
+                index = i;
+            }
+        }
+        NSNumber* Index = [[NSNumber alloc] initWithInteger:index];
+        PicDetailController* pc = [[PicDetailController alloc] initWithPicModel:imgUrlArr PicIndex: Index];
+        [self.navigationController pushViewController:pc animated:YES];
+    }
+    
+}
+
+#pragma mark - WKUIDelegate(js弹框需要实现的代理方法)
+- (void)webView:(WKWebView *)webView runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(void))completionHandler
+{
+    NSLog(@"tankuang----------");
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:message message:nil preferredStyle:UIAlertControllerStyleAlert];
+    [alertController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+        completionHandler();
+    }]];
+    [self presentViewController:alertController animated:YES completion:nil];
+    
+}
+
+
 
 @end

@@ -192,7 +192,8 @@
     self.headImageView.image = image;
     self.headImageView.image = [self scaleToSize:CGSizeMake(100, 100) width:image.size.width height:image.size.height];
     NSLog(@"%f", self.headImageView.image.size.width);
-    NSLog(@"%f", self.headImageView.image.size.height);}
+    NSLog(@"%f", self.headImageView.image.size.height);
+}
 
 //等比例缩放
 -(UIImage*)scaleToSize:(CGSize)size width:(CGFloat)currentWidth height:(CGFloat)currentHeight
