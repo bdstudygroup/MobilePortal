@@ -15,7 +15,6 @@
 		9758CEC422880A1A0090C60D /* AppDelegate+DDLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 9758CEC322880A1A0090C60D /* AppDelegate+DDLog.m */; };
 		978742C222984BAB00C7EAE0 /* HomeListManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 978742C122984BAB00C7EAE0 /* HomeListManager.m */; };
 		97A0587A229D881400033BF6 /* LBVideoPlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A05879229D881400033BF6 /* LBVideoPlayerController.m */; };
-		97A0587D229D883B00033BF6 /* LBBigPictureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A0587C229D883B00033BF6 /* LBBigPictureViewController.m */; };
 		EC05F92422945B75008E6027 /* SingletonUser.m in Sources */ = {isa = PBXBuildFile; fileRef = EC05F92322945B75008E6027 /* SingletonUser.m */; };
 		EC100B56229BA2D100D5907A /* NoImageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EC100B55229BA2D100D5907A /* NoImageTableViewCell.m */; };
 		ECB25E1F22996283005EB072 /* OneImageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ECB25E1E22996283005EB072 /* OneImageTableViewCell.m */; };
@@ -113,8 +112,6 @@
 		978742C122984BAB00C7EAE0 /* HomeListManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeListManager.m; sourceTree = "<group>"; };
 		97A05878229D881400033BF6 /* LBVideoPlayerController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LBVideoPlayerController.h; sourceTree = "<group>"; };
 		97A05879229D881400033BF6 /* LBVideoPlayerController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LBVideoPlayerController.m; sourceTree = "<group>"; };
-		97A0587B229D883B00033BF6 /* LBBigPictureViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LBBigPictureViewController.h; sourceTree = "<group>"; };
-		97A0587C229D883B00033BF6 /* LBBigPictureViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LBBigPictureViewController.m; sourceTree = "<group>"; };
 		CBD97A0A5912800A232F996B /* libPods-NewsDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-NewsDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC05F92222945B75008E6027 /* SingletonUser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SingletonUser.h; sourceTree = "<group>"; };
 		EC05F92322945B75008E6027 /* SingletonUser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SingletonUser.m; sourceTree = "<group>"; };
@@ -394,8 +391,6 @@
 				EF616278228F9A2300EB7367 /* PicController.m */,
 				EF61627A228F9A3100EB7367 /* PicDetailController.h */,
 				EF61627B228F9A3100EB7367 /* PicDetailController.m */,
-				97A0587B229D883B00033BF6 /* LBBigPictureViewController.h */,
-				97A0587C229D883B00033BF6 /* LBBigPictureViewController.m */,
 			);
 			path = WordPicController;
 			sourceTree = "<group>";
@@ -894,7 +889,6 @@
 				FA0392A922A2154500C60D1C /* WKWebView+XHShowImage.m in Sources */,
 				EF61625B228F972300EB7367 /* HomeController.m in Sources */,
 				EF61626D228F98DD00EB7367 /* SetController.m in Sources */,
-				97A0587D229D883B00033BF6 /* LBBigPictureViewController.m in Sources */,
 				97A0587A229D881400033BF6 /* LBVideoPlayerController.m in Sources */,
 				9758CEB5228808B20090C60D /* BarItem.m in Sources */,
 				9758CEBB228809730090C60D /* iCarousel.m in Sources */,

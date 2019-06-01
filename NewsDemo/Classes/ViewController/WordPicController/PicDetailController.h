@@ -11,6 +11,7 @@
 @interface PicDetailController : UIViewController
 
 @property(nonatomic, strong)NSArray* imgURL;
-- (instancetype)initWithPicModel:(NSArray*)imgURL;
+@property(nonatomic, strong)NSNumber* index;
+- (instancetype)initWithPicModel:(NSArray*)imgURL PicIndex:(NSNumber*) index;
 
 @end

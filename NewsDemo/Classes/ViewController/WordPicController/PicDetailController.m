@@ -15,9 +15,10 @@
 
 @implementation PicDetailController
 
-- (instancetype)initWithPicModel:(NSArray* )imgURL {
+- (instancetype)initWithPicModel:(NSArray* )imgURL PicIndex: (NSNumber*) index{
     if (self = [super init]) {
         self.imgURL = imgURL;
+        self.index = index;
     }
     return self;
 }
@@ -28,6 +29,7 @@
     [BarItem addBackItemToVC:self];
     
     MWPhotoBrowser *pb = [[MWPhotoBrowser alloc] initWithDelegate:self];
+    [pb setCurrentPhotoIndex:[self.index integerValue]];
     NSMutableArray *naviVCs = [NSMutableArray arrayWithArray:self.navigationController.viewControllers];
     [naviVCs removeLastObject];
     [naviVCs addObject:pb];

@@ -346,39 +346,13 @@ static NSString * const videoMethodName = @"openVideoPlayer:";
         for (NSInteger i = 0; i < [imgUrlArr count]; i++) {
             if([imageUrl isEqualToString:imgUrlArr[i]]){
                 index = i;
-                PicDetailController* pc = [[PicDetailController alloc] initWithPicModel:imgUrlArr];
-                [self.navigationController pushViewController:pc animated:YES];
             }
         }
+        NSNumber* Index = [[NSNumber alloc] initWithInteger:index];
+        PicDetailController* pc = [[PicDetailController alloc] initWithPicModel:imgUrlArr PicIndex: Index];
+        [self.navigationController pushViewController:pc animated:YES];
     }
     
-}
-
-#pragma mark - WKScriptMessageHandler
-- (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message{
-    
-    NSLog(@"messageName=%@,messageBody=%@",message.name,message.body);
-    NSDictionary *imageDict = message.body;
-    NSString *src = [NSString string];
-    if (imageDict[@"imageSrc"]) {
-        src = imageDict[@"imageSrc"];
-    }else{
-        src = imageDict[@"videoSrc"];
-    }
-    NSString *name = imageDict[@"methodName"];
-    
-    //如果方法名是我们需要的，那么说明是时候调用原生对应的方法了
-    if ([picMethodName isEqualToString:name]) {
-        SEL sel = NSSelectorFromString(picMethodName);
-        [self performSelector:sel withObject:src];
-
-    }else if ([videoMethodName isEqualToString:name]){
-        
-        SEL sel = NSSelectorFromString(name);
-
-        [self performSelector:sel withObject:src];
-        
-    }
 }
 
 #pragma mark - WKUIDelegate(js弹框需要实现的代理方法)
@@ -391,32 +365,6 @@ static NSString * const videoMethodName = @"openVideoPlayer:";
         completionHandler();
     }]];
     [self presentViewController:alertController animated:YES completion:nil];
-    
-}
-
-#pragma mark - JS调用 OC的方法进行图片浏览
-- (void)openBigPicture:(NSString *)imageSrc
-{
-    //NSLog(@"%@",imageSrc);
-    PicDetailController *picVc = [[PicDetailController alloc] init];
-    picVc.modalTransitionStyle = UIModalTransitionStylePartialCurl;
-    picVc.imgURL = imageSrc;
-    
-    [self presentViewController:picVc animated:YES completion:nil];
-    
-}
-
-
-#pragma mark - JS调用 OC的方法进行视频播放
-- (void)openVideoPlayer:(NSString *)videoSrc
-{
-    
-    LBVideoPlayerController *videoPlayer = [[LBVideoPlayerController alloc] init];
-    videoPlayer.videoSrc = videoSrc;
-    
-    [self presentViewController:videoPlayer animated:YES completion:nil];
-    
-    
     
 }
 
