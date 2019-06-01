@@ -14,7 +14,6 @@
     if(self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         CGFloat width = [[UIScreen mainScreen] bounds].size.width;
         self.content = [[UILabel alloc]init];
-        self.content.font = [UIFont systemFontOfSize:16];
         self.content.text = @"text";
         //self.content.frame = CGRectMake(5, 5, (width- 10), 50);
         self.content.numberOfLines = 0;

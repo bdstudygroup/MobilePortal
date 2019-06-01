@@ -27,15 +27,12 @@
             make.left.equalTo(self.contentView.mas_left).offset(5.0);
             make.width.mas_equalTo(width*0.6);
         }];
-        
         [self.headImageView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.contentView.mas_top).offset(5.0);
             make.left.equalTo(self.content.mas_right).offset(5.0);
             make.size.mas_equalTo(CGSizeMake((0.4*width - 15), ((0.4*width - 15)*0.56)));
             make.bottom.equalTo(self.contentView.mas_bottom).offset(-5.0);
         }];
-        
-        
     }
     return self;
 }

@@ -9,6 +9,7 @@
 #import "HomeListController.h"
 #import "HomeDetailController.h"
 #import "HomeListManager.h"
+#import "PicDetailController.h"
 #import "../../View/HomeView/OneImageTableViewCell.h"
 #import "../../View/HomeView/ThreeImageTableViewCell.h"
 #import "../../View/HomeView/NoImageTableViewCell.h"
@@ -21,18 +22,20 @@ UITableViewDelegate
 >
 
 @property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, strong) NSArray<NSDictionary *> *articleList;
+@property (nonatomic, strong) NSMutableArray<NSDictionary *> *articleList;
+@property (nonatomic, strong) HomeListManager *manager;
 
 @end
-
 @implementation HomeListController
 
 #pragma mark - Life Cycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.manager = [HomeListManager sharedManager];
+    self.manager.currentOffset = 0;
     [self setup];
-    [self update];
+    //[self update];
 }
 
 - (void)setup {
@@ -40,24 +43,16 @@ UITableViewDelegate
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.tableFooterView = [UIView new];
+    [self.view addSubview:self.tableView];
     //下拉刷新
-    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadData)];
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [self update];
+    }];
     [self.tableView.mj_header beginRefreshing];
     //上拉加载更多
-    self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
-    [self.view addSubview:self.tableView];
-}
-
-- (void)update {
-    __weak __typeof(self) weakSelf = self;
-    [[HomeListManager sharedManager] updateWithCompletion:^(NSArray * _Nonnull articleFeed) {
-        __strong __typeof(weakSelf) strongSelf = weakSelf;
-        strongSelf.articleList = articleFeed;
-        NSLog(@"%@",strongSelf.articleList);
-        [strongSelf.tableView reloadData];
-        
+    self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        [self update];
     }];
-    
 }
 
 - (void)viewDidLayoutSubviews {
@@ -90,7 +85,7 @@ UITableViewDelegate
         NSDictionary *json = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:&err];
         NSString *url = json[@"url_prefix"];
         url = [url stringByAppendingString:json[@"web_uri"]];
-        NSLog(@"%@", url);
+        //NSLog(@"%@", url);
         
         [((OneImageTableViewCell*)cell).headImageView setImageWithURL:url];
         return cell;
@@ -108,6 +103,15 @@ UITableViewDelegate
         [((ThreeImageTableViewCell*)cell).imageFirst setImageWithURL:url_arr[0]];
         [((ThreeImageTableViewCell*)cell).imageSecond setImageWithURL:url_arr[1]];
         [((ThreeImageTableViewCell*)cell).imageThird setImageWithURL:url_arr[2]];
+        //push data
+        NSArray *visibleRows = [self.tableView indexPathsForVisibleRows];
+        NSInteger nextRow = indexPath.row + visibleRows.count;
+        if(self.articleList.count - indexPath.row < visibleRows.count) {
+            //[self.tableView.mj_footer beginRefreshing];
+            NSLog(@"kkkkkkkkkkkkkkkkk %d", self.articleList.count);
+            [self.tableView.mj_footer beginRefreshing];
+        }
+        
         return cell;
     }
     
@@ -115,7 +119,7 @@ UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     HomeDetailController* detailController = [[HomeDetailController alloc] init];
     detailController.groupId = self.articleList[indexPath.row][@"group_id"];
-    NSLog(@"%@", self.articleList[indexPath.row][@"image_infos"]);
+    //NSLog(@"%@", self.articleList[indexPath.row][@"image_infos"]);
     [self.navigationController pushViewController:detailController animated:YES];
 }
 
@@ -139,11 +143,21 @@ UITableViewDelegate
     return 44;
 }
 
-- (void)loadData {
-    
+- (void) update {
+    [self.manager  updateWithCompletion:^(NSArray * _Nonnull articleFeed) {
+        NSMutableArray *temp = [[NSMutableArray alloc]initWithArray:self.articleList];
+        [temp addObjectsFromArray:articleFeed];
+        self.articleList = temp;
+        NSLog(@"%@",self.articleList);
+    }];
+    NSLog(@"REload reload");
+    [self.tableView reloadData];
+    [self.tableView.mj_footer endRefreshing];
+    [self.tableView.mj_header endRefreshing];
+    self.tableView.mj_header.hidden = YES;
 }
 
 - (void)loadMoreData {
-    
+    NSLog(@"Refresh");
 }
 @end

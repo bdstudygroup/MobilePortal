@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface HomeListManager : NSObject
 
+@property(nonatomic, assign) NSInteger currentOffset;
+
 + (instancetype)sharedManager;
 
 - (void)updateWithCompletion:(void (^)(NSArray *articleFeed))completion;
