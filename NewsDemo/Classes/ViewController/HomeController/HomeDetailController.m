@@ -10,14 +10,14 @@
 #import "HomeDetailController.h"
 #import "BarItem.h"
 #import "NSObject+Hint.h"
+#import "WKWebView+XHShowImage.h"
 #import <Masonry.h>
 #import <WebKit/WebKit.h>
-#import <MWPhotoBrowser.h>
 #import "PicDetailController.h"
 #import "LBVideoPlayerController.h"
 
 
-@interface HomeDetailController () <WKNavigationDelegate,WKUIDelegate, WKScriptMessageHandler, MWPhotoBrowserDelegate>
+@interface HomeDetailController () <WKNavigationDelegate,WKUIDelegate, WKScriptMessageHandler>
 
 @property(nonatomic, strong)NSMutableURLRequest* urlRequset;
 
@@ -286,15 +286,6 @@ static NSString * const videoMethodName = @"openVideoPlayer:";
                           imageArray[p].style.width = '100%%';\
                           imageArray[p].style.height ='auto'\
                       }\
-                      for(var i=0; i < imageArray.length; i++)\
-                      {\
-                          var image = imageArray[i];\
-                          image.index = i;\
-                          image.onclick = function(){\
-                              alert(imageArray[image.index]);\
-                              window.webkit.messageHandlers.openBigPicture.postMessage({methodName:\"openBigPicture:\",imageSrc:imageArray[this.index].src});\
-                          }\
-                      }\
                       }\
                       </script>\
                       <div >%@</div>\
@@ -331,6 +322,35 @@ static NSString * const videoMethodName = @"openVideoPlayer:";
     
     //自定义的方法，发送网络请求，获取新闻数据
     [self httpPostWithCustomDelegate: self.groupId];
+    
+}
+
+#pragma mark - show big picture
+- (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation {
+    [webView xh_getImageUrlWithWebView:webView];
+}
+
+- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
+    
+    [self showBigImage:navigationAction.request];
+    
+    decisionHandler(WKNavigationActionPolicyAllow);
+}
+
+- (void)showBigImage:(NSURLRequest *)request {
+    NSString *str = request.URL.absoluteString;
+    if ([str hasPrefix:@"myweb:imageClick:"]) {
+        NSString *imageUrl = [str substringFromIndex:@"myweb:imageClick:".length];
+        NSArray *imgUrlArr = [self.wkWebView getImgUrlArray];
+        NSInteger index = 0;
+        for (NSInteger i = 0; i < [imgUrlArr count]; i++) {
+            if([imageUrl isEqualToString:imgUrlArr[i]]){
+                index = i;
+                PicDetailController* pc = [[PicDetailController alloc] initWithPicModel:imgUrlArr];
+                [self.navigationController pushViewController:pc animated:YES];
+            }
+        }
+    }
     
 }
 

@@ -10,7 +10,7 @@
 
 @interface PicDetailController : UIViewController
 
-@property(nonatomic, strong)NSString* imgURL;
-- (instancetype)initWithPicModel:(NSString* )imgURL;
+@property(nonatomic, strong)NSArray* imgURL;
+- (instancetype)initWithPicModel:(NSArray*)imgURL;
 
 @end

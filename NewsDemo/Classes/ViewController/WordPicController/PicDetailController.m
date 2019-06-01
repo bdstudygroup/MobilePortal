@@ -15,7 +15,7 @@
 
 @implementation PicDetailController
 
-- (instancetype)initWithPicModel:(NSString* )imgURL {
+- (instancetype)initWithPicModel:(NSArray* )imgURL {
     if (self = [super init]) {
         self.imgURL = imgURL;
     }
@@ -36,10 +36,10 @@
 
 #pragma mark - <MWPhotoBrowserDelegate>
 - (NSUInteger)numberOfPhotosInPhotoBrowser:(MWPhotoBrowser *)photoBrowser {
-    return 10;
+    return self.imgURL.count;
 }
 - (id<MWPhoto>)photoBrowser:(MWPhotoBrowser *)photoBrowser photoAtIndex:(NSUInteger)index {
-    MWPhoto *photo = [MWPhoto photoWithURL:[NSURL URLWithString:self.imgURL]];
+    MWPhoto *photo = [MWPhoto photoWithURL:[NSURL URLWithString:self.imgURL[index]]];
     return photo;
 }
 

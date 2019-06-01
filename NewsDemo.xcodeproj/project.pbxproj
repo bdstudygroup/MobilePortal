@@ -73,6 +73,8 @@
 		EF8CD8732286786000A7B431 /* ios-social-sdk-shake.html in Resources */ = {isa = PBXBuildFile; fileRef = EF8CD8532286786000A7B431 /* ios-social-sdk-shake.html */; };
 		EF8CD8742286786000A7B431 /* ios-social-sdk-comment-quick.html in Resources */ = {isa = PBXBuildFile; fileRef = EF8CD8542286786000A7B431 /* ios-social-sdk-comment-quick.html */; };
 		EF8CD8752286786000A7B431 /* libMobClickLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EF8CD8582286786000A7B431 /* libMobClickLibrary.a */; };
+		FA0392A622A20D0B00C60D1C /* NewsDetail.js in Resources */ = {isa = PBXBuildFile; fileRef = FA0392A522A20D0B00C60D1C /* NewsDetail.js */; };
+		FA0392A922A2154500C60D1C /* WKWebView+XHShowImage.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0392A822A2154500C60D1C /* WKWebView+XHShowImage.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -218,6 +220,9 @@
 		EF8CD8562286786000A7B431 /* MobClick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClick.h; sourceTree = "<group>"; };
 		EF8CD8572286786000A7B431 /* MobClickSocialAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClickSocialAnalytics.h; sourceTree = "<group>"; };
 		EF8CD8582286786000A7B431 /* libMobClickLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMobClickLibrary.a; sourceTree = "<group>"; };
+		FA0392A522A20D0B00C60D1C /* NewsDetail.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = NewsDetail.js; sourceTree = "<group>"; };
+		FA0392A722A2154500C60D1C /* WKWebView+XHShowImage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WKWebView+XHShowImage.h"; sourceTree = "<group>"; };
+		FA0392A822A2154500C60D1C /* WKWebView+XHShowImage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "WKWebView+XHShowImage.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -305,6 +310,8 @@
 				9758CEC0228809FC0090C60D /* NSObject+Hint.m */,
 				9758CEC222880A1A0090C60D /* AppDelegate+DDLog.h */,
 				9758CEC322880A1A0090C60D /* AppDelegate+DDLog.m */,
+				FA0392A722A2154500C60D1C /* WKWebView+XHShowImage.h */,
+				FA0392A822A2154500C60D1C /* WKWebView+XHShowImage.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -371,6 +378,7 @@
 		978A02B6229E11530067066C /* HTML */ = {
 			isa = PBXGroup;
 			children = (
+				FA0392A522A20D0B00C60D1C /* NewsDetail.js */,
 			);
 			path = HTML;
 			sourceTree = "<group>";
@@ -797,6 +805,7 @@
 				EF8CD8632286786000A7B431 /* UMSShareListController.xib in Resources */,
 				EF8CD8702286786000A7B431 /* ios-social-sdk-socialbar.html in Resources */,
 				EF8CD8652286786000A7B431 /* UMSnsAccountViewController.xib in Resources */,
+				FA0392A622A20D0B00C60D1C /* NewsDetail.js in Resources */,
 				EF8CD8662286786000A7B431 /* UMShareEditViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -882,6 +891,7 @@
 				EF8CD7C12286686E00A7B431 /* AppDelegate.m in Sources */,
 				978742C222984BAB00C7EAE0 /* HomeListManager.m in Sources */,
 				EF8CD81C2286785200A7B431 /* PSCollectionView.m in Sources */,
+				FA0392A922A2154500C60D1C /* WKWebView+XHShowImage.m in Sources */,
 				EF61625B228F972300EB7367 /* HomeController.m in Sources */,
 				EF61626D228F98DD00EB7367 /* SetController.m in Sources */,
 				97A0587D229D883B00033BF6 /* LBBigPictureViewController.m in Sources */,
