@@ -25,7 +25,7 @@
 
 /** 浏览器 */
 @property (nonatomic, strong) WKWebView *wkWebView;
-@property (nonatomic, strong) UIView* comment;
+@property (nonatomic, strong) UIView* commentView;
 
 
 /** 进度条 */
@@ -51,14 +51,45 @@
 - (void)viewDidLoad{
     [super viewDidLoad];
     [self setupWebView];
-    [self.comment mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(kWindowW, 50));
-        make.top.mas_equalTo(self.wkWebView.mas_bottom).mas_equalTo(10);
+    [self setUpTableView];
+}
+
+-(void)setupWebView{
+    WKWebViewConfiguration* configur = [[WKWebViewConfiguration alloc] init];
+    WKPreferences* preference = [[WKPreferences alloc] init];
+    configur.preferences = preference;
+    preference.javaScriptEnabled = YES;
+    _wkWebView = [[WKWebView alloc] initWithFrame:CGRectZero configuration:configur];
+    [self.view addSubview:_wkWebView];
+    [_wkWebView mas_makeConstraints:^(MASConstraintMaker* make){
+        make.top.mas_equalTo(0);
+        make.size.mas_equalTo(CGSizeMake(kWindowW, kWindowH));
     }];
-    self.comment.backgroundColor = [UIColor blueColor];
-    [self.view addSubview:self.comment];
+    
+    //设置内边距底部，主要是为了让网页最后的内容不被底部的toolBar挡着
+    _wkWebView.scrollView.contentInset = UIEdgeInsetsMake(0, 0, 104, 0);
+    //这句代码是让竖直方向的滚动条显示在正确的位置
+    _wkWebView.scrollView.scrollIndicatorInsets = _wkWebView.scrollView.contentInset;
+    _wkWebView.UIDelegate = self;
+    _wkWebView.navigationDelegate = self;
+    //自定义的方法，发送网络请求，获取新闻数据
+    [self httpPostWithCustomDelegate: self.groupId];
     
 }
+
+#pragma 懒加载
+
+- (void)setUpTableView{
+    _commentView = [[UIView alloc] initWithFrame:CGRectZero];
+    _commentView.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:_commentView];
+    [_commentView mas_makeConstraints:^(MASConstraintMaker* make){
+        make.bottom.mas_equalTo(-100);
+        make.size.mas_equalTo(CGSizeMake(kWindowW, 100));
+    }];
+    NSLog(@"fuck=%lf", kWindowH);
+}
+
 
 -(void) httpPostWithCustomDelegate: (NSString*)groupId
 {
@@ -298,32 +329,6 @@
     [self.wkWebView loadHTMLString:html baseURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] resourcePath]]];
 }
 
-
--(void)setupWebView{
-    WKWebViewConfiguration* configur = [[WKWebViewConfiguration alloc] init];
-    WKPreferences* preference = [[WKPreferences alloc] init];
-    configur.preferences = preference;
-    preference.javaScriptEnabled = YES;
-    WKWebView* wkWebView = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0, kWindowW, kWindowH-100) configuration:configur];
-    
-    [self.view addSubview:wkWebView];
-    self.wkWebView = wkWebView;
-    
-    self.automaticallyAdjustsScrollViewInsets = NO;
-    //设置内边距底部，主要是为了让网页最后的内容不被底部的toolBar挡着
-    wkWebView.scrollView.contentInset = UIEdgeInsetsMake(0, 0, 104, 0);
-    //这句代码是让竖直方向的滚动条显示在正确的位置
-    wkWebView.scrollView.scrollIndicatorInsets = wkWebView.scrollView.contentInset;
-    
-    wkWebView.UIDelegate = self;
-    
-    self.wkWebView.navigationDelegate = self;
-    
-    //自定义的方法，发送网络请求，获取新闻数据
-    [self httpPostWithCustomDelegate: self.groupId];
-    
-}
-
 #pragma mark - show big picture
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation {
     [webView xh_getImageUrlWithWebView:webView];
@@ -366,6 +371,7 @@
     [self presentViewController:alertController animated:YES completion:nil];
     
 }
+
 
 
 

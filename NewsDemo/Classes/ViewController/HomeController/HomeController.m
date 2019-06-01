@@ -100,7 +100,7 @@
 
 -(void)update{
     __weak __typeof(self) weakSelf = self;
-    [[HomeListManager sharedManager] updateWithCompletion:^(NSArray * _Nonnull articleFeed) {
+    [[HomeListManager sharedManager] getAllNews:^(NSArray * _Nonnull articleFeed) {
         __strong __typeof(weakSelf) strongSelf = weakSelf;
         strongSelf.articleList = articleFeed;
         NSLog(@"%@",strongSelf.articleList);
