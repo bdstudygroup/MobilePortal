@@ -17,7 +17,7 @@
 #import "LBVideoPlayerController.h"
 
 
-@interface HomeDetailController () <WKNavigationDelegate,WKUIDelegate, WKScriptMessageHandler>
+@interface HomeDetailController () <WKNavigationDelegate,WKUIDelegate>
 
 @property(nonatomic, strong)NSMutableURLRequest* urlRequset;
 
@@ -25,6 +25,7 @@
 
 /** 浏览器 */
 @property (nonatomic, strong) WKWebView *wkWebView;
+@property (nonatomic, strong) UIView* comment;
 
 
 /** 进度条 */
@@ -39,9 +40,6 @@
 
 @implementation HomeDetailController
 
-static NSString * const picMethodName = @"openBigPicture:";
-static NSString * const videoMethodName = @"openVideoPlayer:";
-
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
@@ -53,6 +51,13 @@ static NSString * const videoMethodName = @"openVideoPlayer:";
 - (void)viewDidLoad{
     [super viewDidLoad];
     [self setupWebView];
+    [self.comment mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(kWindowW, 50));
+        make.top.mas_equalTo(self.wkWebView.mas_bottom).mas_equalTo(10);
+    }];
+    self.comment.backgroundColor = [UIColor blueColor];
+    [self.view addSubview:self.comment];
+    
 }
 
 -(void) httpPostWithCustomDelegate: (NSString*)groupId
@@ -93,6 +98,7 @@ static NSString * const videoMethodName = @"openVideoPlayer:";
             NSString* article_content = [article_data objectForKey:@"article_content"];
             NSString* img_prefix = [article_data objectForKey:@"image_url_prefix"];
             NSLog(@"content=%@ \n", article_content);
+            NSLog(@"prefix=%@", img_prefix);
             NSArray* imgFilter = [self filterImage:article_content];
             NSArray* videoFilter = [self filterVideo:article_content];
             if(videoFilter.count > 0){
@@ -152,7 +158,9 @@ static NSString * const videoMethodName = @"openVideoPlayer:";
             NSUInteger loc = [src rangeOfString:@">"].location;
             if (loc != NSNotFound) {
                 src = [src substringToIndex:loc];
-                [resultArray addObject:src];
+                if ([src containsString:@"{{image_domain}}"]) {
+                    [resultArray addObject:src];
+                }
             }
         }
     }
@@ -252,7 +260,6 @@ static NSString * const videoMethodName = @"openVideoPlayer:";
     NSArray* stringFilter = [self filterString:body];
     NSArray* videoStringFilter = [self filterStringVideo:body];
     if(videoStringFilter.count > 0){
-//        NSLog(@"string=%@", videoStringFilter[0]);
         for (int i=0; i<videoStringFilter.count; i++) {
             NSString *str=[NSString stringWithFormat:@"<img src=\"%@\" \\>", self.video_post[i]];
             body = [body stringByReplacingOccurrencesOfString:videoStringFilter[i] withString:str];
@@ -261,10 +268,6 @@ static NSString * const videoMethodName = @"openVideoPlayer:";
     
     if (stringFilter > 0){
         for (int i=0; i<stringFilter.count; i++) {
-//            NSLog(@"string=%@\n", stringFilter[i]);
-//            NSLog(@"img=%@", self.img_uri[i]);
-//            NSLog(@"width=%@", self.width[i]);
-//            NSLog(@"height=%@", self.height[i]);
             NSString *str = [NSString stringWithFormat:@"src=\"%@\" height=%@ width=%@ ", self.img_uri[i], self.height[i], self.width[i]];
             body=[body stringByReplacingOccurrencesOfString:stringFilter[i] withString:str];
         }
@@ -301,11 +304,7 @@ static NSString * const videoMethodName = @"openVideoPlayer:";
     WKPreferences* preference = [[WKPreferences alloc] init];
     configur.preferences = preference;
     preference.javaScriptEnabled = YES;
-    WKUserContentController *userContentController = [[WKUserContentController alloc]init];
-    [userContentController addScriptMessageHandler:self name:@"openBigPicture"];
-    [userContentController addScriptMessageHandler:self name:@"openVideoPlayer"];
-    configur.userContentController = userContentController;
-    WKWebView* wkWebView = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0, kWindowW, kWindowH) configuration:configur];
+    WKWebView* wkWebView = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0, kWindowW, kWindowH-100) configuration:configur];
     
     [self.view addSubview:wkWebView];
     self.wkWebView = wkWebView;
