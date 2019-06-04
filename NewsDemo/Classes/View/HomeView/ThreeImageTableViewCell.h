@@ -15,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UIImageView *imageFirst;
 @property (nonatomic, strong) UIImageView *imageSecond;
 @property (nonatomic, strong) UIImageView *imageThird;
+@property (nonatomic, strong) UILabel *numberStar;
+@property (nonatomic, strong) UILabel *numberComment;
 @end
 
 NS_ASSUME_NONNULL_END

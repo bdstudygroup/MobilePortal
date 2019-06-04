@@ -35,7 +35,7 @@ UITableViewDelegate
     self.manager = [HomeListManager sharedManager];
     self.manager.currentOffset = 0;
     [self setup];
-    //[self update];
+    [self update];
 }
 
 - (void)setup {
@@ -44,11 +44,6 @@ UITableViewDelegate
     self.tableView.delegate = self;
     self.tableView.tableFooterView = [UIView new];
     [self.view addSubview:self.tableView];
-    //下拉刷新
-    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        [self update];
-    }];
-    [self.tableView.mj_header beginRefreshing];
     //上拉加载更多
     self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
         [self update];
@@ -108,11 +103,8 @@ UITableViewDelegate
         NSArray *visibleRows = [self.tableView indexPathsForVisibleRows];
         NSInteger nextRow = indexPath.row + visibleRows.count;
         if(self.articleList.count - indexPath.row < visibleRows.count) {
-            //[self.tableView.mj_footer beginRefreshing];
-            NSLog(@"kkkkkkkkkkkkkkkkk %d", self.articleList.count);
             [self.tableView.mj_footer beginRefreshing];
         }
-        
         return cell;
     }
     
@@ -145,20 +137,21 @@ UITableViewDelegate
 }
 
 - (void) update {
-    [self.manager  updateWithCompletion:^(NSArray * _Nonnull articleFeed) {
-        NSMutableArray *temp = [[NSMutableArray alloc]initWithArray:self.articleList];
-        [temp addObjectsFromArray:articleFeed];
-        self.articleList = temp;
-        NSLog(@"%@",self.articleList);
+    static Boolean noMoreData = false;
+    [self.manager  updateWithCompletion:^(NSArray *articleFeed) {
+        if(articleFeed == NULL) {
+            noMoreData = true;
+        } else {
+            NSMutableArray *temp = [[NSMutableArray alloc]initWithArray:self.articleList];
+            [temp addObjectsFromArray:articleFeed];
+            self.articleList = temp;
+        }
     }];
-    NSLog(@"REload reload");
-    [self.tableView reloadData];
-    [self.tableView.mj_footer endRefreshing];
-    [self.tableView.mj_header endRefreshing];
-    self.tableView.mj_header.hidden = YES;
-}
-
-- (void)loadMoreData {
-    NSLog(@"Refresh");
+    if(noMoreData) {
+        [self.tableView.mj_footer endRefreshingWithNoMoreData];
+    } else {
+        [self.tableView.mj_footer endRefreshing];
+        self.tableView.mj_header.hidden = YES;
+    }
 }
 @end
