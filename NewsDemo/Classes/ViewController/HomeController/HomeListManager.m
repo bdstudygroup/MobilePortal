@@ -48,4 +48,19 @@ static NSString *const feedUrl = @"https://i.snssdk.com/course/article_feed";
     [task resume];
 }
 
+- (void)getAllNews:(void (^)(NSArray * _Nonnull))completion {
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURL *url = [NSURL URLWithString:feedUrl];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    request.HTTPMethod = @"POST";
+    NSString *str = @"uid=4822&offset=0&count=100";
+    //@"uid=4822&offset=0&count=20"
+    request.HTTPBody = [str dataUsingEncoding:NSUTF8StringEncoding];
+    NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+        completion(dict[@"data"][@"article_feed"]);
+    }];
+    [task resume];
+}
+
 @end

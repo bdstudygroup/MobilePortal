@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (instancetype)sharedManager;
 
 - (void)updateWithCompletion:(void (^)(NSArray *articleFeed))completion;
+- (void)getAllNews:(void (^)(NSArray * _Nonnull))completion;
 
 @end
 
