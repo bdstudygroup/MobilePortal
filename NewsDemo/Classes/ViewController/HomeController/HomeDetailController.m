@@ -17,7 +17,7 @@
 #import "LBVideoPlayerController.h"
 
 
-@interface HomeDetailController () <WKNavigationDelegate,WKUIDelegate>
+@interface HomeDetailController () <WKNavigationDelegate,WKUIDelegate,UITextFieldDelegate>
 
 @property(nonatomic, strong)NSMutableURLRequest* urlRequset;
 
@@ -57,6 +57,7 @@
 - (void)viewDidLoad{
     [super viewDidLoad];
     [self setUpInputView];
+    [self addNotification];
     [self setupWebView];
     [self setUpTableView];
 }
@@ -101,16 +102,40 @@
 }
 
 -(void)onKeyBoardWillShow:(NSNotification *)notification{
+    NSDictionary *userInfoDic = notification.userInfo;
+    NSTimeInterval duration = [userInfoDic [UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    //这里是将时间曲线信息(一个64为的无符号整形)转换为UIViewAnimationOptions，要通过左移动16来完成类型转换。
+    UIViewAnimationOptions options = [userInfoDic[UIKeyboardAnimationCurveUserInfoKey] unsignedIntegerValue] << 16;
     
+    CGRect keyboardRect = [userInfoDic[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    CGFloat keyboardHeight = MIN(CGRectGetWidth(keyboardRect), CGRectGetHeight(keyboardRect));
+    
+    
+    [UIView animateWithDuration:duration delay:0 options:options animations:^{
+        self.commentView.transform = CGAffineTransformMakeTranslation(0, -keyboardHeight);
+    } completion:nil];
 }
 
 -(void)onKeyBoardWillHide:(NSNotification *)notification{
+    NSDictionary *userInfoDic = notification.userInfo;
     
+    NSTimeInterval duration = [userInfoDic[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    //这里是将时间曲线信息(一个64为的无符号整形)转换为UIViewAnimationOptions，要通过左移动16来完成类型转换。
+    UIViewAnimationOptions options = [userInfoDic[UIKeyboardAnimationCurveUserInfoKey] unsignedIntegerValue] << 16;
+    
+    [UIView animateWithDuration:duration delay:0 options:options animations:^{
+                         self.commentView.transform = CGAffineTransformIdentity;
+                     } completion:nil];
+}
+
+- (void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma 懒加载
 
 - (void)setUpTableView{
+    self.jumpView = [[JumpView alloc] init];
     _commentView = [[UIView alloc] initWithFrame:CGRectZero];
     _commentView.backgroundColor = [UIColor darkGrayColor];
     [self.view addSubview:_commentView];
@@ -119,30 +144,51 @@
         make.size.mas_equalTo(CGSizeMake(kWindowW, 70));
     }];
     NSLog(@"fuck=%lf", kWindowH);
-    self.textField = [[UITextField alloc]initWithFrame:CGRectMake(10, 10, 280, 50)];
+    self.textField = [[UITextField alloc]initWithFrame:CGRectMake(10, 10, 200, 35)];
     self.textField.borderStyle = UITextBorderStyleRoundedRect;
     self.textField.placeholder = @"请输入文字";
+    self.textField.returnKeyType = UIReturnKeySend;
+    self.textField.delegate = self;
     [_commentView addSubview:self.textField];
     UIButton *star = [UIButton buttonWithType:UIButtonTypeCustom];
-    [star setBackgroundImage:[UIImage imageNamed:@"me_haoping"]forState:UIControlStateNormal];
+    [star setBackgroundImage:[UIImage imageNamed:@"collect"]forState:UIControlStateNormal];
     [_commentView addSubview:star];
     [star mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.mas_equalTo(-10);
+        make.bottom.mas_equalTo(-20);
         make.right.mas_equalTo(-60);
-        make.size.mas_equalTo(CGSizeMake(50, 50));
+        make.size.mas_equalTo(CGSizeMake(40, 40));
+    }];
+    UIButton *dianzan = [UIButton buttonWithType:UIButtonTypeCustom];
+    [dianzan setBackgroundImage:[UIImage imageNamed:@"zan"]forState:UIControlStateNormal];
+    [_commentView addSubview:dianzan];
+    [dianzan mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.mas_equalTo(-20);
+        make.right.mas_equalTo(-120);
+        make.size.mas_equalTo(CGSizeMake(35, 35));
     }];
     UIButton *comment = [UIButton buttonWithType:UIButtonTypeCustom];
     [comment setBackgroundImage:[UIImage imageNamed:@"mycomment"]forState:UIControlStateNormal];
     [_commentView addSubview:comment];
     [comment mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.mas_equalTo(-10);
+        make.bottom.mas_equalTo(-20);
         make.right.mas_equalTo(-10);
-        make.size.mas_equalTo(CGSizeMake(50, 50));
+        make.size.mas_equalTo(CGSizeMake(40, 40));
     }];
     [comment addTarget:self action:@selector(clickCommentShow) forControlEvents:UIControlEventTouchUpInside];
 }
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [self.textField resignFirstResponder];
+    NSString* text = textField.text;
+    self.textField.placeholder = @"请输入文字";
+    self.textField.text = nil;
+    [self.jumpView.commentArray addObject:text];
+    [self.jumpView showInView:self.view];
+    return YES;
+}
+
 -(void)clickCommentShow{
-    self.jumpView = [[JumpView alloc] init];
+    [self.textField resignFirstResponder];
     [self.jumpView showInView:self.view];
 }
 

@@ -70,6 +70,7 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    NSLog(@"count: %d", self.commentArray.count);
     return self.commentArray.count;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -91,9 +92,8 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     // 假数据
-    cell.textLabel.text = [NSString stringWithFormat:@"%ld", (long)indexPath.row];
-    cell.detailTextLabel.text = @"已购";
-    
+    cell.textLabel.text = self.commentArray[indexPath.row];
+    cell.detailTextLabel.text = @"已评论";
     return cell;
 }
 
