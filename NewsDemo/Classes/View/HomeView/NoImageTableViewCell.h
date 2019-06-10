@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NoImageTableViewCell : UITableViewCell
 @property (nonatomic, strong) UILabel *content;
+@property (nonatomic, strong) UILabel *numberStar;
+@property (nonatomic, strong) UILabel *numberComment;
 @end
 
 NS_ASSUME_NONNULL_END
