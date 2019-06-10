@@ -30,6 +30,11 @@ UITableViewDelegate
 
 #pragma mark - Life Cycle
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.tabBarController.tabBar.hidden = NO;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.manager = [HomeListManager sharedManager];
@@ -122,6 +127,7 @@ UITableViewDelegate
     detailController.groupId = self.articleList[indexPath.row][@"group_id"];
     //NSLog(@"%@", self.articleList[indexPath.row][@"image_infos"]);
     [self.navigationController pushViewController:detailController animated:YES];
+    
 }
 
 #pragma mark - Setter

@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JumpView.h"
 
 @interface HomeDetailController : UIViewController
 
 @property(nonatomic, strong)NSString* groupId;
+@property(nonatomic, strong)JumpView* jumpView;
 
 @end

@@ -25,7 +25,6 @@
 
 /** 浏览器 */
 @property (nonatomic, strong) WKWebView *wkWebView;
-@property (nonatomic, strong) UIView* commentView;
 
 
 /** 进度条 */
@@ -35,6 +34,9 @@
 @property (nonatomic, strong) NSMutableArray<NSString*>* width;
 @property (nonatomic, strong) NSMutableArray<NSString*>* video_post;
 
+//评论区设计
+@property (nonatomic, strong) UITextField* textField;
+@property (nonatomic, strong) UIView* commentView;
 
 @end
 
@@ -47,9 +49,14 @@
     
     self.navigationItem.title= @"新闻详情";
 }
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.tabBarController.tabBar.hidden = YES;
+}
 
 - (void)viewDidLoad{
     [super viewDidLoad];
+    [self setUpInputView];
     [self setupWebView];
     [self setUpTableView];
 }
@@ -67,7 +74,7 @@
     }];
     
     //设置内边距底部，主要是为了让网页最后的内容不被底部的toolBar挡着
-    _wkWebView.scrollView.contentInset = UIEdgeInsetsMake(0, 0, 104, 0);
+    _wkWebView.scrollView.contentInset = UIEdgeInsetsMake(0, 0, 154, 0);
     //这句代码是让竖直方向的滚动条显示在正确的位置
     _wkWebView.scrollView.scrollIndicatorInsets = _wkWebView.scrollView.contentInset;
     _wkWebView.UIDelegate = self;
@@ -76,18 +83,67 @@
     [self httpPostWithCustomDelegate: self.groupId];
     
 }
+#pragma 输入框设计
+
+-(void)setUpInputView{
+    UITapGestureRecognizer* tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onBackClicked:)];
+    [self.wkWebView addGestureRecognizer:tapGesture];
+}
+
+-(void)onBackClicked:(id)sender{
+    [self.textField resignFirstResponder];
+}
+
+-(void)addNotification{
+    NSNotificationCenter* center = [NSNotificationCenter defaultCenter];
+    [center addObserver:self selector:@selector(onKeyBoardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [center addObserver:self selector:@selector(onKeyBoardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+}
+
+-(void)onKeyBoardWillShow:(NSNotification *)notification{
+    
+}
+
+-(void)onKeyBoardWillHide:(NSNotification *)notification{
+    
+}
 
 #pragma 懒加载
 
 - (void)setUpTableView{
     _commentView = [[UIView alloc] initWithFrame:CGRectZero];
-    _commentView.backgroundColor = [UIColor whiteColor];
+    _commentView.backgroundColor = [UIColor darkGrayColor];
     [self.view addSubview:_commentView];
     [_commentView mas_makeConstraints:^(MASConstraintMaker* make){
-        make.bottom.mas_equalTo(-100);
-        make.size.mas_equalTo(CGSizeMake(kWindowW, 100));
+        make.bottom.mas_equalTo(0);
+        make.size.mas_equalTo(CGSizeMake(kWindowW, 70));
     }];
     NSLog(@"fuck=%lf", kWindowH);
+    self.textField = [[UITextField alloc]initWithFrame:CGRectMake(10, 10, 280, 50)];
+    self.textField.borderStyle = UITextBorderStyleRoundedRect;
+    self.textField.placeholder = @"请输入文字";
+    [_commentView addSubview:self.textField];
+    UIButton *star = [UIButton buttonWithType:UIButtonTypeCustom];
+    [star setBackgroundImage:[UIImage imageNamed:@"me_haoping"]forState:UIControlStateNormal];
+    [_commentView addSubview:star];
+    [star mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.mas_equalTo(-10);
+        make.right.mas_equalTo(-60);
+        make.size.mas_equalTo(CGSizeMake(50, 50));
+    }];
+    UIButton *comment = [UIButton buttonWithType:UIButtonTypeCustom];
+    [comment setBackgroundImage:[UIImage imageNamed:@"mycomment"]forState:UIControlStateNormal];
+    [_commentView addSubview:comment];
+    [comment mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.mas_equalTo(-10);
+        make.right.mas_equalTo(-10);
+        make.size.mas_equalTo(CGSizeMake(50, 50));
+    }];
+    [comment addTarget:self action:@selector(clickCommentShow) forControlEvents:UIControlEventTouchUpInside];
+}
+-(void)clickCommentShow{
+    self.jumpView = [[JumpView alloc] init];
+    [self.jumpView showInView:self.view];
 }
 
 

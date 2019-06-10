@@ -33,6 +33,11 @@
     return navi;
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.navigationItem.hidesBackButton = NO;
+}
+
 + (NSArray *)itemNames {
     return @[@""];
 }

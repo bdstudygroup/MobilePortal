@@ -14,6 +14,7 @@
 		9758CEC1228809FC0090C60D /* NSObject+Hint.m in Sources */ = {isa = PBXBuildFile; fileRef = 9758CEC0228809FC0090C60D /* NSObject+Hint.m */; };
 		9758CEC422880A1A0090C60D /* AppDelegate+DDLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 9758CEC322880A1A0090C60D /* AppDelegate+DDLog.m */; };
 		978742C222984BAB00C7EAE0 /* HomeListManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 978742C122984BAB00C7EAE0 /* HomeListManager.m */; };
+		979DEA6522AE355000E9BA53 /* JumpView.m in Sources */ = {isa = PBXBuildFile; fileRef = 979DEA6422AE355000E9BA53 /* JumpView.m */; };
 		97A0587A229D881400033BF6 /* LBVideoPlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A05879229D881400033BF6 /* LBVideoPlayerController.m */; };
 		EC05F92422945B75008E6027 /* SingletonUser.m in Sources */ = {isa = PBXBuildFile; fileRef = EC05F92322945B75008E6027 /* SingletonUser.m */; };
 		EC100B56229BA2D100D5907A /* NoImageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EC100B55229BA2D100D5907A /* NoImageTableViewCell.m */; };
@@ -110,6 +111,8 @@
 		9758CEC322880A1A0090C60D /* AppDelegate+DDLog.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "AppDelegate+DDLog.m"; sourceTree = "<group>"; };
 		978742C022984BAB00C7EAE0 /* HomeListManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeListManager.h; sourceTree = "<group>"; };
 		978742C122984BAB00C7EAE0 /* HomeListManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeListManager.m; sourceTree = "<group>"; };
+		979DEA6322AE355000E9BA53 /* JumpView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JumpView.h; sourceTree = "<group>"; };
+		979DEA6422AE355000E9BA53 /* JumpView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JumpView.m; sourceTree = "<group>"; };
 		97A05878229D881400033BF6 /* LBVideoPlayerController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LBVideoPlayerController.h; sourceTree = "<group>"; };
 		97A05879229D881400033BF6 /* LBVideoPlayerController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LBVideoPlayerController.m; sourceTree = "<group>"; };
 		CBD97A0A5912800A232F996B /* libPods-NewsDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-NewsDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -273,6 +276,8 @@
 				ECB25E242299632B005EB072 /* ThreeImageTableViewCell.m */,
 				EC100B54229BA2D100D5907A /* NoImageTableViewCell.h */,
 				EC100B55229BA2D100D5907A /* NoImageTableViewCell.m */,
+				979DEA6322AE355000E9BA53 /* JumpView.h */,
+				979DEA6422AE355000E9BA53 /* JumpView.m */,
 			);
 			path = HomeView;
 			sourceTree = "<group>";
@@ -878,6 +883,7 @@
 				ECB25E1F22996283005EB072 /* OneImageTableViewCell.m in Sources */,
 				EF616270228F99B500EB7367 /* VideoController.m in Sources */,
 				EF616273228F9A0200EB7367 /* WordController.m in Sources */,
+				979DEA6522AE355000E9BA53 /* JumpView.m in Sources */,
 				EF61627C228F9A3100EB7367 /* PicDetailController.m in Sources */,
 				EF8CD7CF2286686E00A7B431 /* main.m in Sources */,
 				EF61626A228F98D000EB7367 /* RegisterLoginController.m in Sources */,
