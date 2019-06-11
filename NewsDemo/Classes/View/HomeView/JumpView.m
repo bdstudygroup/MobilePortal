@@ -7,6 +7,7 @@
 //
 
 #import "JumpView.h"
+#import "CommentViewCell.h"
 #define UI_navBar_Height 64.0
 
 @interface JumpView()
@@ -78,23 +79,29 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSString *cellID = [NSString stringWithFormat:@"cellID:%ld", indexPath.row];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
+    cell = [[CommentViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
+    ((CommentViewCell*)cell).comment.text = self.commentArray[indexPath.row];
+    NSDate *date = [NSDate date];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd HH-mm-ss"];
+    NSString *time_now = [formatter stringFromDate:date];
+    ((CommentViewCell*)cell).time.text = time_now;
     
-    static NSString *ID = @"cell";
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
-    
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:ID];
-        
-        cell.textLabel.font = [UIFont systemFontOfSize:13];
-        cell.detailTextLabel.font = [UIFont systemFontOfSize:13];
-    }
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
-    // 假数据
-    cell.textLabel.text = self.commentArray[indexPath.row];
-    cell.detailTextLabel.text = @"已评论";
     return cell;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSLog(@"YES");
+    return UITableViewAutomaticDimension;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSLog(@"YES2");
+    return 100;
 }
 
 //展示从底部向上弹出的UIView（包含遮罩）

@@ -181,7 +181,6 @@
     [self.textField resignFirstResponder];
     NSString* text = textField.text;
     self.textField.placeholder = @"请输入文字";
-    self.textField.text = nil;
     [self.jumpView.commentArray addObject:text];
     [self.jumpView showInView:self.view];
     return YES;
