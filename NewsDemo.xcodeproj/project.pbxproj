@@ -7,6 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		18ECD18222B0039600F31BA0 /* NSString+Formatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 18ECD17A22B0039600F31BA0 /* NSString+Formatter.m */; };
+		18ECD18322B0039600F31BA0 /* UIView+FrameMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 18ECD17E22B0039600F31BA0 /* UIView+FrameMethods.m */; };
+		18ECD18422B0039600F31BA0 /* UIImageView+CCWebImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 18ECD17F22B0039600F31BA0 /* UIImageView+CCWebImage.m */; };
+		18ECD18522B0039600F31BA0 /* NSObject+CCModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18ECD18022B0039600F31BA0 /* NSObject+CCModel.m */; };
+		18ECD18622B0039600F31BA0 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 18ECD18122B0039600F31BA0 /* UIImage+Resize.m */; };
+		18ECD19F22B003CD00F31BA0 /* CCVideoPlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18ECD18922B003CD00F31BA0 /* CCVideoPlayerController.m */; };
+		18ECD1A022B003CD00F31BA0 /* CCVideoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18ECD18E22B003CD00F31BA0 /* CCVideoView.m */; };
+		18ECD1A122B003CD00F31BA0 /* CCVideoControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18ECD18F22B003CD00F31BA0 /* CCVideoControlView.m */; };
+		18ECD1A222B003CD00F31BA0 /* CCMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18ECD19222B003CD00F31BA0 /* CCMainViewController.m */; };
+		18ECD1A322B003CD00F31BA0 /* CCNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18ECD19522B003CD00F31BA0 /* CCNavigationController.m */; };
+		18ECD1A422B003CD00F31BA0 /* CCVideoListManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 18ECD19722B003CD00F31BA0 /* CCVideoListManager.m */; };
+		18ECD1A522B003CD00F31BA0 /* CCVideoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18ECD19B22B003CD00F31BA0 /* CCVideoModel.m */; };
+		18ECD1A622B003CD00F31BA0 /* CCVideoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18ECD19E22B003CD00F31BA0 /* CCVideoCell.m */; };
+		18ECD1A922B0043700F31BA0 /* libCCURL.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 18ECD1A722B0043700F31BA0 /* libCCURL.a */; };
 		6323DBA9CEA9697509E56202 /* libPods-NewsDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CBD97A0A5912800A232F996B /* libPods-NewsDemo.a */; };
 		9758CEB5228808B20090C60D /* BarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 9758CEB4228808B20090C60D /* BarItem.m */; };
 		9758CEB8228809220090C60D /* MyImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9758CEB7228809220090C60D /* MyImageView.m */; };
@@ -16,7 +30,6 @@
 		978742C222984BAB00C7EAE0 /* HomeListManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 978742C122984BAB00C7EAE0 /* HomeListManager.m */; };
 		97989A1822AFCE5F00D7D880 /* CommentViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 97989A1722AFCE5F00D7D880 /* CommentViewCell.m */; };
 		979DEA6522AE355000E9BA53 /* JumpView.m in Sources */ = {isa = PBXBuildFile; fileRef = 979DEA6422AE355000E9BA53 /* JumpView.m */; };
-		97A0587A229D881400033BF6 /* LBVideoPlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A05879229D881400033BF6 /* LBVideoPlayerController.m */; };
 		EC05F92422945B75008E6027 /* SingletonUser.m in Sources */ = {isa = PBXBuildFile; fileRef = EC05F92322945B75008E6027 /* SingletonUser.m */; };
 		EC100B56229BA2D100D5907A /* NoImageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EC100B55229BA2D100D5907A /* NoImageTableViewCell.m */; };
 		ECB25E1F22996283005EB072 /* OneImageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ECB25E1E22996283005EB072 /* OneImageTableViewCell.m */; };
@@ -28,7 +41,6 @@
 		EF616267228F98BE00EB7367 /* RegisterController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF616266228F98BE00EB7367 /* RegisterController.m */; };
 		EF61626A228F98D000EB7367 /* RegisterLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF616269228F98D000EB7367 /* RegisterLoginController.m */; };
 		EF61626D228F98DD00EB7367 /* SetController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF61626C228F98DD00EB7367 /* SetController.m */; };
-		EF616270228F99B500EB7367 /* VideoController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF61626F228F99B500EB7367 /* VideoController.m */; };
 		EF616273228F9A0200EB7367 /* WordController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF616272228F9A0200EB7367 /* WordController.m */; };
 		EF616276228F9A1000EB7367 /* WordDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF616275228F9A1000EB7367 /* WordDetailController.m */; };
 		EF616279228F9A2300EB7367 /* PicController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF616278228F9A2300EB7367 /* PicController.m */; };
@@ -97,6 +109,34 @@
 
 /* Begin PBXFileReference section */
 		08E29C2F448135E36A6FCBFE /* Pods-NewsDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NewsDemo.debug.xcconfig"; path = "Target Support Files/Pods-NewsDemo/Pods-NewsDemo.debug.xcconfig"; sourceTree = "<group>"; };
+		18ECD17822B0039600F31BA0 /* UIImageView+CCWebImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+CCWebImage.h"; sourceTree = "<group>"; };
+		18ECD17922B0039600F31BA0 /* UIView+FrameMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+FrameMethods.h"; sourceTree = "<group>"; };
+		18ECD17A22B0039600F31BA0 /* NSString+Formatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Formatter.m"; sourceTree = "<group>"; };
+		18ECD17B22B0039600F31BA0 /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Resize.h"; sourceTree = "<group>"; };
+		18ECD17C22B0039600F31BA0 /* NSObject+CCModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+CCModel.h"; sourceTree = "<group>"; };
+		18ECD17D22B0039600F31BA0 /* NSString+Formatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Formatter.h"; sourceTree = "<group>"; };
+		18ECD17E22B0039600F31BA0 /* UIView+FrameMethods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+FrameMethods.m"; sourceTree = "<group>"; };
+		18ECD17F22B0039600F31BA0 /* UIImageView+CCWebImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+CCWebImage.m"; sourceTree = "<group>"; };
+		18ECD18022B0039600F31BA0 /* NSObject+CCModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+CCModel.m"; sourceTree = "<group>"; };
+		18ECD18122B0039600F31BA0 /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Resize.m"; sourceTree = "<group>"; };
+		18ECD18922B003CD00F31BA0 /* CCVideoPlayerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCVideoPlayerController.m; sourceTree = "<group>"; };
+		18ECD18A22B003CD00F31BA0 /* CCVideoPlayerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCVideoPlayerController.h; sourceTree = "<group>"; };
+		18ECD18C22B003CD00F31BA0 /* CCVideoControlView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCVideoControlView.h; sourceTree = "<group>"; };
+		18ECD18D22B003CD00F31BA0 /* CCVideoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCVideoView.h; sourceTree = "<group>"; };
+		18ECD18E22B003CD00F31BA0 /* CCVideoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCVideoView.m; sourceTree = "<group>"; };
+		18ECD18F22B003CD00F31BA0 /* CCVideoControlView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCVideoControlView.m; sourceTree = "<group>"; };
+		18ECD19222B003CD00F31BA0 /* CCMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCMainViewController.m; sourceTree = "<group>"; };
+		18ECD19322B003CD00F31BA0 /* CCNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCNavigationController.h; sourceTree = "<group>"; };
+		18ECD19422B003CD00F31BA0 /* CCMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCMainViewController.h; sourceTree = "<group>"; };
+		18ECD19522B003CD00F31BA0 /* CCNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCNavigationController.m; sourceTree = "<group>"; };
+		18ECD19722B003CD00F31BA0 /* CCVideoListManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCVideoListManager.m; sourceTree = "<group>"; };
+		18ECD19822B003CD00F31BA0 /* CCVideoListManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCVideoListManager.h; sourceTree = "<group>"; };
+		18ECD19A22B003CD00F31BA0 /* CCVideoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCVideoModel.h; sourceTree = "<group>"; };
+		18ECD19B22B003CD00F31BA0 /* CCVideoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCVideoModel.m; sourceTree = "<group>"; };
+		18ECD19D22B003CD00F31BA0 /* CCVideoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCVideoCell.h; sourceTree = "<group>"; };
+		18ECD19E22B003CD00F31BA0 /* CCVideoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCVideoCell.m; sourceTree = "<group>"; };
+		18ECD1A722B0043700F31BA0 /* libCCURL.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libCCURL.a; sourceTree = "<group>"; };
+		18ECD1A822B0043700F31BA0 /* CCURL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCURL.h; sourceTree = "<group>"; };
 		79FCBF6DBF2FB0006B83DC6C /* Pods-NewsDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NewsDemo.release.xcconfig"; path = "Target Support Files/Pods-NewsDemo/Pods-NewsDemo.release.xcconfig"; sourceTree = "<group>"; };
 		9748C468228C554500CDB674 /* Const.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Const.h; sourceTree = "<group>"; };
 		9748C469228C5CAE00CDB674 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
@@ -116,8 +156,6 @@
 		97989A1722AFCE5F00D7D880 /* CommentViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommentViewCell.m; sourceTree = "<group>"; };
 		979DEA6322AE355000E9BA53 /* JumpView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JumpView.h; sourceTree = "<group>"; };
 		979DEA6422AE355000E9BA53 /* JumpView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JumpView.m; sourceTree = "<group>"; };
-		97A05878229D881400033BF6 /* LBVideoPlayerController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LBVideoPlayerController.h; sourceTree = "<group>"; };
-		97A05879229D881400033BF6 /* LBVideoPlayerController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LBVideoPlayerController.m; sourceTree = "<group>"; };
 		CBD97A0A5912800A232F996B /* libPods-NewsDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-NewsDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC05F92222945B75008E6027 /* SingletonUser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SingletonUser.h; sourceTree = "<group>"; };
 		EC05F92322945B75008E6027 /* SingletonUser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SingletonUser.m; sourceTree = "<group>"; };
@@ -141,8 +179,6 @@
 		EF616269228F98D000EB7367 /* RegisterLoginController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RegisterLoginController.m; sourceTree = "<group>"; };
 		EF61626B228F98DD00EB7367 /* SetController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SetController.h; sourceTree = "<group>"; };
 		EF61626C228F98DD00EB7367 /* SetController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SetController.m; sourceTree = "<group>"; };
-		EF61626E228F99B500EB7367 /* VideoController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoController.h; sourceTree = "<group>"; };
-		EF61626F228F99B500EB7367 /* VideoController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoController.m; sourceTree = "<group>"; };
 		EF616271228F9A0200EB7367 /* WordController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WordController.h; sourceTree = "<group>"; };
 		EF616272228F9A0200EB7367 /* WordController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WordController.m; sourceTree = "<group>"; };
 		EF616274228F9A1000EB7367 /* WordDetailController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WordDetailController.h; sourceTree = "<group>"; };
@@ -233,6 +269,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18ECD1A922B0043700F31BA0 /* libCCURL.a in Frameworks */,
 				EF61628D228FAF0F00EB7367 /* libc++.tbd in Frameworks */,
 				EF8CD85B2286786000A7B431 /* TencentOpenAPI.framework in Frameworks */,
 				EF8CD80E2286770300A7B431 /* libSocialWechat.a in Frameworks */,
@@ -261,6 +298,110 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		18ECD17622B0039600F31BA0 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				18ECD17722B0039600F31BA0 /* Category */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		18ECD17722B0039600F31BA0 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				18ECD17822B0039600F31BA0 /* UIImageView+CCWebImage.h */,
+				18ECD17922B0039600F31BA0 /* UIView+FrameMethods.h */,
+				18ECD17A22B0039600F31BA0 /* NSString+Formatter.m */,
+				18ECD17B22B0039600F31BA0 /* UIImage+Resize.h */,
+				18ECD17C22B0039600F31BA0 /* NSObject+CCModel.h */,
+				18ECD17D22B0039600F31BA0 /* NSString+Formatter.h */,
+				18ECD17E22B0039600F31BA0 /* UIView+FrameMethods.m */,
+				18ECD17F22B0039600F31BA0 /* UIImageView+CCWebImage.m */,
+				18ECD18022B0039600F31BA0 /* NSObject+CCModel.m */,
+				18ECD18122B0039600F31BA0 /* UIImage+Resize.m */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		18ECD18722B003CD00F31BA0 /* Video */ = {
+			isa = PBXGroup;
+			children = (
+				18ECD18822B003CD00F31BA0 /* Controller */,
+				18ECD18B22B003CD00F31BA0 /* View */,
+			);
+			path = Video;
+			sourceTree = "<group>";
+		};
+		18ECD18822B003CD00F31BA0 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				18ECD18922B003CD00F31BA0 /* CCVideoPlayerController.m */,
+				18ECD18A22B003CD00F31BA0 /* CCVideoPlayerController.h */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		18ECD18B22B003CD00F31BA0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				18ECD18C22B003CD00F31BA0 /* CCVideoControlView.h */,
+				18ECD18D22B003CD00F31BA0 /* CCVideoView.h */,
+				18ECD18E22B003CD00F31BA0 /* CCVideoView.m */,
+				18ECD18F22B003CD00F31BA0 /* CCVideoControlView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		18ECD19022B003CD00F31BA0 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				18ECD19122B003CD00F31BA0 /* Controller */,
+				18ECD19622B003CD00F31BA0 /* Manager */,
+				18ECD19922B003CD00F31BA0 /* Model */,
+				18ECD19C22B003CD00F31BA0 /* View */,
+			);
+			name = Main;
+			path = ../../../../../../MobilePortal/NewsDemo/Classes/ViewController/VideoController/Main;
+			sourceTree = "<group>";
+		};
+		18ECD19122B003CD00F31BA0 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				18ECD19222B003CD00F31BA0 /* CCMainViewController.m */,
+				18ECD19322B003CD00F31BA0 /* CCNavigationController.h */,
+				18ECD19422B003CD00F31BA0 /* CCMainViewController.h */,
+				18ECD19522B003CD00F31BA0 /* CCNavigationController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		18ECD19622B003CD00F31BA0 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				18ECD19722B003CD00F31BA0 /* CCVideoListManager.m */,
+				18ECD19822B003CD00F31BA0 /* CCVideoListManager.h */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		18ECD19922B003CD00F31BA0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				18ECD19A22B003CD00F31BA0 /* CCVideoModel.h */,
+				18ECD19B22B003CD00F31BA0 /* CCVideoModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		18ECD19C22B003CD00F31BA0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				18ECD19D22B003CD00F31BA0 /* CCVideoCell.h */,
+				18ECD19E22B003CD00F31BA0 /* CCVideoCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		1EB882B36BF14DDCB2067F2A /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -374,10 +515,8 @@
 		975F6E0A228A564700A49B59 /* VideoController */ = {
 			isa = PBXGroup;
 			children = (
-				EF61626E228F99B500EB7367 /* VideoController.h */,
-				EF61626F228F99B500EB7367 /* VideoController.m */,
-				97A05878229D881400033BF6 /* LBVideoPlayerController.h */,
-				97A05879229D881400033BF6 /* LBVideoPlayerController.m */,
+				18ECD19022B003CD00F31BA0 /* Main */,
+				18ECD18722B003CD00F31BA0 /* Video */,
 			);
 			path = VideoController;
 			sourceTree = "<group>";
@@ -451,6 +590,7 @@
 		EF8CD7BE2286686E00A7B431 /* NewsDemo */ = {
 			isa = PBXGroup;
 			children = (
+				18ECD17622B0039600F31BA0 /* Base */,
 				EF8CD7CD2286686E00A7B431 /* Info.plist */,
 				EF8CD7F22286687B00A7B431 /* Supporting Files */,
 				EF8CD7F12286687500A7B431 /* Classes */,
@@ -477,6 +617,8 @@
 		EF8CD7F22286687B00A7B431 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				18ECD1A822B0043700F31BA0 /* CCURL.h */,
+				18ECD1A722B0043700F31BA0 /* libCCURL.a */,
 				EF8CD7C52286686E00A7B431 /* Main.storyboard */,
 				EF8CD7C82286686E00A7B431 /* Assets.xcassets */,
 				EF8CD7CA2286686E00A7B431 /* LaunchScreen.storyboard */,
@@ -863,10 +1005,21 @@
 				"${PODS_ROOT}/Target Support Files/Pods-NewsDemo/Pods-NewsDemo-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-NewsDemo/Pods-NewsDemo-resources.sh",
+				"${PODS_ROOT}/FlatUIKit/Resources/flat-ui-icons-regular.ttf",
+				"${PODS_ROOT}/FlatUIKit/Resources/Lato-Bold.ttf",
+				"${PODS_ROOT}/FlatUIKit/Resources/Lato-Italic.ttf",
+				"${PODS_ROOT}/FlatUIKit/Resources/Lato-Light.ttf",
+				"${PODS_ROOT}/FlatUIKit/Resources/Lato-Regular.ttf",
+				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/MWPhotoBrowser/MWPhotoBrowser.bundle",
+				"${PODS_ROOT}/PYSearch/PYSearch/PYSearch.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-NewsDemo/Pods-NewsDemo-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -881,18 +1034,27 @@
 			buildActionMask = 2147483647;
 			files = (
 				EF616261228F974200EB7367 /* HomeDetailController.m in Sources */,
+				18ECD1A622B003CD00F31BA0 /* CCVideoCell.m in Sources */,
 				EF616267228F98BE00EB7367 /* RegisterController.m in Sources */,
+				18ECD1A122B003CD00F31BA0 /* CCVideoControlView.m in Sources */,
+				18ECD1A422B003CD00F31BA0 /* CCVideoListManager.m in Sources */,
+				18ECD18322B0039600F31BA0 /* UIView+FrameMethods.m in Sources */,
 				EF616279228F9A2300EB7367 /* PicController.m in Sources */,
 				EF8CD7C42286686E00A7B431 /* ViewController.m in Sources */,
+				18ECD18622B0039600F31BA0 /* UIImage+Resize.m in Sources */,
+				18ECD18522B0039600F31BA0 /* NSObject+CCModel.m in Sources */,
 				EC05F92422945B75008E6027 /* SingletonUser.m in Sources */,
 				ECB25E1F22996283005EB072 /* OneImageTableViewCell.m in Sources */,
+				18ECD18222B0039600F31BA0 /* NSString+Formatter.m in Sources */,
+				18ECD1A322B003CD00F31BA0 /* CCNavigationController.m in Sources */,
 				97989A1822AFCE5F00D7D880 /* CommentViewCell.m in Sources */,
-				EF616270228F99B500EB7367 /* VideoController.m in Sources */,
+				18ECD18422B0039600F31BA0 /* UIImageView+CCWebImage.m in Sources */,
 				EF616273228F9A0200EB7367 /* WordController.m in Sources */,
 				979DEA6522AE355000E9BA53 /* JumpView.m in Sources */,
 				EF61627C228F9A3100EB7367 /* PicDetailController.m in Sources */,
 				EF8CD7CF2286686E00A7B431 /* main.m in Sources */,
 				EF61626A228F98D000EB7367 /* RegisterLoginController.m in Sources */,
+				18ECD19F22B003CD00F31BA0 /* CCVideoPlayerController.m in Sources */,
 				EF616264228F98AE00EB7367 /* MyController.m in Sources */,
 				ECB25E252299632B005EB072 /* ThreeImageTableViewCell.m in Sources */,
 				EF8CD7C12286686E00A7B431 /* AppDelegate.m in Sources */,
@@ -901,15 +1063,17 @@
 				FA0392A922A2154500C60D1C /* WKWebView+XHShowImage.m in Sources */,
 				EF61625B228F972300EB7367 /* HomeController.m in Sources */,
 				EF61626D228F98DD00EB7367 /* SetController.m in Sources */,
-				97A0587A229D881400033BF6 /* LBVideoPlayerController.m in Sources */,
 				9758CEB5228808B20090C60D /* BarItem.m in Sources */,
 				9758CEBB228809730090C60D /* iCarousel.m in Sources */,
+				18ECD1A022B003CD00F31BA0 /* CCVideoView.m in Sources */,
 				EF8CD81D2286785200A7B431 /* PSCollectionViewCell.m in Sources */,
 				9758CEC1228809FC0090C60D /* NSObject+Hint.m in Sources */,
 				9758CEB8228809220090C60D /* MyImageView.m in Sources */,
 				EF616276228F9A1000EB7367 /* WordDetailController.m in Sources */,
 				9758CEC422880A1A0090C60D /* AppDelegate+DDLog.m in Sources */,
+				18ECD1A222B003CD00F31BA0 /* CCMainViewController.m in Sources */,
 				EC100B56229BA2D100D5907A /* NoImageTableViewCell.m in Sources */,
+				18ECD1A522B003CD00F31BA0 /* CCVideoModel.m in Sources */,
 				EF61625E228F973200EB7367 /* HomeListController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1107,6 +1271,7 @@
 					"$(PROJECT_DIR)/NewsDemo/Classes/Vendor/UM/UMSocial_Sdk_4.2.5",
 					"$(PROJECT_DIR)/NewsDemo/Classes/Vendor/UM/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/NewsDemo/Classes/Vendor/UM/UMSocial_Sdk_Extra_Frameworks/Wechat",
+					"$(PROJECT_DIR)/NewsDemo/Supporting\\ Files",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = news.NewsDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1137,6 +1302,7 @@
 					"$(PROJECT_DIR)/NewsDemo/Classes/Vendor/UM/UMSocial_Sdk_4.2.5",
 					"$(PROJECT_DIR)/NewsDemo/Classes/Vendor/UM/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/NewsDemo/Classes/Vendor/UM/UMSocial_Sdk_Extra_Frameworks/Wechat",
+					"$(PROJECT_DIR)/NewsDemo/Supporting\\ Files",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = news.NewsDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";

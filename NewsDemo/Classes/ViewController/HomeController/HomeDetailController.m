@@ -14,7 +14,7 @@
 #import <Masonry.h>
 #import <WebKit/WebKit.h>
 #import "PicDetailController.h"
-#import "LBVideoPlayerController.h"
+
 
 
 @interface HomeDetailController () <WKNavigationDelegate,WKUIDelegate,UITextFieldDelegate>

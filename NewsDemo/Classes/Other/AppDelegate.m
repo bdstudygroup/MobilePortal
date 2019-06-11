@@ -10,7 +10,7 @@
 #import "AppDelegate+DDLog.h"
 #import "HomeController.h"
 #import "WordController.h"
-#import "VideoController.h"
+#import "CCMainViewController.h"
 #import "MyController.h"
 #import "UMSocialWechatHandler.h"
 #import "UMSocial.h"
@@ -43,7 +43,7 @@
 -(void)setupViewControllers{
     UINavigationController *navi0 = [HomeController defaultHomeNavi];
     UINavigationController *navi1 = [WordController defaultWordNavi];
-    UINavigationController *navi2 = [VideoController defaultVideoNavi];
+    CCMainViewController *navi2 = [CCMainViewController defaultVideoNavi];
     UINavigationController *vc3 = [MyController defaultMyNavi];
     CYLTabBarController* tbc = [CYLTabBarController new];
     [self customTabBarForController:tbc];

@@ -15,5 +15,5 @@ target 'NewsDemo' do
   pod 'SDWebImage', '~> 3.8.1'
   pod 'TPKeyboardAvoiding', '~> 1.3'
   pod 'PYSearch', '~> 0.9.1'
-
+  pod 'YYModel'
 end
