@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		181E2CB822B3EE780013BA7F /* CCMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E2CAB22B3EE780013BA7F /* CCMainViewController.m */; };
+		181E2CB922B3EE780013BA7F /* CCNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E2CAE22B3EE780013BA7F /* CCNavigationController.m */; };
+		181E2CBA22B3EE780013BA7F /* CCVideoListManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E2CB022B3EE780013BA7F /* CCVideoListManager.m */; };
+		181E2CBB22B3EE780013BA7F /* CCVideoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E2CB422B3EE780013BA7F /* CCVideoModel.m */; };
+		181E2CBC22B3EE780013BA7F /* CCVideoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E2CB722B3EE780013BA7F /* CCVideoCell.m */; };
 		18ECD18222B0039600F31BA0 /* NSString+Formatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 18ECD17A22B0039600F31BA0 /* NSString+Formatter.m */; };
 		18ECD18322B0039600F31BA0 /* UIView+FrameMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 18ECD17E22B0039600F31BA0 /* UIView+FrameMethods.m */; };
 		18ECD18422B0039600F31BA0 /* UIImageView+CCWebImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 18ECD17F22B0039600F31BA0 /* UIImageView+CCWebImage.m */; };
@@ -15,11 +20,6 @@
 		18ECD19F22B003CD00F31BA0 /* CCVideoPlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18ECD18922B003CD00F31BA0 /* CCVideoPlayerController.m */; };
 		18ECD1A022B003CD00F31BA0 /* CCVideoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18ECD18E22B003CD00F31BA0 /* CCVideoView.m */; };
 		18ECD1A122B003CD00F31BA0 /* CCVideoControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18ECD18F22B003CD00F31BA0 /* CCVideoControlView.m */; };
-		18ECD1A222B003CD00F31BA0 /* CCMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18ECD19222B003CD00F31BA0 /* CCMainViewController.m */; };
-		18ECD1A322B003CD00F31BA0 /* CCNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18ECD19522B003CD00F31BA0 /* CCNavigationController.m */; };
-		18ECD1A422B003CD00F31BA0 /* CCVideoListManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 18ECD19722B003CD00F31BA0 /* CCVideoListManager.m */; };
-		18ECD1A522B003CD00F31BA0 /* CCVideoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18ECD19B22B003CD00F31BA0 /* CCVideoModel.m */; };
-		18ECD1A622B003CD00F31BA0 /* CCVideoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18ECD19E22B003CD00F31BA0 /* CCVideoCell.m */; };
 		18ECD1A922B0043700F31BA0 /* libCCURL.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 18ECD1A722B0043700F31BA0 /* libCCURL.a */; };
 		6323DBA9CEA9697509E56202 /* libPods-NewsDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CBD97A0A5912800A232F996B /* libPods-NewsDemo.a */; };
 		9758CEB5228808B20090C60D /* BarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 9758CEB4228808B20090C60D /* BarItem.m */; };
@@ -109,6 +109,16 @@
 
 /* Begin PBXFileReference section */
 		08E29C2F448135E36A6FCBFE /* Pods-NewsDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NewsDemo.debug.xcconfig"; path = "Target Support Files/Pods-NewsDemo/Pods-NewsDemo.debug.xcconfig"; sourceTree = "<group>"; };
+		181E2CAB22B3EE780013BA7F /* CCMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCMainViewController.m; sourceTree = "<group>"; };
+		181E2CAC22B3EE780013BA7F /* CCNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCNavigationController.h; sourceTree = "<group>"; };
+		181E2CAD22B3EE780013BA7F /* CCMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCMainViewController.h; sourceTree = "<group>"; };
+		181E2CAE22B3EE780013BA7F /* CCNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCNavigationController.m; sourceTree = "<group>"; };
+		181E2CB022B3EE780013BA7F /* CCVideoListManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCVideoListManager.m; sourceTree = "<group>"; };
+		181E2CB122B3EE780013BA7F /* CCVideoListManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCVideoListManager.h; sourceTree = "<group>"; };
+		181E2CB322B3EE780013BA7F /* CCVideoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCVideoModel.h; sourceTree = "<group>"; };
+		181E2CB422B3EE780013BA7F /* CCVideoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCVideoModel.m; sourceTree = "<group>"; };
+		181E2CB622B3EE780013BA7F /* CCVideoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCVideoCell.h; sourceTree = "<group>"; };
+		181E2CB722B3EE780013BA7F /* CCVideoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCVideoCell.m; sourceTree = "<group>"; };
 		18ECD17822B0039600F31BA0 /* UIImageView+CCWebImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+CCWebImage.h"; sourceTree = "<group>"; };
 		18ECD17922B0039600F31BA0 /* UIView+FrameMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+FrameMethods.h"; sourceTree = "<group>"; };
 		18ECD17A22B0039600F31BA0 /* NSString+Formatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Formatter.m"; sourceTree = "<group>"; };
@@ -125,16 +135,6 @@
 		18ECD18D22B003CD00F31BA0 /* CCVideoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCVideoView.h; sourceTree = "<group>"; };
 		18ECD18E22B003CD00F31BA0 /* CCVideoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCVideoView.m; sourceTree = "<group>"; };
 		18ECD18F22B003CD00F31BA0 /* CCVideoControlView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCVideoControlView.m; sourceTree = "<group>"; };
-		18ECD19222B003CD00F31BA0 /* CCMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCMainViewController.m; sourceTree = "<group>"; };
-		18ECD19322B003CD00F31BA0 /* CCNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCNavigationController.h; sourceTree = "<group>"; };
-		18ECD19422B003CD00F31BA0 /* CCMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCMainViewController.h; sourceTree = "<group>"; };
-		18ECD19522B003CD00F31BA0 /* CCNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCNavigationController.m; sourceTree = "<group>"; };
-		18ECD19722B003CD00F31BA0 /* CCVideoListManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCVideoListManager.m; sourceTree = "<group>"; };
-		18ECD19822B003CD00F31BA0 /* CCVideoListManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCVideoListManager.h; sourceTree = "<group>"; };
-		18ECD19A22B003CD00F31BA0 /* CCVideoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCVideoModel.h; sourceTree = "<group>"; };
-		18ECD19B22B003CD00F31BA0 /* CCVideoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCVideoModel.m; sourceTree = "<group>"; };
-		18ECD19D22B003CD00F31BA0 /* CCVideoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCVideoCell.h; sourceTree = "<group>"; };
-		18ECD19E22B003CD00F31BA0 /* CCVideoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCVideoCell.m; sourceTree = "<group>"; };
 		18ECD1A722B0043700F31BA0 /* libCCURL.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libCCURL.a; sourceTree = "<group>"; };
 		18ECD1A822B0043700F31BA0 /* CCURL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCURL.h; sourceTree = "<group>"; };
 		79FCBF6DBF2FB0006B83DC6C /* Pods-NewsDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NewsDemo.release.xcconfig"; path = "Target Support Files/Pods-NewsDemo/Pods-NewsDemo.release.xcconfig"; sourceTree = "<group>"; };
@@ -298,6 +298,55 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		181E2CA922B3EE780013BA7F /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				181E2CAA22B3EE780013BA7F /* Controller */,
+				181E2CAF22B3EE780013BA7F /* Manager */,
+				181E2CB222B3EE780013BA7F /* Model */,
+				181E2CB522B3EE780013BA7F /* View */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		181E2CAA22B3EE780013BA7F /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				181E2CAB22B3EE780013BA7F /* CCMainViewController.m */,
+				181E2CAC22B3EE780013BA7F /* CCNavigationController.h */,
+				181E2CAD22B3EE780013BA7F /* CCMainViewController.h */,
+				181E2CAE22B3EE780013BA7F /* CCNavigationController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		181E2CAF22B3EE780013BA7F /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				181E2CB022B3EE780013BA7F /* CCVideoListManager.m */,
+				181E2CB122B3EE780013BA7F /* CCVideoListManager.h */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		181E2CB222B3EE780013BA7F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				181E2CB322B3EE780013BA7F /* CCVideoModel.h */,
+				181E2CB422B3EE780013BA7F /* CCVideoModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		181E2CB522B3EE780013BA7F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				181E2CB622B3EE780013BA7F /* CCVideoCell.h */,
+				181E2CB722B3EE780013BA7F /* CCVideoCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		18ECD17622B0039600F31BA0 /* Base */ = {
 			isa = PBXGroup;
 			children = (
@@ -348,56 +397,6 @@
 				18ECD18D22B003CD00F31BA0 /* CCVideoView.h */,
 				18ECD18E22B003CD00F31BA0 /* CCVideoView.m */,
 				18ECD18F22B003CD00F31BA0 /* CCVideoControlView.m */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		18ECD19022B003CD00F31BA0 /* Main */ = {
-			isa = PBXGroup;
-			children = (
-				18ECD19122B003CD00F31BA0 /* Controller */,
-				18ECD19622B003CD00F31BA0 /* Manager */,
-				18ECD19922B003CD00F31BA0 /* Model */,
-				18ECD19C22B003CD00F31BA0 /* View */,
-			);
-			name = Main;
-			path = ../../../../../../MobilePortal/NewsDemo/Classes/ViewController/VideoController/Main;
-			sourceTree = "<group>";
-		};
-		18ECD19122B003CD00F31BA0 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				18ECD19222B003CD00F31BA0 /* CCMainViewController.m */,
-				18ECD19322B003CD00F31BA0 /* CCNavigationController.h */,
-				18ECD19422B003CD00F31BA0 /* CCMainViewController.h */,
-				18ECD19522B003CD00F31BA0 /* CCNavigationController.m */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		18ECD19622B003CD00F31BA0 /* Manager */ = {
-			isa = PBXGroup;
-			children = (
-				18ECD19722B003CD00F31BA0 /* CCVideoListManager.m */,
-				18ECD19822B003CD00F31BA0 /* CCVideoListManager.h */,
-			);
-			path = Manager;
-			sourceTree = "<group>";
-		};
-		18ECD19922B003CD00F31BA0 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				18ECD19A22B003CD00F31BA0 /* CCVideoModel.h */,
-				18ECD19B22B003CD00F31BA0 /* CCVideoModel.m */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		18ECD19C22B003CD00F31BA0 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				18ECD19D22B003CD00F31BA0 /* CCVideoCell.h */,
-				18ECD19E22B003CD00F31BA0 /* CCVideoCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -515,7 +514,7 @@
 		975F6E0A228A564700A49B59 /* VideoController */ = {
 			isa = PBXGroup;
 			children = (
-				18ECD19022B003CD00F31BA0 /* Main */,
+				181E2CA922B3EE780013BA7F /* Main */,
 				18ECD18722B003CD00F31BA0 /* Video */,
 			);
 			path = VideoController;
@@ -1034,10 +1033,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				EF616261228F974200EB7367 /* HomeDetailController.m in Sources */,
-				18ECD1A622B003CD00F31BA0 /* CCVideoCell.m in Sources */,
+				181E2CBC22B3EE780013BA7F /* CCVideoCell.m in Sources */,
 				EF616267228F98BE00EB7367 /* RegisterController.m in Sources */,
 				18ECD1A122B003CD00F31BA0 /* CCVideoControlView.m in Sources */,
-				18ECD1A422B003CD00F31BA0 /* CCVideoListManager.m in Sources */,
+				181E2CBA22B3EE780013BA7F /* CCVideoListManager.m in Sources */,
 				18ECD18322B0039600F31BA0 /* UIView+FrameMethods.m in Sources */,
 				EF616279228F9A2300EB7367 /* PicController.m in Sources */,
 				EF8CD7C42286686E00A7B431 /* ViewController.m in Sources */,
@@ -1046,7 +1045,7 @@
 				EC05F92422945B75008E6027 /* SingletonUser.m in Sources */,
 				ECB25E1F22996283005EB072 /* OneImageTableViewCell.m in Sources */,
 				18ECD18222B0039600F31BA0 /* NSString+Formatter.m in Sources */,
-				18ECD1A322B003CD00F31BA0 /* CCNavigationController.m in Sources */,
+				181E2CB922B3EE780013BA7F /* CCNavigationController.m in Sources */,
 				97989A1822AFCE5F00D7D880 /* CommentViewCell.m in Sources */,
 				18ECD18422B0039600F31BA0 /* UIImageView+CCWebImage.m in Sources */,
 				EF616273228F9A0200EB7367 /* WordController.m in Sources */,
@@ -1071,9 +1070,9 @@
 				9758CEB8228809220090C60D /* MyImageView.m in Sources */,
 				EF616276228F9A1000EB7367 /* WordDetailController.m in Sources */,
 				9758CEC422880A1A0090C60D /* AppDelegate+DDLog.m in Sources */,
-				18ECD1A222B003CD00F31BA0 /* CCMainViewController.m in Sources */,
+				181E2CB822B3EE780013BA7F /* CCMainViewController.m in Sources */,
 				EC100B56229BA2D100D5907A /* NoImageTableViewCell.m in Sources */,
-				18ECD1A522B003CD00F31BA0 /* CCVideoModel.m in Sources */,
+				181E2CBB22B3EE780013BA7F /* CCVideoModel.m in Sources */,
 				EF61625E228F973200EB7367 /* HomeListController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
