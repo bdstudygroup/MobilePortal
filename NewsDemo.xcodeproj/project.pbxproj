@@ -12,11 +12,11 @@
 		181E2CBA22B3EE780013BA7F /* CCVideoListManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E2CB022B3EE780013BA7F /* CCVideoListManager.m */; };
 		181E2CBB22B3EE780013BA7F /* CCVideoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E2CB422B3EE780013BA7F /* CCVideoModel.m */; };
 		181E2CBC22B3EE780013BA7F /* CCVideoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E2CB722B3EE780013BA7F /* CCVideoCell.m */; };
-		181E2CFC22B3F14A0013BA7F /* NSString+Formatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E2CF422B3F14A0013BA7F /* NSString+Formatter.m */; };
-		181E2CFD22B3F14A0013BA7F /* UIView+FrameMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E2CF822B3F14A0013BA7F /* UIView+FrameMethods.m */; };
-		181E2CFE22B3F14A0013BA7F /* UIImageView+CCWebImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E2CF922B3F14A0013BA7F /* UIImageView+CCWebImage.m */; };
-		181E2CFF22B3F14A0013BA7F /* NSObject+CCModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E2CFA22B3F14A0013BA7F /* NSObject+CCModel.m */; };
-		181E2D0022B3F14A0013BA7F /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E2CFB22B3F14A0013BA7F /* UIImage+Resize.m */; };
+		181E2D1C22B3F1C20013BA7F /* NSString+Formatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E2D1422B3F1C10013BA7F /* NSString+Formatter.m */; };
+		181E2D1D22B3F1C20013BA7F /* UIView+FrameMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E2D1822B3F1C10013BA7F /* UIView+FrameMethods.m */; };
+		181E2D1E22B3F1C20013BA7F /* UIImageView+CCWebImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E2D1922B3F1C10013BA7F /* UIImageView+CCWebImage.m */; };
+		181E2D1F22B3F1C20013BA7F /* NSObject+CCModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E2D1A22B3F1C10013BA7F /* NSObject+CCModel.m */; };
+		181E2D2022B3F1C20013BA7F /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E2D1B22B3F1C10013BA7F /* UIImage+Resize.m */; };
 		18ECD19F22B003CD00F31BA0 /* CCVideoPlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18ECD18922B003CD00F31BA0 /* CCVideoPlayerController.m */; };
 		18ECD1A022B003CD00F31BA0 /* CCVideoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18ECD18E22B003CD00F31BA0 /* CCVideoView.m */; };
 		18ECD1A122B003CD00F31BA0 /* CCVideoControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18ECD18F22B003CD00F31BA0 /* CCVideoControlView.m */; };
@@ -119,16 +119,16 @@
 		181E2CB422B3EE780013BA7F /* CCVideoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCVideoModel.m; sourceTree = "<group>"; };
 		181E2CB622B3EE780013BA7F /* CCVideoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCVideoCell.h; sourceTree = "<group>"; };
 		181E2CB722B3EE780013BA7F /* CCVideoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCVideoCell.m; sourceTree = "<group>"; };
-		181E2CF222B3F14A0013BA7F /* UIImageView+CCWebImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+CCWebImage.h"; sourceTree = "<group>"; };
-		181E2CF322B3F14A0013BA7F /* UIView+FrameMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+FrameMethods.h"; sourceTree = "<group>"; };
-		181E2CF422B3F14A0013BA7F /* NSString+Formatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Formatter.m"; sourceTree = "<group>"; };
-		181E2CF522B3F14A0013BA7F /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Resize.h"; sourceTree = "<group>"; };
-		181E2CF622B3F14A0013BA7F /* NSObject+CCModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+CCModel.h"; sourceTree = "<group>"; };
-		181E2CF722B3F14A0013BA7F /* NSString+Formatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Formatter.h"; sourceTree = "<group>"; };
-		181E2CF822B3F14A0013BA7F /* UIView+FrameMethods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+FrameMethods.m"; sourceTree = "<group>"; };
-		181E2CF922B3F14A0013BA7F /* UIImageView+CCWebImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+CCWebImage.m"; sourceTree = "<group>"; };
-		181E2CFA22B3F14A0013BA7F /* NSObject+CCModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+CCModel.m"; sourceTree = "<group>"; };
-		181E2CFB22B3F14A0013BA7F /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Resize.m"; sourceTree = "<group>"; };
+		181E2D1222B3F1C10013BA7F /* UIImageView+CCWebImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+CCWebImage.h"; sourceTree = "<group>"; };
+		181E2D1322B3F1C10013BA7F /* UIView+FrameMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+FrameMethods.h"; sourceTree = "<group>"; };
+		181E2D1422B3F1C10013BA7F /* NSString+Formatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Formatter.m"; sourceTree = "<group>"; };
+		181E2D1522B3F1C10013BA7F /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Resize.h"; sourceTree = "<group>"; };
+		181E2D1622B3F1C10013BA7F /* NSObject+CCModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+CCModel.h"; sourceTree = "<group>"; };
+		181E2D1722B3F1C10013BA7F /* NSString+Formatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Formatter.h"; sourceTree = "<group>"; };
+		181E2D1822B3F1C10013BA7F /* UIView+FrameMethods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+FrameMethods.m"; sourceTree = "<group>"; };
+		181E2D1922B3F1C10013BA7F /* UIImageView+CCWebImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+CCWebImage.m"; sourceTree = "<group>"; };
+		181E2D1A22B3F1C10013BA7F /* NSObject+CCModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+CCModel.m"; sourceTree = "<group>"; };
+		181E2D1B22B3F1C10013BA7F /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Resize.m"; sourceTree = "<group>"; };
 		18ECD18922B003CD00F31BA0 /* CCVideoPlayerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCVideoPlayerController.m; sourceTree = "<group>"; };
 		18ECD18A22B003CD00F31BA0 /* CCVideoPlayerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCVideoPlayerController.h; sourceTree = "<group>"; };
 		18ECD18C22B003CD00F31BA0 /* CCVideoControlView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCVideoControlView.h; sourceTree = "<group>"; };
@@ -347,27 +347,19 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		181E2CF022B3F14A0013BA7F /* Base */ = {
+		181E2D1122B3F1C10013BA7F /* category */ = {
 			isa = PBXGroup;
 			children = (
-				181E2CF122B3F14A0013BA7F /* category */,
-			);
-			path = Base;
-			sourceTree = "<group>";
-		};
-		181E2CF122B3F14A0013BA7F /* category */ = {
-			isa = PBXGroup;
-			children = (
-				181E2CF222B3F14A0013BA7F /* UIImageView+CCWebImage.h */,
-				181E2CF322B3F14A0013BA7F /* UIView+FrameMethods.h */,
-				181E2CF422B3F14A0013BA7F /* NSString+Formatter.m */,
-				181E2CF522B3F14A0013BA7F /* UIImage+Resize.h */,
-				181E2CF622B3F14A0013BA7F /* NSObject+CCModel.h */,
-				181E2CF722B3F14A0013BA7F /* NSString+Formatter.h */,
-				181E2CF822B3F14A0013BA7F /* UIView+FrameMethods.m */,
-				181E2CF922B3F14A0013BA7F /* UIImageView+CCWebImage.m */,
-				181E2CFA22B3F14A0013BA7F /* NSObject+CCModel.m */,
-				181E2CFB22B3F14A0013BA7F /* UIImage+Resize.m */,
+				181E2D1222B3F1C10013BA7F /* UIImageView+CCWebImage.h */,
+				181E2D1322B3F1C10013BA7F /* UIView+FrameMethods.h */,
+				181E2D1422B3F1C10013BA7F /* NSString+Formatter.m */,
+				181E2D1522B3F1C10013BA7F /* UIImage+Resize.h */,
+				181E2D1622B3F1C10013BA7F /* NSObject+CCModel.h */,
+				181E2D1722B3F1C10013BA7F /* NSString+Formatter.h */,
+				181E2D1822B3F1C10013BA7F /* UIView+FrameMethods.m */,
+				181E2D1922B3F1C10013BA7F /* UIImageView+CCWebImage.m */,
+				181E2D1A22B3F1C10013BA7F /* NSObject+CCModel.m */,
+				181E2D1B22B3F1C10013BA7F /* UIImage+Resize.m */,
 			);
 			path = category;
 			sourceTree = "<group>";
@@ -601,7 +593,7 @@
 		EF8CD7F12286687500A7B431 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				181E2CF022B3F14A0013BA7F /* Base */,
+				181E2D1122B3F1C10013BA7F /* category */,
 				978A02B6229E11530067066C /* HTML */,
 				EF8CD7F42286693500A7B431 /* Define */,
 				EF8CD7FF2286755E00A7B431 /* Vendor */,
@@ -1032,7 +1024,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				181E2CFC22B3F14A0013BA7F /* NSString+Formatter.m in Sources */,
+				181E2D1C22B3F1C20013BA7F /* NSString+Formatter.m in Sources */,
 				EF616261228F974200EB7367 /* HomeDetailController.m in Sources */,
 				181E2CBC22B3EE780013BA7F /* CCVideoCell.m in Sources */,
 				EF616267228F98BE00EB7367 /* RegisterController.m in Sources */,
@@ -1049,14 +1041,14 @@
 				EF61627C228F9A3100EB7367 /* PicDetailController.m in Sources */,
 				EF8CD7CF2286686E00A7B431 /* main.m in Sources */,
 				EF61626A228F98D000EB7367 /* RegisterLoginController.m in Sources */,
-				181E2CFE22B3F14A0013BA7F /* UIImageView+CCWebImage.m in Sources */,
+				181E2D1E22B3F1C20013BA7F /* UIImageView+CCWebImage.m in Sources */,
 				18ECD19F22B003CD00F31BA0 /* CCVideoPlayerController.m in Sources */,
 				EF616264228F98AE00EB7367 /* MyController.m in Sources */,
 				ECB25E252299632B005EB072 /* ThreeImageTableViewCell.m in Sources */,
 				EF8CD7C12286686E00A7B431 /* AppDelegate.m in Sources */,
 				978742C222984BAB00C7EAE0 /* HomeListManager.m in Sources */,
 				EF8CD81C2286785200A7B431 /* PSCollectionView.m in Sources */,
-				181E2CFD22B3F14A0013BA7F /* UIView+FrameMethods.m in Sources */,
+				181E2D1D22B3F1C20013BA7F /* UIView+FrameMethods.m in Sources */,
 				FA0392A922A2154500C60D1C /* WKWebView+XHShowImage.m in Sources */,
 				EF61625B228F972300EB7367 /* HomeController.m in Sources */,
 				EF61626D228F98DD00EB7367 /* SetController.m in Sources */,
@@ -1065,7 +1057,7 @@
 				18ECD1A022B003CD00F31BA0 /* CCVideoView.m in Sources */,
 				EF8CD81D2286785200A7B431 /* PSCollectionViewCell.m in Sources */,
 				9758CEC1228809FC0090C60D /* NSObject+Hint.m in Sources */,
-				181E2CFF22B3F14A0013BA7F /* NSObject+CCModel.m in Sources */,
+				181E2D1F22B3F1C20013BA7F /* NSObject+CCModel.m in Sources */,
 				9758CEB8228809220090C60D /* MyImageView.m in Sources */,
 				EF616276228F9A1000EB7367 /* WordDetailController.m in Sources */,
 				9758CEC422880A1A0090C60D /* AppDelegate+DDLog.m in Sources */,
@@ -1073,7 +1065,7 @@
 				EC100B56229BA2D100D5907A /* NoImageTableViewCell.m in Sources */,
 				181E2CBB22B3EE780013BA7F /* CCVideoModel.m in Sources */,
 				EF61625E228F973200EB7367 /* HomeListController.m in Sources */,
-				181E2D0022B3F14A0013BA7F /* UIImage+Resize.m in Sources */,
+				181E2D2022B3F1C20013BA7F /* UIImage+Resize.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
