@@ -54,6 +54,11 @@ static CGFloat const distanceItemToItem = 10.0;
     [self commonInit];
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.tabBarController.tabBar.hidden = NO;
+}
+
 - (void)viewDidLayoutSubviews {
     
     [super viewDidLayoutSubviews];
