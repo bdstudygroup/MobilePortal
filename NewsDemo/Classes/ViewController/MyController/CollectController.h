@@ -10,7 +10,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface CollectController : UIViewController
+@interface CollectController : UIViewController<UITableViewDataSource, UITableViewDelegate>
+
+@property(nonatomic, strong)NSMutableArray* collectionNews;
+@property(nonatomic, strong)UITableView* collectionTable;
 
 @end
 

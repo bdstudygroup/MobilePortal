@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "JumpView.h"
+#import "CollectController.h"
 
 @interface HomeDetailController : UIViewController
 

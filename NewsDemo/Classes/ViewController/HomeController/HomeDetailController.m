@@ -160,6 +160,7 @@
         make.right.mas_equalTo(-60);
         make.size.mas_equalTo(CGSizeMake(40, 40));
     }];
+    [star addTarget:self action:@selector(collectNews) forControlEvents:UIControlEventTouchUpInside];
     UIButton *dianzan = [UIButton buttonWithType:UIButtonTypeCustom];
     [dianzan setBackgroundImage:[UIImage imageNamed:@"zan"]forState:UIControlStateNormal];
     [_commentView addSubview:dianzan];
@@ -193,6 +194,10 @@
 -(void)clickCommentShow{
     [self.textField resignFirstResponder];
     [self.jumpView showInView:self.view];
+}
+
+-(void)collectNews{
+    
 }
 
 

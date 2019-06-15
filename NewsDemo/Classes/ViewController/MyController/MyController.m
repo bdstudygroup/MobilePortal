@@ -85,7 +85,7 @@
         [self.navigationController pushViewController:vc animated:YES];
     }
     else{
-        CollectController* vc = [CollectController new];
+        CollectController* vc = [[CollectController alloc] init];
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
     }
