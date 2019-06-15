@@ -8,6 +8,7 @@
 
 #import "MyController.h"
 #import "SetController.h"
+#import "CollectController.h"
 #import "RegisterLoginController.h"
 
 @interface MyController () <UITableViewDataSource, UITableViewDelegate>
@@ -17,7 +18,9 @@
 
 @end
 
-@implementation MyController
+@implementation MyController{
+    NSArray* userList;
+}
 
 - (instancetype)init {
     if (self = [super init]) {
@@ -36,7 +39,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = kRGBColor(244, 244, 244);
-    
+    userList = @[@"设置",@"收藏栏"];
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getInfo:) name:@"userInfo" object:nil];
 }
@@ -48,24 +51,44 @@
 }
 
 #pragma mark - <UITableViewDataSource>
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 2;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 1;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil];
+    NSString *cellID = [NSString stringWithFormat:@"cellID:%ld", indexPath.section];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
+    }
     cell.textLabel.font = kTitleFont;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    cell.imageView.image = [UIImage imageNamed:@"me_setting"];
-    cell.textLabel.text = @"设置";
+    if (indexPath.section == 0) {
+        cell.imageView.image = [UIImage imageNamed:@"me_setting"];
+    }
+    else{
+        cell.imageView.image = [UIImage imageNamed:@"collect"];
+    }
+    cell.textLabel.text = userList[indexPath.section];
     return cell;
 }
 
 #pragma mark - <UITableViewDelegate>
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    SetController *vc = [SetController new];
-    vc.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:vc animated:YES];
+    if (indexPath.section == 0) {
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+        SetController *vc = [SetController new];
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    else{
+        CollectController* vc = [CollectController new];
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 #pragma mark - 懒加载

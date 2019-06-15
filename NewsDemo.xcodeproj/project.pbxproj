@@ -21,6 +21,7 @@
 		18ECD1A022B003CD00F31BA0 /* CCVideoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18ECD18E22B003CD00F31BA0 /* CCVideoView.m */; };
 		18ECD1A122B003CD00F31BA0 /* CCVideoControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18ECD18F22B003CD00F31BA0 /* CCVideoControlView.m */; };
 		18ECD1A922B0043700F31BA0 /* libCCURL.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 18ECD1A722B0043700F31BA0 /* libCCURL.a */; };
+		3FD6D37822B4993400E87E8F /* CollectController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD6D37722B4993400E87E8F /* CollectController.m */; };
 		6323DBA9CEA9697509E56202 /* libPods-NewsDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CBD97A0A5912800A232F996B /* libPods-NewsDemo.a */; };
 		9758CEB5228808B20090C60D /* BarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 9758CEB4228808B20090C60D /* BarItem.m */; };
 		9758CEB8228809220090C60D /* MyImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9758CEB7228809220090C60D /* MyImageView.m */; };
@@ -137,6 +138,8 @@
 		18ECD18F22B003CD00F31BA0 /* CCVideoControlView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCVideoControlView.m; sourceTree = "<group>"; };
 		18ECD1A722B0043700F31BA0 /* libCCURL.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libCCURL.a; sourceTree = "<group>"; };
 		18ECD1A822B0043700F31BA0 /* CCURL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCURL.h; sourceTree = "<group>"; };
+		3FD6D37622B4993400E87E8F /* CollectController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CollectController.h; sourceTree = "<group>"; };
+		3FD6D37722B4993400E87E8F /* CollectController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CollectController.m; sourceTree = "<group>"; };
 		79FCBF6DBF2FB0006B83DC6C /* Pods-NewsDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NewsDemo.release.xcconfig"; path = "Target Support Files/Pods-NewsDemo/Pods-NewsDemo.release.xcconfig"; sourceTree = "<group>"; };
 		9748C468228C554500CDB674 /* Const.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Const.h; sourceTree = "<group>"; };
 		9748C469228C5CAE00CDB674 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
@@ -499,6 +502,8 @@
 				EF616269228F98D000EB7367 /* RegisterLoginController.m */,
 				EF61626B228F98DD00EB7367 /* SetController.h */,
 				EF61626C228F98DD00EB7367 /* SetController.m */,
+				3FD6D37622B4993400E87E8F /* CollectController.h */,
+				3FD6D37722B4993400E87E8F /* CollectController.m */,
 			);
 			path = MyController;
 			sourceTree = "<group>";
@@ -1066,6 +1071,7 @@
 				181E2CBB22B3EE780013BA7F /* CCVideoModel.m in Sources */,
 				EF61625E228F973200EB7367 /* HomeListController.m in Sources */,
 				181E2D2022B3F1C20013BA7F /* UIImage+Resize.m in Sources */,
+				3FD6D37822B4993400E87E8F /* CollectController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
