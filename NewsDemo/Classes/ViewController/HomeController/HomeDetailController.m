@@ -37,6 +37,7 @@
 //评论区设计
 @property (nonatomic, strong) UITextField* textField;
 @property (nonatomic, strong) UIView* commentView;
+@property (nonatomic, strong) NSMutableArray* commentArray;
 
 @end
 
@@ -56,6 +57,7 @@
 
 - (void)viewDidLoad{
     [super viewDidLoad];
+    _commentArray = [[NSMutableArray alloc] initWithCapacity:100];
     [self setUpInputView];
     [self addNotification];
     [self setupWebView];
@@ -181,8 +183,10 @@
     [self.textField resignFirstResponder];
     NSString* text = textField.text;
     self.textField.placeholder = @"请输入文字";
+    
     [self.jumpView.commentArray addObject:text];
     [self.jumpView showInView:self.view];
+    [self.jumpView updateContent];
     return YES;
 }
 

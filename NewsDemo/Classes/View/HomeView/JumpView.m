@@ -63,15 +63,19 @@
             make.left.bottom.right.mas_equalTo(0);
             make.top.mas_equalTo(closeBtn.mas_bottom).mas_equalTo(15);
         }];
-        commentDetail.delegate = self;
-        commentDetail.dataSource = self;
         self.commentDetail = commentDetail;
         self.commentDetail.separatorStyle = UITableViewCellSeparatorStyleNone;
     }
 }
 
+-(void)updateContent{
+    self.commentDetail.delegate = self;
+    self.commentDetail.dataSource = self;
+    [self.commentDetail reloadData];
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    NSLog(@"count: %d", self.commentArray.count);
+    NSLog(@"number: %d", self.commentArray.count);
     return self.commentArray.count;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -79,10 +83,10 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *cellID = [NSString stringWithFormat:@"cellID:%ld", indexPath.row];
+    NSString *cellID = [NSString stringWithFormat:@"cellID:%ld", indexPath.section];
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
     cell = [[CommentViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
-    ((CommentViewCell*)cell).comment.text = self.commentArray[indexPath.row];
+    ((CommentViewCell*)cell).comment.text = self.commentArray[indexPath.section];
     NSDate *date = [NSDate date];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"yyyy-MM-dd HH-mm-ss"];

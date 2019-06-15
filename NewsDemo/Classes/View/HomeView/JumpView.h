@@ -19,6 +19,9 @@ NS_ASSUME_NONNULL_BEGIN
 //展示从底部向上弹出的UIView（包含遮罩）
 - (void)showInView:(UIView *)view;
 
+- (void)updateContent;
+
+
 @end
 
 NS_ASSUME_NONNULL_END
