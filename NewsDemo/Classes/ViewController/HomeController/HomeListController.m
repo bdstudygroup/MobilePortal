@@ -13,6 +13,8 @@
 #import "../../View/HomeView/OneImageTableViewCell.h"
 #import "../../View/HomeView/ThreeImageTableViewCell.h"
 #import "../../View/HomeView/NoImageTableViewCell.h"
+#import "AllList.h"
+#import "AllListItem.h"
 #define kHomeListCell @"kHomeListCell"
 
 @interface HomeListController ()

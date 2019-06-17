@@ -7,10 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "collectListItem.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface collectList : NSObject
+
+@property(nonatomic, strong)NSMutableArray<collectListItem*>* myCollectList;
+-(void)loadChecklists;
+-(void)saveChecklists;
 
 @end
 

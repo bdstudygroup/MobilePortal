@@ -14,6 +14,8 @@
 #import <Masonry.h>
 #import <WebKit/WebKit.h>
 #import "PicDetailController.h"
+#import "collectList.h"
+#import "CollectController.h"
 
 
 
@@ -62,6 +64,7 @@
     [self addNotification];
     [self setupWebView];
     [self setUpTableView];
+    [self update];
 }
 
 -(void)setupWebView{
@@ -196,8 +199,51 @@
     [self.jumpView showInView:self.view];
 }
 
+-(void)update{
+    __weak __typeof(self) weakSelf = self;
+    [[HomeListManager sharedManager] getAllNews:^(NSArray * _Nonnull articleFeed) {
+        __strong __typeof(weakSelf) strongSelf = weakSelf;
+        strongSelf.allList = articleFeed;
+    }];
+}
+
 -(void)collectNews{
-    
+    NSLog(@"%@",self.allList[0]);
+    collectList* myNewsCollections = [[collectList alloc] init];
+    [myNewsCollections loadChecklists];
+    NSString* title;
+    for (int i=0; i<self.allList.count; i++) {
+        if ([self.allList[i][@"group_id"] isEqualToString: self.groupId]) {
+            NSLog(@"groupID: %@", self.allList[i][@"group_id"]);
+            title = self.allList[i][@"title"];
+            break;
+        }
+    }
+    NSLog(@"group_id: %@ ", self.groupId);
+    NSLog(@"title: %@", title);
+    collectListItem* item = [[collectListItem alloc] init];
+    item.newsTitle = title;
+    item.newsID = self.groupId;
+    if (myNewsCollections.myCollectList.count == 0) {
+        [myNewsCollections.myCollectList addObject:item];
+    }
+    else{
+        int flag = 1;
+        for (int i=0; i<myNewsCollections.myCollectList.count; i++) {
+            if ([myNewsCollections.myCollectList[i].newsID isEqualToString: self.groupId]) {
+                flag = 0;
+                break;
+            }
+        }
+        if (flag == 1) {
+            [myNewsCollections.myCollectList addObject:item];
+        }
+    }
+    if (myNewsCollections.myCollectList.count > 0) {
+        NSLog(@"collect %@", myNewsCollections.myCollectList[0].newsTitle);
+        NSLog(@"number: %d", myNewsCollections.myCollectList.count);
+    }
+    [myNewsCollections saveChecklists];
 }
 
 

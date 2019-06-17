@@ -29,6 +29,9 @@
 		9758CEBB228809730090C60D /* iCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9758CEBA228809730090C60D /* iCarousel.m */; };
 		9758CEC1228809FC0090C60D /* NSObject+Hint.m in Sources */ = {isa = PBXBuildFile; fileRef = 9758CEC0228809FC0090C60D /* NSObject+Hint.m */; };
 		9758CEC422880A1A0090C60D /* AppDelegate+DDLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 9758CEC322880A1A0090C60D /* AppDelegate+DDLog.m */; };
+		9759F2CB22B688100045903D /* AllListItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 9759F2CA22B688100045903D /* AllListItem.m */; };
+		9759F2CE22B688280045903D /* AllList.m in Sources */ = {isa = PBXBuildFile; fileRef = 9759F2CD22B688280045903D /* AllList.m */; };
+		9759F2D122B688900045903D /* collectListItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 9759F2D022B688900045903D /* collectListItem.m */; };
 		978742C222984BAB00C7EAE0 /* HomeListManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 978742C122984BAB00C7EAE0 /* HomeListManager.m */; };
 		97989A1822AFCE5F00D7D880 /* CommentViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 97989A1722AFCE5F00D7D880 /* CommentViewCell.m */; };
 		979DEA6522AE355000E9BA53 /* JumpView.m in Sources */ = {isa = PBXBuildFile; fileRef = 979DEA6422AE355000E9BA53 /* JumpView.m */; };
@@ -156,6 +159,12 @@
 		9758CEC0228809FC0090C60D /* NSObject+Hint.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Hint.m"; sourceTree = "<group>"; };
 		9758CEC222880A1A0090C60D /* AppDelegate+DDLog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AppDelegate+DDLog.h"; sourceTree = "<group>"; };
 		9758CEC322880A1A0090C60D /* AppDelegate+DDLog.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "AppDelegate+DDLog.m"; sourceTree = "<group>"; };
+		9759F2C922B688100045903D /* AllListItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AllListItem.h; sourceTree = "<group>"; };
+		9759F2CA22B688100045903D /* AllListItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AllListItem.m; sourceTree = "<group>"; };
+		9759F2CC22B688280045903D /* AllList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AllList.h; sourceTree = "<group>"; };
+		9759F2CD22B688280045903D /* AllList.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AllList.m; sourceTree = "<group>"; };
+		9759F2CF22B688900045903D /* collectListItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = collectListItem.h; sourceTree = "<group>"; };
+		9759F2D022B688900045903D /* collectListItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = collectListItem.m; sourceTree = "<group>"; };
 		978742C022984BAB00C7EAE0 /* HomeListManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeListManager.h; sourceTree = "<group>"; };
 		978742C122984BAB00C7EAE0 /* HomeListManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeListManager.m; sourceTree = "<group>"; };
 		97989A1622AFCE5F00D7D880 /* CommentViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommentViewCell.h; sourceTree = "<group>"; };
@@ -413,6 +422,12 @@
 			children = (
 				3FD6D37A22B4D36800E87E8F /* collectList.h */,
 				3FD6D37B22B4D36800E87E8F /* collectList.m */,
+				9759F2C922B688100045903D /* AllListItem.h */,
+				9759F2CA22B688100045903D /* AllListItem.m */,
+				9759F2CC22B688280045903D /* AllList.h */,
+				9759F2CD22B688280045903D /* AllList.m */,
+				9759F2CF22B688900045903D /* collectListItem.h */,
+				9759F2D022B688900045903D /* collectListItem.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -1053,7 +1068,10 @@
 				EC05F92422945B75008E6027 /* SingletonUser.m in Sources */,
 				ECB25E1F22996283005EB072 /* OneImageTableViewCell.m in Sources */,
 				181E2CB922B3EE780013BA7F /* CCNavigationController.m in Sources */,
+				9759F2CE22B688280045903D /* AllList.m in Sources */,
+				9759F2D122B688900045903D /* collectListItem.m in Sources */,
 				97989A1822AFCE5F00D7D880 /* CommentViewCell.m in Sources */,
+				9759F2CB22B688100045903D /* AllListItem.m in Sources */,
 				EF616273228F9A0200EB7367 /* WordController.m in Sources */,
 				979DEA6522AE355000E9BA53 /* JumpView.m in Sources */,
 				EF61627C228F9A3100EB7367 /* PicDetailController.m in Sources */,

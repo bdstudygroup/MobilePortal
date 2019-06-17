@@ -85,7 +85,6 @@
 
 - (void)searchViewController:(PYSearchViewController *)searchViewController searchTextDidChange:(UISearchBar *)seachBar searchText:(NSString *)searchText
 {
-    [self update];
     
     if (searchText.length) {
         
@@ -117,6 +116,7 @@
     self.title = @"今日热点";
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(searchButton)];
     self.navigationItem.rightBarButtonItem.tintColor = [UIColor blueColor];
+    [self update];
 }
 
 @end
