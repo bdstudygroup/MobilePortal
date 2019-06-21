@@ -16,6 +16,7 @@
 #import "PicDetailController.h"
 #import "collectList.h"
 #import "CollectController.h"
+#import "commentManager.h"
 
 
 
@@ -188,6 +189,13 @@
     NSString* text = textField.text;
     self.textField.placeholder = @"请输入文字";
     
+    commentManager* manager = [[commentManager alloc] init];
+    manager.groupid = self.groupId;
+    manager.commentDetail = text;
+    manager.username = @"wangld";
+    [manager upComment];
+    [manager downloadComment];
+    self.jumpView.groupid = self.groupId;
     [self.jumpView.commentArray addObject:text];
     [self.jumpView showInView:self.view];
     [self.jumpView updateContent];

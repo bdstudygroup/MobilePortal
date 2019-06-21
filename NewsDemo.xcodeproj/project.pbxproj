@@ -32,6 +32,7 @@
 		9759F2CB22B688100045903D /* AllListItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 9759F2CA22B688100045903D /* AllListItem.m */; };
 		9759F2CE22B688280045903D /* AllList.m in Sources */ = {isa = PBXBuildFile; fileRef = 9759F2CD22B688280045903D /* AllList.m */; };
 		9759F2D122B688900045903D /* collectListItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 9759F2D022B688900045903D /* collectListItem.m */; };
+		977EE27022BCB50100FF67D4 /* commentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 977EE26F22BCB50100FF67D4 /* commentManager.m */; };
 		978742C222984BAB00C7EAE0 /* HomeListManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 978742C122984BAB00C7EAE0 /* HomeListManager.m */; };
 		97989A1822AFCE5F00D7D880 /* CommentViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 97989A1722AFCE5F00D7D880 /* CommentViewCell.m */; };
 		979DEA6522AE355000E9BA53 /* JumpView.m in Sources */ = {isa = PBXBuildFile; fileRef = 979DEA6422AE355000E9BA53 /* JumpView.m */; };
@@ -165,6 +166,8 @@
 		9759F2CD22B688280045903D /* AllList.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AllList.m; sourceTree = "<group>"; };
 		9759F2CF22B688900045903D /* collectListItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = collectListItem.h; sourceTree = "<group>"; };
 		9759F2D022B688900045903D /* collectListItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = collectListItem.m; sourceTree = "<group>"; };
+		977EE26E22BCB50100FF67D4 /* commentManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = commentManager.h; sourceTree = "<group>"; };
+		977EE26F22BCB50100FF67D4 /* commentManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = commentManager.m; sourceTree = "<group>"; };
 		978742C022984BAB00C7EAE0 /* HomeListManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeListManager.h; sourceTree = "<group>"; };
 		978742C122984BAB00C7EAE0 /* HomeListManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeListManager.m; sourceTree = "<group>"; };
 		97989A1622AFCE5F00D7D880 /* CommentViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommentViewCell.h; sourceTree = "<group>"; };
@@ -514,6 +517,8 @@
 				EF616260228F974200EB7367 /* HomeDetailController.m */,
 				978742C022984BAB00C7EAE0 /* HomeListManager.h */,
 				978742C122984BAB00C7EAE0 /* HomeListManager.m */,
+				977EE26E22BCB50100FF67D4 /* commentManager.h */,
+				977EE26F22BCB50100FF67D4 /* commentManager.m */,
 			);
 			path = HomeController;
 			sourceTree = "<group>";
@@ -1098,6 +1103,7 @@
 				9758CEB8228809220090C60D /* MyImageView.m in Sources */,
 				EF616276228F9A1000EB7367 /* WordDetailController.m in Sources */,
 				9758CEC422880A1A0090C60D /* AppDelegate+DDLog.m in Sources */,
+				977EE27022BCB50100FF67D4 /* commentManager.m in Sources */,
 				181E2CB822B3EE780013BA7F /* CCMainViewController.m in Sources */,
 				EC100B56229BA2D100D5907A /* NoImageTableViewCell.m in Sources */,
 				181E2CBB22B3EE780013BA7F /* CCVideoModel.m in Sources */,
