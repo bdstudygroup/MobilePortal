@@ -15,6 +15,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, strong)NSString* groupid;
 @property(nonatomic, strong)NSString* username;
 @property(nonatomic, strong)NSString* commentDetail;
+
+@property(nonatomic, strong)NSArray<NSDictionary*>* comments;
+
 -(void)upComment;
 -(void)downloadComment;
 

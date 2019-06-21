@@ -74,4 +74,18 @@
     [dataTask resume];
 }
 
+-(NSString* )timeStepChange: (NSString*) timeStep {
+    NSString *timeStampString  = timeStep;
+    
+    // iOS 生成的时间戳是10位
+    NSTimeInterval interval    =[timeStampString doubleValue] / 1000.0;
+    NSDate *date               = [NSDate dateWithTimeIntervalSince1970:interval];
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSString *dateString       = [formatter stringFromDate: date];
+    NSLog(@"服务器返回的时间戳对应的时间是:%@",dateString);
+    return dateString;
+}
+
 @end
