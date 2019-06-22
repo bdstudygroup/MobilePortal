@@ -15,6 +15,19 @@
 
 @implementation CollectController
 
+//+ (UINavigationController *)defaultMyController {
+//    static UINavigationController *navi = nil;
+//    static dispatch_once_t onceToken;
+//    dispatch_once(&onceToken, ^{
+//        CollectController *vc = [[CollectController alloc] initWithViewControllerClasses:[self viewControllerClasses] andTheirTitles:[self itemNames]];
+//        vc.keys = [self vcKeys];
+//        vc.values = [self vcValues];
+//    });
+//    return navi;
+//}
+
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.

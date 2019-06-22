@@ -16,5 +16,6 @@
 @property(nonatomic, strong)JumpView* jumpView;
 @property(nonatomic, strong)collectList* newsCollections;
 @property(nonatomic, strong)NSArray<NSDictionary*>* allList;
+@property(nonatomic, strong)NSArray<NSDictionary*>* comments;
 
 @end

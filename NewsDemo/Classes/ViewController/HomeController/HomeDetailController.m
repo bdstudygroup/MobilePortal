@@ -194,17 +194,42 @@
     manager.commentDetail = text;
     manager.username = @"wangld";
     [manager upComment];
-    [manager downloadComment];
-    self.jumpView.groupid = self.groupId;
-    [self.jumpView.commentArray addObject:text];
-    [self.jumpView showInView:self.view];
-    [self.jumpView updateContent];
+    [self methodTwoPerformSelector];
     return YES;
 }
 
+- (void)methodTwoPerformSelector{
+    [self performSelector:@selector(delayMethod2) withObject:nil/*可传任意类型参数*/ afterDelay:0.2];
+}
+- (void)delayMethod2{
+    [self updateComment];
+    [self methodOnePerformSelector];
+}
+
 -(void)clickCommentShow{
+    NSLog(@"sdfsdfa");
     [self.textField resignFirstResponder];
+    [self updateComment];
+    [self methodOnePerformSelector];
+}
+
+- (void)methodOnePerformSelector{
+    [self performSelector:@selector(delayMethod) withObject:nil/*可传任意类型参数*/ afterDelay:0.5];
+}
+- (void)delayMethod{
+    self.jumpView.comments = self.comments;
+    NSLog(@"comments:%@",self.jumpView.comments);
     [self.jumpView showInView:self.view];
+    [self.jumpView updateContent];
+}
+
+- (void)updateComment {
+    __weak __typeof(self) weakSelf = self;
+    [[commentManager sharedManager:self.groupId] downloadComment:^(NSArray * _Nonnull comments) {
+        __strong __typeof(weakSelf) strongSelf = weakSelf;
+        strongSelf.comments = comments;
+        
+    }];
 }
 
 -(void)update{

@@ -18,19 +18,12 @@
 
 @implementation JumpView
 
-- (id)initWithFrame:(CGRect)frame {
-    if (self == [super initWithFrame:frame]) {
-        
-        [self setupContent];
-    }
-    
-    return self;
-}
-
 - (void)setupContent {
     self.frame = CGRectMake(0, 0, kWindowW, kWindowH-viewHeight);
     self.commentArray = [[NSMutableArray alloc] initWithCapacity:100];
     self.commentIDs = [[NSMutableArray alloc] initWithCapacity:100];
+    self.commentTimes = [[NSMutableArray alloc] initWithCapacity:100];
+    self.commentNames = [[NSMutableArray alloc] initWithCapacity:100];
     //alpha 0.0  白色   alpha 1 ：黑色   alpha 0～1 ：遮罩颜色，逐渐
     self.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.4];
     self.userInteractionEnabled = YES;
@@ -69,6 +62,7 @@
 }
 
 -(void)updateContent{
+    [self updateComment];
     self.commentDetail.delegate = self;
     self.commentDetail.dataSource = self;
     [self.commentDetail reloadData];
@@ -87,11 +81,8 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
     cell = [[CommentViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
     ((CommentViewCell*)cell).comment.text = self.commentArray[indexPath.section];
-    NSDate *date = [NSDate date];
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"yyyy-MM-dd HH-mm-ss"];
-    NSString *time_now = [formatter stringFromDate:date];
-    ((CommentViewCell*)cell).time.text = time_now;
+    ((CommentViewCell*)cell).time.text = self.commentTimes[indexPath.section];
+    ((CommentViewCell*)cell).name.text = self.commentNames[indexPath.section];
     
     return cell;
 }
@@ -113,7 +104,9 @@
     if (!view) {
         return;
     }
-    
+    [self updateComment];
+    NSLog(@"comment: %@", self.comments);
+    [self setupContent];
     [view addSubview:self];
     [view addSubview:_contentView];
     
@@ -148,6 +141,27 @@
     
 }
 
+-(NSString* )timeStepChange: (NSString*) timeStep {
+    NSString *timeStampString  = timeStep;
+    
+    // iOS 生成的时间戳是10位
+    NSTimeInterval interval    =[timeStampString doubleValue] / 1000.0;
+    NSDate *date               = [NSDate dateWithTimeIntervalSince1970:interval];
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSString *dateString       = [formatter stringFromDate: date];
+    NSLog(@"服务器返回的时间戳对应的时间是:%@",dateString);
+    return dateString;
+}
 
+-(void)updateComment{
+    for (int i=0; i<self.comments.count; i++) {
+        [self.commentIDs addObject:self.comments[i][@"id"]];
+        [self.commentArray addObject:self.comments[i][@"commentDetail"]];
+        [self.commentNames addObject:self.comments[i][@"username"]];
+        [self.commentTimes addObject:[self timeStepChange: self.comments[i][@"commentTime"]]];
+    }
+}
 
 @end
