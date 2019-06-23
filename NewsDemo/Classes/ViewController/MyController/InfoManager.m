@@ -15,7 +15,7 @@ NSString *const IMAGE_KEY = @"image";
 @implementation InfoManager
 
 // 存储token
-+(void)saveInfo:(NSString *)username image : (UIImage *)image
++(void)saveInfo:(NSString *)username image : (NSString *)image
 {
     NSError *error = nil;
     NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
@@ -38,13 +38,13 @@ NSString *const IMAGE_KEY = @"image";
     return username;
 }
 
-+(UIImage *)getImage
++(NSString *)getImage
 {
     NSError *error;
     NSSet *codingClasses = [NSSet setWithArray:@[ [NSDictionary class],[NSArray class] ]];
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSData *imageData = [userDefaults objectForKey:IMAGE_KEY];
-    UIImage *image = [NSKeyedUnarchiver unarchivedObjectOfClass:codingClasses.class fromData:imageData error:&error];
+    NSString *image = [NSKeyedUnarchiver unarchivedObjectOfClass:codingClasses.class fromData:imageData error:&error];
     [userDefaults synchronize];
     return image;
 }

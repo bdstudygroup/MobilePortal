@@ -36,10 +36,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    SingletonUser *singleton = [SingletonUser sharedInstance];
-    NSLog(@"%@", singleton.username);
-    
-    
     self.navigationController.navigationBar.hidden = NO;
     [BarItem addBackItemToVC:self];
     self.currentState = 0;
@@ -152,7 +148,7 @@
             [self showAlertMessage:@"字段不能为空"];
         } else {
             NSDictionary *userDic = @{@"username" : username, @"password" : password, @"remember" : @"on"};
-            NSMutableURLRequest* formRequest = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"POST" URLString:@"http://172.19.31.26:8080/login" parameters:userDic error:nil];
+            NSMutableURLRequest* formRequest = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"POST" URLString:@"http://172.26.17.164:8080/login" parameters:userDic error:nil];
             [formRequest setValue:@"application/x-www-form-urlencoded"forHTTPHeaderField:@"Content-Type"];
             AFHTTPSessionManager* manager = [AFHTTPSessionManager manager];
             AFJSONResponseSerializer* responseSerializer = [AFJSONResponseSerializer serializer];
@@ -163,11 +159,21 @@
                     NSLog(@"Error: %@", error);
                     return;
                 }
+                NSLog(@"%@", responseObject);
+                NSString *imagePath = @"";
                 NSInteger code = [responseObject[@"code"] integerValue];
                 if(code == 200) {
-                    [InfoManager saveInfo:@"username" image: @"aa"];
+                    if([responseObject[@"data"][@"iconpath"] isEqual:[NSNull null]]) {
+                        [InfoManager saveInfo:@"username" image: @""];
+                    } else {
+                        NSString *url = responseObject[@"data"][@"iconpath"];
+                        NSLog(@"%@", url);
+                        imagePath = [@"http://172.26.17.164:8080/" stringByAppendingString:url];
+                        [InfoManager saveInfo:@"username" image: imagePath];
+                        NSLog(@"lll");
+                    }
                     [self.navigationController popViewControllerAnimated:YES];
-                    [[NSNotificationCenter defaultCenter] postNotificationName:@"userInfo" object:self userInfo:@{@"type": @"login", @"username": username}];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"userInfo" object:self userInfo:@{@"type": @"login", @"username": username, @"image": imagePath}];
                 } else {
                     [self showAlertMessage:@"登陆失败！"];
                 }
@@ -184,7 +190,7 @@
                 return;
             }
             NSDictionary *userDic = @{@"username" : username, @"password" : password};
-            NSMutableURLRequest* formRequest = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"POST" URLString:@"http://172.19.31.26:8080/regist" parameters:userDic error:nil];
+            NSMutableURLRequest* formRequest = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"POST" URLString:@"http://172.26.17.164:8080/regist" parameters:userDic error:nil];
             [formRequest setValue:@"application/x-www-form-urlencoded"forHTTPHeaderField:@"Content-Type"];
             AFHTTPSessionManager* manager = [AFHTTPSessionManager manager];
             AFJSONResponseSerializer* responseSerializer = [AFJSONResponseSerializer serializer];
@@ -195,9 +201,9 @@
                     NSLog(@"Error: %@", error);
                     return;
                 }
+                NSLog(@"%@", responseObject);
                 NSInteger code = [responseObject[@"code"] integerValue];
                 if(code == 200) {
-                    [self.navigationController popViewControllerAnimated:YES];
                     [self showAlertMessage:@"注册成功，请登录！"];
                     self.currentState = 0;
                     [self.changeCurrentState setTitle:@"注册" forState:UIControlStateNormal];
@@ -231,20 +237,11 @@
     
 }
 
-//图片->字符串
--(NSString *)UIImageToBase64Str:(UIImage *) image
-{
-    NSData *data = UIImageJPEGRepresentation(image, 0.6f);
-    NSString *encodedImageStr = [data base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
-    return encodedImageStr;
-}
-
-//字符串->图片
--(UIImage *)Base64StrToUIImage:(NSString *)encodedImageStr
-{
-    NSData  *decodedImageData = [[NSData alloc]initWithBase64EncodedString:encodedImageStr options:NSDataBase64DecodingIgnoreUnknownCharacters];
-    UIImage *decodedImage = [UIImage imageWithData:decodedImageData];
-    return decodedImage;
+- (UIImage *)getImageFromURL: (NSString *)url {
+    UIImage *result;
+    NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
+    result = [UIImage imageWithData:data];
+    return result;
 }
 
 - (BOOL) validateUserName:(NSString *)name

@@ -9,6 +9,7 @@
 #import "SetController.h"
 #import "MyController.h"
 #import "RegisterLoginController.h"
+#import "InfoManager.h"
 
 @interface SetController () <UITableViewDataSource, UITableViewDelegate>
 @property (strong, nonatomic) UITableView *tableView;
@@ -53,6 +54,12 @@ kRemoveCellSeparator
 
 /** 清理缓存 */
 - (void)cleanCaches {
+    NSString *tempUsername = @"";
+    NSString *tempImage = @"";
+    if(!([InfoManager getUsername] == nil)) {
+        tempUsername = [InfoManager getUsername];
+        tempImage = [InfoManager getImage];
+    }
     UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"清理缓存" message:@"" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         return;
@@ -73,11 +80,14 @@ kRemoveCellSeparator
                 [self.tableView reloadData];
             });
         });
-        
         [self showSuccessWithMsg:@"清理成功"];
     }];
     [ac addAction:cancelAction];
     [ac addAction:ensureAction];
+    
+    if(![tempUsername isEqualToString:@""]) {
+        [InfoManager saveInfo:tempUsername image:tempImage];
+    }
     [self presentViewController:ac animated:YES completion:nil];
 }
 
@@ -121,6 +131,7 @@ kRemoveCellSeparator
 
 - (UIButton *)exitBtn {
     if(_exitBtn == nil) {
+        [InfoManager cleanInfo];
         _exitBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         [_exitBtn setTitle:@"退出登录" forState:UIControlStateNormal];
         [_exitBtn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
@@ -142,7 +153,7 @@ kRemoveCellSeparator
                 }
             }
             [self.navigationController popViewControllerAnimated:YES];
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"userInfo" object:self userInfo:@{@"type": @"update", @"username": @""}];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"userInfo" object:self userInfo:@{@"type": @"update", @"username": @"", @"image": @""}];
         } forControlEvents:UIControlEventTouchUpInside];
     }
     

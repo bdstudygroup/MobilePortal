@@ -12,11 +12,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface InfoManager : NSObject
 
-+(void)saveInfo:(NSString *)username image : (UIImage *)image;
++(void)saveInfo:(NSString *)username image : (NSString *)image;
 
 +(NSString *)getUsername;
 
-+(UIImage *)getImage;
++(NSString *)getImage;
 
 +(void)cleanInfo;
 

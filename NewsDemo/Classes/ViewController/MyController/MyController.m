@@ -11,7 +11,6 @@
 #import "CollectController.h"
 #import "RegisterLoginController.h"
 #import "InfoManager.h"
-#import "ImageSelectManager.h"
 
 @interface MyController () <UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, NSURLSessionDelegate>
 @property (strong, nonatomic) UIView *headView;
@@ -45,6 +44,7 @@
     [super viewDidLoad];
     self.view.backgroundColor = kRGBColor(244, 244, 244);
     userList = @[@"设置",@"收藏栏", @"上传头像"];
+    [self checkCookie];
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getInfo:) name:@"userInfo" object:nil];
 }
@@ -190,9 +190,7 @@
 */
 
 - (void)jumpToLogin{
-    SingletonUser *singleton = [SingletonUser sharedInstance];
-    NSLog(@"%@", singleton.username);
-    if(singleton.tag) {
+    if(!([InfoManager getUsername] == nil)) {
         [self showAlertMessage:@"你已经登陆!"];
     } else {
         RegisterLoginController *controller = [[RegisterLoginController alloc] init];
@@ -219,13 +217,16 @@
 - (void)getInfo:(NSNotification *)noti {
     NSDictionary *dict = noti.userInfo;
     NSLog(@"%@",dict);
-    _myBtn.layer.cornerRadius = _myBtn.frame.size.width / 2;
-    _myBtn.clipsToBounds = YES;
     if([dict[@"type"] isEqualToString:@"update"]) {
         self.label.text = @"注册/登陆";
+        [self.myBtn setBackgroundImage:[UIImage imageNamed:@"login_portrait_ph"] forState:UIControlStateNormal];
         self.isLogin = false;
     } else {
         self.label.text = dict[@"username"];
+        NSString *url = dict[@"image"];
+        if(![url isEqualToString:@""]) {
+            [self.myBtn setBackgroundImage:[self getImageFromURL:url] forState:UIControlStateNormal];
+        }
         self.isLogin = true;
     }
 }
@@ -293,7 +294,46 @@
     //UIImage *image = [UIImage fixOrientation:[info objectForKey:UIImagePickerControllerOriginalImage]];
     self.image = image;
     self.image = [self scaleToSize:CGSizeMake(100, 100) width:image.size.width height:image.size.height];
-    [_myBtn setBackgroundImage:self.image forState:UIControlStateNormal];
+    
+    NSString *rememberMe = @"";
+    NSString *sid = @"";
+    NSHTTPCookieStorage *cookieJar = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+    for (NSHTTPCookie *cookie in [cookieJar cookies]) {
+        // NSLog(@"%@", cookie.name);
+        if([cookie.domain isEqualToString:@"172.26.17.164"] && [cookie.name isEqualToString:@"rememberMe"]) {
+            rememberMe = cookie.value;
+        }
+        if([cookie.domain isEqualToString:@"172.26.17.164"] && [cookie.name isEqualToString:@"sid"]) {
+            sid = cookie.value;
+            NSLog(@"%@", sid);
+        }
+    }
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    AFJSONResponseSerializer* responseSerializer = [AFJSONResponseSerializer serializer];
+    [responseSerializer setAcceptableContentTypes:[NSSet setWithObjects:@"application/json",@"text/json",@"text/javascript",@"text/html",@"text/plain",nil]];
+    manager.requestSerializer = [AFJSONRequestSerializer new];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    [manager.requestSerializer setValue:rememberMe forHTTPHeaderField:@"rememberMe"];
+    [manager.requestSerializer setValue:sid forHTTPHeaderField:@"sid"];
+    
+    [manager POST:@"http://172.26.17.164:8080/userinfo/setUserIcon/" parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        NSData *data = UIImagePNGRepresentation(self.image);
+        // NSString *fileName = [NSString stringWithFormat:@"%@.png", username];
+        //上传的参数(上传图片，以文件流的格式)
+        [formData appendPartWithFileData:data
+                                    name:@"file"
+                                fileName:@"user.png"
+                                mimeType:@"multipart/form-data"];
+    } progress:^(NSProgress * _Nonnull uploadProgress) {
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"上传成功%@",responseObject);
+        // NSDictionary * dic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingAllowFragments error:nil];
+        
+        [self.myBtn setBackgroundImage:self.image forState:UIControlStateNormal];
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"上传失败%@",error);
+    }];
 }
 
 //等比例缩放
@@ -329,11 +369,10 @@
      NSHTTPCookieStorage *cookieJar = [NSHTTPCookieStorage sharedHTTPCookieStorage];
      for (NSHTTPCookie *cookie in [cookieJar cookies]) {
          // NSLog(@"%@", cookie.name);
-         if([cookie.domain isEqualToString:@"172.19.31.26"] && [cookie.name isEqualToString:@"rememberMe"]) {
-             NSLog(@"getInfo");
+         if([cookie.domain isEqualToString:@"172.26.17.164"] && [cookie.name isEqualToString:@"rememberMe"]) {
              NSString *remeberMe = cookie.value;
              //请求用户信息
-             NSMutableURLRequest* formRequest = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"POST" URLString:@"http://172.19.31.26:8080/getUserInfo" parameters:nil error:nil];
+             NSMutableURLRequest* formRequest = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"POST" URLString:@"http://172.26.17.164:8080/userinfo/getUserInfo/" parameters:nil error:nil];
              [formRequest addValue:@"application/x-www-form-urlencoded"forHTTPHeaderField:@"Content-Type"];
              [formRequest addValue:remeberMe forHTTPHeaderField:@"rememberMe"];
              AFHTTPSessionManager* manager = [AFHTTPSessionManager manager];
@@ -341,6 +380,7 @@
              [responseSerializer setAcceptableContentTypes:[NSSet setWithObjects:@"application/json",@"text/json",@"text/javascript",@"text/html",@"text/plain",nil]];
              manager.responseSerializer= responseSerializer;
              NSURLSessionDataTask* dataTask = [manager dataTaskWithRequest:formRequest uploadProgress:nil downloadProgress:nil completionHandler: ^(NSURLResponse*_Nonnull response,id _Nullable responseObject,NSError*_Nullable error){
+                 NSLog(@"%@", responseObject);
                  if(error) {
                      NSLog(@"Error: %@", error);
                      [InfoManager cleanInfo];
@@ -350,12 +390,17 @@
                  if(code == 200) {
                      [self showAlertMessage:@"获取成功！"];
                      NSLog(@"%@", responseObject);
-                     NSString *url = responseObject[@"image"];
-                     UIImage *image = [self getImageFromURL:url];
-                     [InfoManager saveInfo:responseObject[@"username"] image:image];
-                     //set UI
-                     [self.myBtn setBackgroundImage:[UIImage imageNamed:@"login_portrait_ph"] forState:UIControlStateNormal];
-                     self.label.text = responseObject[@"username"];
+                     if([responseObject[@"data"][@"userinfo"][@"iconpath"]isEqual:[NSNull null]]) {
+                         [self.myBtn setBackgroundImage:[UIImage imageNamed:@"login_portrait_ph"] forState:UIControlStateNormal];
+                         [InfoManager saveInfo:responseObject[@"data"][@"userinfo"][@"username"] image:@""];
+                     } else {
+                         NSString *url = responseObject[@"data"][@"userinfo"][@"iconpath"];
+                         NSString *imagePath = [@"http://172.26.17.164:8080/" stringByAppendingString:url];
+                         [InfoManager saveInfo:responseObject[@"data"][@"userinfo"][@"username"] image:imagePath];
+                         //set UI, 没有图片的时候默认
+                         [self.myBtn setBackgroundImage:[self getImageFromURL:imagePath] forState:UIControlStateNormal];
+                     }
+                     self.label.text = responseObject[@"data"][@"userinfo"][@"username"];
                      self.isLogin = true;
                  } else {
                      [self showAlertMessage:@"获取失败！"];
