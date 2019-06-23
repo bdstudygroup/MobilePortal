@@ -22,6 +22,10 @@
         self.numberComment = [[UILabel alloc]init];
         self.numberStar.text = @"star";
         self.numberComment.text = @"comment";
+        self.numberStar.font = [UIFont systemFontOfSize:12];
+        self.numberStar.textColor = [UIColor lightGrayColor];
+        self.numberComment.font = [UIFont systemFontOfSize:12];
+        self.numberComment.textColor = [UIColor lightGrayColor];
         self.content.numberOfLines = 0;
         [self.contentView addSubview:self.content];
         [self.contentView addSubview:self.headImageView];
@@ -42,11 +46,14 @@
     [self.headImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.contentView.mas_top).offset(5.0);
         make.left.equalTo(self.content.mas_right).offset(5.0);
-        make.size.mas_equalTo(CGSizeMake((0.4*width - 15), ((0.4*width - 15)*0.56)));
-        make.bottom.equalTo(self.contentView.mas_bottom).offset(-5.0);
+        make.width.mas_equalTo(0.4*width - 15);
+        make.height.mas_equalTo((0.4*width - 15)*0.56);
+        //make.size.mas_equalTo(CGSizeMake((0.4*width - 15), ((0.4*width - 15)*0.56)));
+        // make.bottom.equalTo(self.contentView.mas_bottom).offset(-5.0);
     }];
     [self.numberStar mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.content.mas_left);
+        make.top.equalTo(self.headImageView.mas_bottom).offset(-12);
         make.bottom.equalTo(self.contentView.mas_bottom).offset(-5.0);
     }];
     [self.numberComment mas_makeConstraints:^(MASConstraintMaker *make) {

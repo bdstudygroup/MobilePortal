@@ -26,6 +26,10 @@
         self.numberComment = [[UILabel alloc]init];
         self.numberStar.text = @"star";
         self.numberComment.text = @"comment";
+        self.numberStar.font = [UIFont systemFontOfSize:12];
+        self.numberStar.textColor = [UIColor lightGrayColor];
+        self.numberComment.font = [UIFont systemFontOfSize:12];
+        self.numberComment.textColor = [UIColor lightGrayColor];
         //self.imageFirst.frame = CGRectMake(5, 60, (width - 14)/3, 70);
         //self.imageSecond.frame = CGRectMake(7 + (width-14)/3, 60, (width - 14)/3, (width - 14)/3*0.7);
         //self.imageThird.frame = CGRectMake(9 + 2*(width - 14)/3, 60, (width - 14)/3, (width - 14)/3*0.7);

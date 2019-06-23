@@ -37,6 +37,8 @@
 		97989A1822AFCE5F00D7D880 /* CommentViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 97989A1722AFCE5F00D7D880 /* CommentViewCell.m */; };
 		979DEA6522AE355000E9BA53 /* JumpView.m in Sources */ = {isa = PBXBuildFile; fileRef = 979DEA6422AE355000E9BA53 /* JumpView.m */; };
 		EC05F92422945B75008E6027 /* SingletonUser.m in Sources */ = {isa = PBXBuildFile; fileRef = EC05F92322945B75008E6027 /* SingletonUser.m */; };
+		EC08FD0F22BF371D0083846E /* InfoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EC08FD0E22BF371D0083846E /* InfoManager.m */; };
+		EC08FD1222BF427C0083846E /* ImageSelectManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EC08FD1122BF427C0083846E /* ImageSelectManager.m */; };
 		EC100B56229BA2D100D5907A /* NoImageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EC100B55229BA2D100D5907A /* NoImageTableViewCell.m */; };
 		ECB25E1F22996283005EB072 /* OneImageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ECB25E1E22996283005EB072 /* OneImageTableViewCell.m */; };
 		ECB25E252299632B005EB072 /* ThreeImageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ECB25E242299632B005EB072 /* ThreeImageTableViewCell.m */; };
@@ -177,6 +179,10 @@
 		CBD97A0A5912800A232F996B /* libPods-NewsDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-NewsDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC05F92222945B75008E6027 /* SingletonUser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SingletonUser.h; sourceTree = "<group>"; };
 		EC05F92322945B75008E6027 /* SingletonUser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SingletonUser.m; sourceTree = "<group>"; };
+		EC08FD0D22BF371D0083846E /* InfoManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InfoManager.h; sourceTree = "<group>"; };
+		EC08FD0E22BF371D0083846E /* InfoManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InfoManager.m; sourceTree = "<group>"; };
+		EC08FD1022BF427C0083846E /* ImageSelectManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageSelectManager.h; sourceTree = "<group>"; };
+		EC08FD1122BF427C0083846E /* ImageSelectManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImageSelectManager.m; sourceTree = "<group>"; };
 		EC100B54229BA2D100D5907A /* NoImageTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NoImageTableViewCell.h; sourceTree = "<group>"; };
 		EC100B55229BA2D100D5907A /* NoImageTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NoImageTableViewCell.m; sourceTree = "<group>"; };
 		ECB25E1D22996283005EB072 /* OneImageTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OneImageTableViewCell.h; sourceTree = "<group>"; };
@@ -536,6 +542,10 @@
 				EF61626C228F98DD00EB7367 /* SetController.m */,
 				3FD6D37622B4993400E87E8F /* CollectController.h */,
 				3FD6D37722B4993400E87E8F /* CollectController.m */,
+				EC08FD0D22BF371D0083846E /* InfoManager.h */,
+				EC08FD0E22BF371D0083846E /* InfoManager.m */,
+				EC08FD1022BF427C0083846E /* ImageSelectManager.h */,
+				EC08FD1122BF427C0083846E /* ImageSelectManager.m */,
 			);
 			path = MyController;
 			sourceTree = "<group>";
@@ -1075,6 +1085,7 @@
 				181E2CB922B3EE780013BA7F /* CCNavigationController.m in Sources */,
 				9759F2CE22B688280045903D /* AllList.m in Sources */,
 				9759F2D122B688900045903D /* collectListItem.m in Sources */,
+				EC08FD1222BF427C0083846E /* ImageSelectManager.m in Sources */,
 				97989A1822AFCE5F00D7D880 /* CommentViewCell.m in Sources */,
 				9759F2CB22B688100045903D /* AllListItem.m in Sources */,
 				EF616273228F9A0200EB7367 /* WordController.m in Sources */,
@@ -1084,6 +1095,7 @@
 				EF61626A228F98D000EB7367 /* RegisterLoginController.m in Sources */,
 				181E2D1E22B3F1C20013BA7F /* UIImageView+CCWebImage.m in Sources */,
 				3FD6D37C22B4D36800E87E8F /* collectList.m in Sources */,
+				EC08FD0F22BF371D0083846E /* InfoManager.m in Sources */,
 				18ECD19F22B003CD00F31BA0 /* CCVideoPlayerController.m in Sources */,
 				EF616264228F98AE00EB7367 /* MyController.m in Sources */,
 				ECB25E252299632B005EB072 /* ThreeImageTableViewCell.m in Sources */,

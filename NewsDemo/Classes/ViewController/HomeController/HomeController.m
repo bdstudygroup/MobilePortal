@@ -107,7 +107,7 @@
     [[HomeListManager sharedManager] getAllNews:^(NSArray * _Nonnull articleFeed) {
         __strong __typeof(weakSelf) strongSelf = weakSelf;
         strongSelf.articleList = articleFeed;
-        NSLog(@"%@",strongSelf.articleList);
+        // NSLog(@"%@",strongSelf.articleList);
     }];
 }
 

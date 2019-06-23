@@ -17,6 +17,10 @@
         self.numberComment = [[UILabel alloc]init];
         self.numberStar.text = @"star";
         self.numberComment.text = @"comment";
+        self.numberStar.font = [UIFont systemFontOfSize:12];
+        self.numberStar.textColor = [UIColor lightGrayColor];
+        self.numberComment.font = [UIFont systemFontOfSize:12];
+        self.numberComment.textColor = [UIColor lightGrayColor];
         //self.content.frame = CGRectMake(5, 5, (width- 10), 50);
         self.content.numberOfLines = 0;
         [self.contentView addSubview:self.content];

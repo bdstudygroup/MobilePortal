@@ -132,12 +132,20 @@ kRemoveCellSeparator
         }];
         
         [_exitBtn bk_addEventHandler:^(id sender) {
-            MyController *vc = [MyController new];
-            [self.navigationController pushViewController:vc animated:YES];
+            // MyController *vc = [MyController new];
+            // [self.navigationController pushViewController:vc animated:YES];
+            NSHTTPCookieStorage *cookieJar = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+            for (NSHTTPCookie *cookie in [cookieJar cookies]) {
+                // NSLog(@"%@", cookie.name);
+                if([cookie.domain isEqualToString:@"172.26.17.164"] && [cookie.name isEqualToString:@"rememberMe"]) {
+                    [cookieJar deleteCookie:cookie];
+                }
+            }
+            [self.navigationController popViewControllerAnimated:YES];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"userInfo" object:self userInfo:@{@"type": @"update", @"username": @""}];
         } forControlEvents:UIControlEventTouchUpInside];
     }
-    SingletonUser *singleton = [SingletonUser sharedInstance];
-    singleton.tag = false;
+    
     return _exitBtn;
 }
 
