@@ -72,13 +72,14 @@
     //change current state, login in or register
     self.changeCurrentState = [[UIButton alloc]init];
     [self.changeCurrentState setTitle:@"注册" forState:UIControlStateNormal];
+    self.changeCurrentState.titleLabel.font = [UIFont systemFontOfSize:12];
     self.changeCurrentState.frame = CGRectMake(7*self.width/8 - 40, 0.1*self.height + 250, 40, 30);
     [self.changeCurrentState setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
     [self.view addSubview:self.changeCurrentState];
     
     self.confirmButton = [[UIButton alloc]initWithFrame:CGRectMake(self.width/8, 0.1*self.height + 210, 3*self.width/4, 30)];
     [self.confirmButton setTitle:@"确认" forState:UIControlStateNormal];
-    [self.confirmButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [self.confirmButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     self.confirmButton.backgroundColor = [UIColor blueColor];
     [self.view addSubview:self.confirmButton];
     [self.confirmButton addTarget:self action:@selector(validUser) forControlEvents:UIControlEventTouchUpInside];
@@ -94,7 +95,7 @@
         self.confirmPasswordFiled.hidden = NO;
         self.confirmPasswordTip.hidden = NO;
         self.confirmButton.frame = CGRectMake(self.width/8, 0.1*self.height + 250, 3*self.width/4, 40);
-        self.changeCurrentState.frame = CGRectMake(7*self.width/8 - 40, 0.1*self.height + 290, 40, 30);
+        self.changeCurrentState.frame = CGRectMake(7*self.width/8 - 100, 0.1*self.height + 290, 100, 30);
     } else {
         self.currentState = 0;
         [self.changeCurrentState setTitle:@"注册" forState:UIControlStateNormal];
@@ -177,11 +178,11 @@
             [[NSNotificationCenter defaultCenter] postNotificationName:@"userInfo" object:self userInfo:@{@"type": @"login", @"username": username}];
         }
     } else { //注册
-        if([username isEqualToString:@""] || [password isEqualToString:@""] || [confirmPassword isEqualToString:@""]) {
-            [self showAlertMessage:@"字段不能为空"];
-        } else if(![password isEqualToString:confirmPassword]) {
-            [self showAlertMessage:@"密码不对应"];
-        } else {
+        if([self validateUserName:username] && [self validatePassword:password]) {
+            if(![password isEqualToString:confirmPassword]) {
+                [self showAlertMessage:@"密码不对应"];
+                return;
+            }
             NSDictionary *userDic = @{@"username" : username, @"password" : password};
             NSMutableURLRequest* formRequest = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"POST" URLString:@"http://172.19.31.26:8080/regist" parameters:userDic error:nil];
             [formRequest setValue:@"application/x-www-form-urlencoded"forHTTPHeaderField:@"Content-Type"];
@@ -210,8 +211,9 @@
                 }
                 
             }];
-            
             [dataTask resume];
+        } else {
+            [self showAlertMessage:@"用户名和密码至少是6位长度的字母和数字串！"];
         }
     }
 }
@@ -243,6 +245,22 @@
     NSData  *decodedImageData = [[NSData alloc]initWithBase64EncodedString:encodedImageStr options:NSDataBase64DecodingIgnoreUnknownCharacters];
     UIImage *decodedImage = [UIImage imageWithData:decodedImageData];
     return decodedImage;
+}
+
+- (BOOL) validateUserName:(NSString *)name
+{
+    NSString *userNameRegex = @"^[A-Za-z0-9]{6,20}+$";
+    NSPredicate *userNamePredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",userNameRegex];
+    BOOL B = [userNamePredicate evaluateWithObject:name];
+    return B;
+}
+
+- (BOOL) validatePassword:(NSString *)password
+{
+    NSString *passwordRegex = @"^[A-Za-z0-9_]{6,20}+$";
+    NSPredicate *userNamePredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",passwordRegex];
+    BOOL B = [userNamePredicate evaluateWithObject:password];
+    return B;
 }
 
 @end
