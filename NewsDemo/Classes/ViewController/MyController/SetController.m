@@ -14,6 +14,8 @@
 @interface SetController () <UITableViewDataSource, UITableViewDelegate>
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) UIButton *exitBtn;
+@property (strong, nonatomic) NSString *tempUsername;
+@property (strong, nonatomic) NSString *tempImage;
 
 @end
 
@@ -21,6 +23,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.tempUsername = @"";
+    self.tempImage = @"";
+    if(!([InfoManager getUsername] == nil)) {
+        NSLog(@"22222222");
+        self.tempUsername = [InfoManager getUsername];
+        self.tempImage = [InfoManager getImage];
+    }
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationController.navigationBar.hidden = NO;
     [BarItem addBackItemToVC:self];
@@ -54,12 +63,6 @@ kRemoveCellSeparator
 
 /** 清理缓存 */
 - (void)cleanCaches {
-    NSString *tempUsername = @"";
-    NSString *tempImage = @"";
-    if(!([InfoManager getUsername] == nil)) {
-        tempUsername = [InfoManager getUsername];
-        tempImage = [InfoManager getImage];
-    }
     UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"清理缓存" message:@"" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         return;
@@ -81,13 +84,13 @@ kRemoveCellSeparator
             });
         });
         [self showSuccessWithMsg:@"清理成功"];
+        NSLog(@"%@", self.tempUsername);
+        if(![self.tempUsername isEqualToString:@""]) {
+            [InfoManager saveInfo:self.tempUsername image:self.tempImage];
+        }
     }];
     [ac addAction:cancelAction];
     [ac addAction:ensureAction];
-    
-    if(![tempUsername isEqualToString:@""]) {
-        [InfoManager saveInfo:tempUsername image:tempImage];
-    }
     [self presentViewController:ac animated:YES completion:nil];
 }
 
