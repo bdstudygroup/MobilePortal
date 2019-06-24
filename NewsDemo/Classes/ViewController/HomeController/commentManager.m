@@ -7,6 +7,8 @@
 //
 
 #import "commentManager.h"
+#import "InfoManager.h"
+#import "RegisterLoginController.h"
 
 @implementation commentManager
 
@@ -23,7 +25,7 @@
 -(void)downloadComment:(void (^)(NSArray * _Nonnull))completion{
     NSDictionary* form = @{@"groupid": self.groupid};
     
-    NSMutableURLRequest* formRequest = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"POST" URLString:@"http://172.19.31.26:8080/comment/getCommentByGroupId" parameters:form error:nil];
+    NSMutableURLRequest* formRequest = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"POST" URLString:@"http://172.26.17.164:8080/comment/getCommentByGroupId" parameters:form error:nil];
     
     [formRequest setValue:@"application/x-www-form-urlencoded; charset=utf-8"forHTTPHeaderField:@"Content-Type"];
     
@@ -53,10 +55,33 @@
     [dataTask resume];
 }
 
--(void)upComment{
-    NSDictionary* form = @{@"username": self.username , @"commentDetail":self.commentDetail, @"groupid": self.groupid};
+- (void) showAlertMessage:(NSString *) myMessage{
+    //创建提示框指针
+    UIAlertController *alertMessage;
+    //用参数myMessage初始化提示框
+    alertMessage = [UIAlertController alertControllerWithTitle:@"提示" message:myMessage preferredStyle:UIAlertControllerStyleAlert];
+    //添加按钮
+    [alertMessage addAction:[UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:nil]];
     
-    NSMutableURLRequest* formRequest = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"POST" URLString:@"http://172.19.31.26:8080/comment/insertComment" parameters:form error:nil];
+    //display the message on screen  显示在屏幕上
+    [self presentViewController:alertMessage animated:YES completion:nil];
+    
+}
+
+-(void)upComment{
+    if(!([InfoManager getUsername]==nil)){
+        [self showAlertMessage:@"你已经登陆了"];
+    }else{
+        [self showAlertMessage:@"请登录或注册"];
+        RegisterLoginController* controller = [[RegisterLoginController alloc] init];
+        controller.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:controller animated:YES];
+        return;
+    }
+    
+    NSDictionary* form = @{@"username": [InfoManager getUsername] , @"commentDetail":self.commentDetail, @"groupid": self.groupid};
+    
+    NSMutableURLRequest* formRequest = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"POST" URLString:@"http://172.26.17.164:8080/comment/insertComment" parameters:form error:nil];
     
     [formRequest setValue:@"application/x-www-form-urlencoded; charset=utf-8"forHTTPHeaderField:@"Content-Type"];
     

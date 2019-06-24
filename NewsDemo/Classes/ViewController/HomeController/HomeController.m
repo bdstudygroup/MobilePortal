@@ -85,7 +85,7 @@
 
 - (void)searchViewController:(PYSearchViewController *)searchViewController searchTextDidChange:(UISearchBar *)seachBar searchText:(NSString *)searchText
 {
-    
+    [self update];
     if (searchText.length) {
         
         // Simulate a send request to get a search suggestions

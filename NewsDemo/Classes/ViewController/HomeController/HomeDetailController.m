@@ -184,6 +184,19 @@
     [comment addTarget:self action:@selector(clickCommentShow) forControlEvents:UIControlEventTouchUpInside];
 }
 
+- (void) showAlertMessage:(NSString *) myMessage{
+    //创建提示框指针
+    UIAlertController *alertMessage;
+    //用参数myMessage初始化提示框
+    alertMessage = [UIAlertController alertControllerWithTitle:@"提示" message:myMessage preferredStyle:UIAlertControllerStyleAlert];
+    //添加按钮
+    [alertMessage addAction:[UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:nil]];
+    
+    //display the message on screen  显示在屏幕上
+    [self presentViewController:alertMessage animated:YES completion:nil];
+    
+}
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
     [self.textField resignFirstResponder];
     NSString* text = textField.text;
@@ -259,6 +272,7 @@
     item.newsID = self.groupId;
     if (myNewsCollections.myCollectList.count == 0) {
         [myNewsCollections.myCollectList addObject:item];
+        [self showAlertMessage:@"收藏成功"];
     }
     else{
         int flag = 1;
@@ -270,6 +284,9 @@
         }
         if (flag == 1) {
             [myNewsCollections.myCollectList addObject:item];
+            [self showAlertMessage:@"收藏成功"];
+        }else{
+            [self showAlertMessage:@"已收藏"];
         }
     }
     if (myNewsCollections.myCollectList.count > 0) {
