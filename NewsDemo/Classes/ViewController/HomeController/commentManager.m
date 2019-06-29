@@ -12,19 +12,18 @@
 
 @implementation commentManager
 
-+ (instancetype)sharedManager:(NSString*)groupid {
++ (instancetype)sharedManager{
     static commentManager *manager = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         manager = [[commentManager alloc] init];
-        manager.groupid = groupid;
     });
     return manager;
 }
 
--(void)downloadComment:(void (^)(NSArray * _Nonnull))completion{
-    NSDictionary* form = @{@"groupid": self.groupid};
-    
+-(void)downloadComment:(void (^)(NSArray * _Nonnull))completion withGroupID: (NSString* )groupid{
+    NSDictionary* form = @{@"groupid": groupid};
+    NSLog(@"ID: %@", groupid);
     NSMutableURLRequest* formRequest = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"POST" URLString:@"http://172.19.3.119:8080/comment/getCommentByGroupId" parameters:form error:nil];
     
     [formRequest setValue:@"application/x-www-form-urlencoded; charset=utf-8"forHTTPHeaderField:@"Content-Type"];
@@ -68,18 +67,10 @@
     
 }
 
--(void)upComment{
-    if(!([InfoManager getUsername]==nil)){
-        [self showAlertMessage:@"你已经登陆了"];
-    }else{
-        [self showAlertMessage:@"请登录或注册"];
-        RegisterLoginController* controller = [[RegisterLoginController alloc] init];
-        controller.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:controller animated:YES];
-        return;
-    }
+-(void)upComment:(NSString*)username withGroupID: (NSString*) groupid{
     
-    NSDictionary* form = @{@"username": [InfoManager getUsername] , @"commentDetail":self.commentDetail, @"groupid": self.groupid};
+    
+    NSDictionary* form = @{@"username": username , @"commentDetail":self.commentDetail, @"groupid": groupid};
     
     NSMutableURLRequest* formRequest = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"POST" URLString:@"http://172.19.3.119:8080/comment/insertComment" parameters:form error:nil];
     

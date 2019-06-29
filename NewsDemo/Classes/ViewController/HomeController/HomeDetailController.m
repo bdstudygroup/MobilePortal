@@ -17,6 +17,8 @@
 #import "collectList.h"
 #import "CollectController.h"
 #import "commentManager.h"
+#import "RegisterLoginController.h"
+#import "InfoManager.h"
 
 
 
@@ -206,7 +208,16 @@
     manager.groupid = self.groupId;
     manager.commentDetail = text;
     manager.username = @"wangld";
-    [manager upComment];
+    NSString* username;
+    if(!([InfoManager getUsername]==nil)){
+        [self showAlertMessage:@"你已经登陆了"];
+        username = [InfoManager getUsername];
+    }else{
+        NSLog(@"jump");
+        [self showAlertMessage:@"请登录或注册"];
+        return YES;
+    }
+    [manager upComment: username withGroupID:self.groupId];
     [self methodTwoPerformSelector];
     return YES;
 }
@@ -238,11 +249,11 @@
 
 - (void)updateComment {
     __weak __typeof(self) weakSelf = self;
-    [[commentManager sharedManager:self.groupId] downloadComment:^(NSArray * _Nonnull comments) {
+    [[commentManager sharedManager] downloadComment:^(NSArray * _Nonnull comments) {
         __strong __typeof(weakSelf) strongSelf = weakSelf;
         strongSelf.comments = comments;
         
-    }];
+    } withGroupID:self.groupId];
 }
 
 -(void)update{

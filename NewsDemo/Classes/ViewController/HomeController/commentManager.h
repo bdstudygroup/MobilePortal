@@ -17,9 +17,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, strong)NSString* username;
 @property(nonatomic, strong)NSString* commentDetail;
 
-+ (instancetype)sharedManager:(NSString*)groupid;
--(void)upComment;
--(void)downloadComment:(void (^)(NSArray * _Nonnull))completion;
++ (instancetype)sharedManager;
+-(void)upComment:(NSString*)username withGroupID: (NSString*) groupid;
+-(void)downloadComment:(void (^)(NSArray * _Nonnull))completion withGroupID: (NSString* )groupid;
 
 @end
 
