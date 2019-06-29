@@ -1295,6 +1295,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 42VW94SVZ4;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/NewsDemo/Classes/Vendor/UM/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
@@ -1326,6 +1327,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 42VW94SVZ4;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/NewsDemo/Classes/Vendor/UM/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
