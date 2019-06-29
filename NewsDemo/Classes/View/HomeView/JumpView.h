@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, strong)NSMutableArray* commentIDs;
 @property(nonatomic, strong)NSMutableArray* commentTimes;
 @property(nonatomic, strong)NSMutableArray* commentNames;
+@property(nonatomic, strong)NSMutableArray* headImages;
 @property(nonatomic, strong)NSString* groupid;
 @property(nonatomic, strong)NSArray<NSDictionary*>* comments;
 //展示从底部向上弹出的UIView（包含遮罩）

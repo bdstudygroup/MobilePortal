@@ -25,7 +25,7 @@
 -(void)downloadComment:(void (^)(NSArray * _Nonnull))completion{
     NSDictionary* form = @{@"groupid": self.groupid};
     
-    NSMutableURLRequest* formRequest = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"POST" URLString:@"http://172.26.17.164:8080/comment/getCommentByGroupId" parameters:form error:nil];
+    NSMutableURLRequest* formRequest = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"POST" URLString:@"http://172.19.3.119:8080/comment/getCommentByGroupId" parameters:form error:nil];
     
     [formRequest setValue:@"application/x-www-form-urlencoded; charset=utf-8"forHTTPHeaderField:@"Content-Type"];
     
@@ -81,7 +81,7 @@
     
     NSDictionary* form = @{@"username": [InfoManager getUsername] , @"commentDetail":self.commentDetail, @"groupid": self.groupid};
     
-    NSMutableURLRequest* formRequest = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"POST" URLString:@"http://172.26.17.164:8080/comment/insertComment" parameters:form error:nil];
+    NSMutableURLRequest* formRequest = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"POST" URLString:@"http://172.19.3.119:8080/comment/insertComment" parameters:form error:nil];
     
     [formRequest setValue:@"application/x-www-form-urlencoded; charset=utf-8"forHTTPHeaderField:@"Content-Type"];
     

@@ -148,7 +148,7 @@
             [self showAlertMessage:@"字段不能为空"];
         } else {
             NSDictionary *userDic = @{@"username" : username, @"password" : password, @"remember" : @"on"};
-            NSMutableURLRequest* formRequest = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"POST" URLString:@"http://172.26.17.164:8080/login" parameters:userDic error:nil];
+            NSMutableURLRequest* formRequest = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"POST" URLString:@"http://172.19.3.119:8080/login" parameters:userDic error:nil];
             [formRequest setValue:@"application/x-www-form-urlencoded"forHTTPHeaderField:@"Content-Type"];
             AFHTTPSessionManager* manager = [AFHTTPSessionManager manager];
             AFJSONResponseSerializer* responseSerializer = [AFJSONResponseSerializer serializer];
@@ -168,7 +168,7 @@
                     } else {
                         NSString *url = responseObject[@"data"][@"iconpath"];
                         NSLog(@"%@", url);
-                        imagePath = [@"http://172.26.17.164:8080/" stringByAppendingString:url];
+                        imagePath = [@"http://172.19.3.119:8080/" stringByAppendingString:url];
                         [InfoManager saveInfo:@"username" image: imagePath];
                         NSLog(@"lll");
                     }
@@ -190,7 +190,7 @@
                 return;
             }
             NSDictionary *userDic = @{@"username" : username, @"password" : password};
-            NSMutableURLRequest* formRequest = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"POST" URLString:@"http://172.26.17.164:8080/regist" parameters:userDic error:nil];
+            NSMutableURLRequest* formRequest = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"POST" URLString:@"http://172.19.3.119:8080/regist" parameters:userDic error:nil];
             [formRequest setValue:@"application/x-www-form-urlencoded"forHTTPHeaderField:@"Content-Type"];
             AFHTTPSessionManager* manager = [AFHTTPSessionManager manager];
             AFJSONResponseSerializer* responseSerializer = [AFJSONResponseSerializer serializer];

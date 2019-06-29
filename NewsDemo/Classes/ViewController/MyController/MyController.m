@@ -226,6 +226,8 @@
         NSString *url = dict[@"image"];
         if(![url isEqualToString:@""]) {
             [self.myBtn setBackgroundImage:[self getImageFromURL:url] forState:UIControlStateNormal];
+        } else {
+            [self.myBtn setBackgroundImage:[UIImage imageNamed:@"login_portrait_ph"] forState:UIControlStateNormal];
         }
         self.isLogin = true;
     }
@@ -300,10 +302,10 @@
     NSHTTPCookieStorage *cookieJar = [NSHTTPCookieStorage sharedHTTPCookieStorage];
     for (NSHTTPCookie *cookie in [cookieJar cookies]) {
         // NSLog(@"%@", cookie.name);
-        if([cookie.domain isEqualToString:@"172.26.17.164"] && [cookie.name isEqualToString:@"rememberMe"]) {
+        if([cookie.domain isEqualToString:@"172.19.3.119"] && [cookie.name isEqualToString:@"rememberMe"]) {
             rememberMe = cookie.value;
         }
-        if([cookie.domain isEqualToString:@"172.26.17.164"] && [cookie.name isEqualToString:@"sid"]) {
+        if([cookie.domain isEqualToString:@"172.19.3.119"] && [cookie.name isEqualToString:@"sid"]) {
             sid = cookie.value;
             NSLog(@"%@", sid);
         }
@@ -317,7 +319,7 @@
     [manager.requestSerializer setValue:rememberMe forHTTPHeaderField:@"rememberMe"];
     [manager.requestSerializer setValue:sid forHTTPHeaderField:@"sid"];
     
-    [manager POST:@"http://172.26.17.164:8080/userinfo/setUserIcon/" parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+    [manager POST:@"http://172.19.3.119:8080/userinfo/setUserIcon/" parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         NSData *data = UIImagePNGRepresentation(self.image);
         // NSString *fileName = [NSString stringWithFormat:@"%@.png", username];
         //上传的参数(上传图片，以文件流的格式)
@@ -369,10 +371,10 @@
      NSHTTPCookieStorage *cookieJar = [NSHTTPCookieStorage sharedHTTPCookieStorage];
      for (NSHTTPCookie *cookie in [cookieJar cookies]) {
          // NSLog(@"%@", cookie.name);
-         if([cookie.domain isEqualToString:@"172.26.17.164"] && [cookie.name isEqualToString:@"rememberMe"]) {
+         if([cookie.domain isEqualToString:@"172.19.3.119"] && [cookie.name isEqualToString:@"rememberMe"]) {
              NSString *remeberMe = cookie.value;
              //请求用户信息
-             NSMutableURLRequest* formRequest = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"POST" URLString:@"http://172.26.17.164:8080/userinfo/getUserInfo/" parameters:nil error:nil];
+             NSMutableURLRequest* formRequest = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"POST" URLString:@"http://172.19.3.119:8080/userinfo/getUserInfo/" parameters:nil error:nil];
              [formRequest addValue:@"application/x-www-form-urlencoded"forHTTPHeaderField:@"Content-Type"];
              [formRequest addValue:remeberMe forHTTPHeaderField:@"rememberMe"];
              AFHTTPSessionManager* manager = [AFHTTPSessionManager manager];
@@ -388,14 +390,14 @@
                  }
                  NSInteger code = [responseObject[@"code"] integerValue];
                  if(code == 200) {
-                     [self showAlertMessage:@"获取成功！"];
-                     NSLog(@"%@", responseObject);
+                     //[self showAlertMessage:@"获取成功！"];
+                     //NSLog(@"%@", responseObject);
                      if([responseObject[@"data"][@"userinfo"][@"iconpath"]isEqual:[NSNull null]]) {
                          [self.myBtn setBackgroundImage:[UIImage imageNamed:@"login_portrait_ph"] forState:UIControlStateNormal];
                          [InfoManager saveInfo:responseObject[@"data"][@"userinfo"][@"username"] image:@""];
                      } else {
                          NSString *url = responseObject[@"data"][@"userinfo"][@"iconpath"];
-                         NSString *imagePath = [@"http://172.26.17.164:8080/" stringByAppendingString:url];
+                         NSString *imagePath = [@"http://172.19.3.119:8080/" stringByAppendingString:url];
                          [InfoManager saveInfo:responseObject[@"data"][@"userinfo"][@"username"] image:imagePath];
                          //set UI, 没有图片的时候默认
                          [self.myBtn setBackgroundImage:[self getImageFromURL:imagePath] forState:UIControlStateNormal];

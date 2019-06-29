@@ -24,6 +24,7 @@
     self.commentIDs = [[NSMutableArray alloc] initWithCapacity:100];
     self.commentTimes = [[NSMutableArray alloc] initWithCapacity:100];
     self.commentNames = [[NSMutableArray alloc] initWithCapacity:100];
+    self.headImages = [[NSMutableArray alloc] initWithCapacity:100];
     //alpha 0.0  白色   alpha 1 ：黑色   alpha 0～1 ：遮罩颜色，逐渐
     self.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.4];
     self.userInteractionEnabled = YES;
@@ -83,6 +84,10 @@
     ((CommentViewCell*)cell).comment.text = self.commentArray[indexPath.section];
     ((CommentViewCell*)cell).time.text = self.commentTimes[indexPath.section];
     ((CommentViewCell*)cell).name.text = self.commentNames[indexPath.section];
+    NSLog(@"has image: %@", self.headImages[indexPath.section]);
+    if (![self.headImages[indexPath.section] isEqualToString:@"http://172.19.3.119:8080/"]) {
+        [((CommentViewCell*)cell).headImage setImage:[self getImageFromURL:self.headImages[indexPath.section]]];
+    }
     
     return cell;
 }
@@ -155,12 +160,28 @@
     return dateString;
 }
 
+- (UIImage *)getImageFromURL: (NSString *)url {
+    UIImage *result;
+    NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
+    result = [UIImage imageWithData:data];
+    return result;
+}
+
 -(void)updateComment{
     for (int i=0; i<self.comments.count; i++) {
         [self.commentIDs addObject:self.comments[i][@"id"]];
         [self.commentArray addObject:self.comments[i][@"commentDetail"]];
         [self.commentNames addObject:self.comments[i][@"username"]];
         [self.commentTimes addObject:[self timeStepChange: self.comments[i][@"commentTime"]]];
+        NSString* imageURL;
+        if ([self.comments[i][@"iconPath"]isEqual:[NSNull null]]) {
+            imageURL = @"http://172.19.3.119:8080/";
+        }
+        else{
+            imageURL = [@"http://172.19.3.119:8080/" stringByAppendingString:self.comments[i][@"iconPath"]];
+        }
+        NSLog(@"url, %@", imageURL);
+        [self.headImages addObject:imageURL];
     }
 }
 

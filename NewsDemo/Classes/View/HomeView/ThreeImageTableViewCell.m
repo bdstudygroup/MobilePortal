@@ -24,8 +24,8 @@
         self.imageThird = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"login_portrait_ph"]];
         self.numberStar = [[UILabel alloc]init];
         self.numberComment = [[UILabel alloc]init];
-        self.numberStar.text = @"star";
-        self.numberComment.text = @"comment";
+        self.numberStar.text = @"点赞";
+        self.numberComment.text = @"评论";
         self.numberStar.font = [UIFont systemFontOfSize:12];
         self.numberStar.textColor = [UIColor lightGrayColor];
         self.numberComment.font = [UIFont systemFontOfSize:12];
