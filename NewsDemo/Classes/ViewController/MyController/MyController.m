@@ -8,16 +8,23 @@
 
 #import "MyController.h"
 #import "SetController.h"
+#import "CollectController.h"
 #import "RegisterLoginController.h"
+#import "InfoManager.h"
 
-@interface MyController () <UITableViewDataSource, UITableViewDelegate>
+@interface MyController () <UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, NSURLSessionDelegate>
 @property (strong, nonatomic) UIView *headView;
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) UIButton *myBtn;
+@property (strong, nonatomic) UIImage *image;
+@property (assign, nonatomic) BOOL isLogin;
+@property (strong, nonatomic) UIAlertController *actionSheet;
 
 @end
 
-@implementation MyController
+@implementation MyController{
+    NSArray* userList;
+}
 
 - (instancetype)init {
     if (self = [super init]) {
@@ -36,7 +43,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = kRGBColor(244, 244, 244);
-    
+    userList = @[@"设置",@"收藏栏", @"上传头像"];
+    [self checkCookie];
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getInfo:) name:@"userInfo" object:nil];
 }
@@ -48,24 +56,48 @@
 }
 
 #pragma mark - <UITableViewDataSource>
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 3;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 1;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil];
+    NSString *cellID = [NSString stringWithFormat:@"cellID:%ld", indexPath.section];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
+    }
     cell.textLabel.font = kTitleFont;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    cell.imageView.image = [UIImage imageNamed:@"me_setting"];
-    cell.textLabel.text = @"设置";
+    if (indexPath.section == 0) {
+        cell.imageView.image = [UIImage imageNamed:@"me_setting"];
+    } else if (indexPath.section == 1) {
+        cell.imageView.image = [UIImage imageNamed:@"collect"];
+    }
+    else {
+        cell.imageView.image = [UIImage imageNamed:@"share"];
+    }
+    cell.textLabel.text = userList[indexPath.section];
     return cell;
 }
 
 #pragma mark - <UITableViewDelegate>
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    SetController *vc = [SetController new];
-    vc.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:vc animated:YES];
+    if (indexPath.section == 0) {
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+        SetController *vc = [SetController new];
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    else if(indexPath.section == 1){
+        CollectController* vc = [[CollectController alloc] init];
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+    } else {
+        [self callActionSheetFunc];
+    }
 }
 
 #pragma mark - 懒加载
@@ -94,13 +126,23 @@
         } forControlEvents:UIControlEventTouchUpInside];
         
         _myBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        
         [_myBtn setBackgroundImage:[UIImage imageNamed:@"login_portrait_ph"] forState:UIControlStateNormal];
         [_headView addSubview:_myBtn];
         [_myBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.center.mas_equalTo(0);
             make.size.mas_equalTo(CGSizeMake(65, 65));
         }];
-        
+        _myBtn.layer.masksToBounds=YES;
+        [_myBtn.layer setCornerRadius:32.5];
+        [_myBtn setContentMode:UIViewContentModeScaleAspectFill];
+        [_myBtn setClipsToBounds:YES];
+        _myBtn.layer.shadowColor = [UIColor blackColor].CGColor;
+        _myBtn.layer.shadowOffset = CGSizeMake(4, 4);
+        _myBtn.layer.shadowOpacity = 0.5;
+        _myBtn.layer.shadowRadius = 2.0;
+        _myBtn.layer.borderColor = [[UIColor blackColor] CGColor];
+        _myBtn.layer.borderWidth = 2.0f;
         [_myBtn addTarget:self action:@selector(jumpToLogin) forControlEvents:UIControlEventTouchUpInside];
         
         self.label = [UILabel new];
@@ -148,9 +190,7 @@
 */
 
 - (void)jumpToLogin{
-    SingletonUser *singleton = [SingletonUser sharedInstance];
-    NSLog(@"%@", singleton.username);
-    if(singleton.tag) {
+    if(!([InfoManager getUsername] == nil)) {
         [self showAlertMessage:@"你已经登陆!"];
     } else {
         RegisterLoginController *controller = [[RegisterLoginController alloc] init];
@@ -176,16 +216,208 @@
 //收到通知的时候调用这个方法接受到通知消息
 - (void)getInfo:(NSNotification *)noti {
     NSDictionary *dict = noti.userInfo;
-    NSLog(@"%@",dict[@"username"]);
-    self.label.text = dict[@"username"];
-    _myBtn.layer.cornerRadius = _myBtn.frame.size.width /2;
-    _myBtn.clipsToBounds = YES;
-    [_myBtn setBackgroundImage:dict[@"headImage"] forState:UIControlStateNormal];
-    
+    NSLog(@"%@",dict);
+    if([dict[@"type"] isEqualToString:@"update"]) {
+        self.label.text = @"注册/登陆";
+        [self.myBtn setBackgroundImage:[UIImage imageNamed:@"login_portrait_ph"] forState:UIControlStateNormal];
+        self.isLogin = false;
+    } else {
+        self.label.text = dict[@"username"];
+        NSString *url = dict[@"image"];
+        if(![url isEqualToString:@""]) {
+            [self.myBtn setBackgroundImage:[self getImageFromURL:url] forState:UIControlStateNormal];
+        } else {
+            [self.myBtn setBackgroundImage:[UIImage imageNamed:@"login_portrait_ph"] forState:UIControlStateNormal];
+        }
+        self.isLogin = true;
+    }
 }
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (UIImage *)getImageFromURL: (NSString *)url {
+    UIImage *result;
+    NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
+    result = [UIImage imageWithData:data];
+    return result;
+}
+
+//call when click headImage
+- (void)callActionSheetFunc{
+    UIAlertController * alertController = [UIAlertController alertControllerWithTitle:@"" message:@"请选择图片来源" preferredStyle:0];
+    UIAlertAction * cancel = [UIAlertAction actionWithTitle:@"取消" style:1 handler:^(UIAlertAction * _Nonnull action) {
+        NSLog(@"点击了取消");
+    }];
+    UIAlertAction * ok = [UIAlertAction actionWithTitle:@"相册" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        NSLog(@"要打开相册了");
+        //select from photoLibrary
+        UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+        imagePickerController.delegate = self;
+        imagePickerController.allowsEditing = YES;
+        imagePickerController.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+        //UIImagePickerControllerSourceTypePhotoLibrary;
+        [self presentViewController:imagePickerController animated:YES completion:^{
+            
+        }];
+    }];
+    //show when device support(select from camera)
+    if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        UIAlertAction * camera = [UIAlertAction actionWithTitle:@"相机" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            //sourceType = UIImagePickerControllerSourceTypeCamera;
+            NSLog(@"打开相机");
+            UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+            imagePickerController.delegate = self;
+            imagePickerController.allowsEditing = YES;
+            imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+            
+            [self presentViewController:imagePickerController animated:YES completion:^{
+                
+            }];
+        }];
+        [alertController addAction:camera];
+    }
+    [alertController addAction:cancel];
+    [alertController addAction:ok];
+    
+    [self presentViewController:alertController animated:YES completion:^{
+        NSLog(@"弹出了");
+    }];
+}
+
+//choose image, backcall
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    [picker dismissViewControllerAnimated:YES completion:^{
+        
+    }];
+    UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];
+    //UIImage *image = [UIImage fixOrientation:[info objectForKey:UIImagePickerControllerOriginalImage]];
+    self.image = image;
+    self.image = [self scaleToSize:CGSizeMake(100, 100) width:image.size.width height:image.size.height];
+    
+    NSString *rememberMe = @"";
+    NSString *sid = @"";
+    NSHTTPCookieStorage *cookieJar = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+    for (NSHTTPCookie *cookie in [cookieJar cookies]) {
+        // NSLog(@"%@", cookie.name);
+        if([cookie.domain isEqualToString:@"172.19.3.119"] && [cookie.name isEqualToString:@"rememberMe"]) {
+            rememberMe = cookie.value;
+        }
+        if([cookie.domain isEqualToString:@"172.19.3.119"] && [cookie.name isEqualToString:@"sid"]) {
+            sid = cookie.value;
+            NSLog(@"%@", sid);
+        }
+    }
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    AFJSONResponseSerializer* responseSerializer = [AFJSONResponseSerializer serializer];
+    [responseSerializer setAcceptableContentTypes:[NSSet setWithObjects:@"application/json",@"text/json",@"text/javascript",@"text/html",@"text/plain",nil]];
+    manager.requestSerializer = [AFJSONRequestSerializer new];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    [manager.requestSerializer setValue:rememberMe forHTTPHeaderField:@"rememberMe"];
+    [manager.requestSerializer setValue:sid forHTTPHeaderField:@"sid"];
+    
+    [manager POST:@"http://172.19.3.119:8080/userinfo/setUserIcon/" parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        NSData *data = UIImagePNGRepresentation(self.image);
+        // NSString *fileName = [NSString stringWithFormat:@"%@.png", username];
+        //上传的参数(上传图片，以文件流的格式)
+        [formData appendPartWithFileData:data
+                                    name:@"file"
+                                fileName:@"user.png"
+                                mimeType:@"multipart/form-data"];
+    } progress:^(NSProgress * _Nonnull uploadProgress) {
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"上传成功%@",responseObject);
+        // NSDictionary * dic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingAllowFragments error:nil];
+        
+        [self.myBtn setBackgroundImage:self.image forState:UIControlStateNormal];
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"上传失败%@",error);
+    }];
+}
+
+//等比例缩放
+-(UIImage*)scaleToSize:(CGSize)size width:(CGFloat)currentWidth height:(CGFloat)currentHeight
+{
+    
+    CGFloat widthRadio = size.width*1.0/currentWidth;
+    CGFloat heightRadio = size.height*1.0/currentHeight;
+    
+    float radio = 1;
+    if(widthRadio>1 && heightRadio>1)
+    {
+        radio = widthRadio > heightRadio ? widthRadio : heightRadio;
+    }
+    else
+    {
+        radio = widthRadio < heightRadio ? widthRadio : heightRadio;
+    }
+    // 创建一个bitmap的context
+    // 并把它设置成为当前正在使用的context
+    UIGraphicsBeginImageContext(size);
+    [self.image drawInRect:CGRectMake(0, 0, currentWidth*radio, currentHeight*radio)];
+    // 从当前context中创建一个改变大小后的图片
+    UIImage* scaledImage = UIGraphicsGetImageFromCurrentImageContext();
+    // 使当前的context出堆栈
+    UIGraphicsEndImageContext();
+    // 返回新的改变大小后的图片
+    return scaledImage;
+}
+
+- (void) checkCookie {
+    //通过remeberMe拉取用户信息
+     NSHTTPCookieStorage *cookieJar = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+     for (NSHTTPCookie *cookie in [cookieJar cookies]) {
+         // NSLog(@"%@", cookie.name);
+         if([cookie.domain isEqualToString:@"172.19.3.119"] && [cookie.name isEqualToString:@"rememberMe"]) {
+             NSString *remeberMe = cookie.value;
+             //请求用户信息
+             NSMutableURLRequest* formRequest = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"POST" URLString:@"http://172.19.3.119:8080/userinfo/getUserInfo/" parameters:nil error:nil];
+             [formRequest addValue:@"application/x-www-form-urlencoded"forHTTPHeaderField:@"Content-Type"];
+             [formRequest addValue:remeberMe forHTTPHeaderField:@"rememberMe"];
+             AFHTTPSessionManager* manager = [AFHTTPSessionManager manager];
+             AFJSONResponseSerializer* responseSerializer = [AFJSONResponseSerializer serializer];
+             [responseSerializer setAcceptableContentTypes:[NSSet setWithObjects:@"application/json",@"text/json",@"text/javascript",@"text/html",@"text/plain",nil]];
+             manager.responseSerializer= responseSerializer;
+             NSURLSessionDataTask* dataTask = [manager dataTaskWithRequest:formRequest uploadProgress:nil downloadProgress:nil completionHandler: ^(NSURLResponse*_Nonnull response,id _Nullable responseObject,NSError*_Nullable error){
+                 NSLog(@"%@", responseObject);
+                 if(error) {
+                     NSLog(@"Error: %@", error);
+                     [InfoManager cleanInfo];
+                     return;
+                 }
+                 NSInteger code = [responseObject[@"code"] integerValue];
+                 if(code == 200) {
+                     //[self showAlertMessage:@"获取成功！"];
+                     //NSLog(@"%@", responseObject);
+                     if([responseObject[@"data"][@"userinfo"][@"iconpath"]isEqual:[NSNull null]]) {
+                         [self.myBtn setBackgroundImage:[UIImage imageNamed:@"login_portrait_ph"] forState:UIControlStateNormal];
+                         [InfoManager saveInfo:responseObject[@"data"][@"userinfo"][@"username"] image:@""];
+                     } else {
+                         NSString *url = responseObject[@"data"][@"userinfo"][@"iconpath"];
+                         NSString *imagePath = [@"http://172.19.3.119:8080/" stringByAppendingString:url];
+                         [InfoManager saveInfo:responseObject[@"data"][@"userinfo"][@"username"] image:imagePath];
+                         //set UI, 没有图片的时候默认
+                         [self.myBtn setBackgroundImage:[self getImageFromURL:imagePath] forState:UIControlStateNormal];
+                     }
+                     self.label.text = responseObject[@"data"][@"userinfo"][@"username"];
+                     self.isLogin = true;
+                 } else {
+                     [self showAlertMessage:@"获取失败！"];
+                     [InfoManager cleanInfo];
+                     self.isLogin = false;
+                 }
+             }];
+             [dataTask resume];
+        } else {
+            self.isLogin = false;
+            [self.myBtn setBackgroundImage:[UIImage imageNamed:@"login_portrait_ph"] forState:UIControlStateNormal];
+            self.label.text = @"登陆/注册";
+            [InfoManager cleanInfo];
+        }
+    }
 }
 
 @end

@@ -10,7 +10,7 @@
 #import "AppDelegate+DDLog.h"
 #import "HomeController.h"
 #import "WordController.h"
-#import "VideoController.h"
+#import "CCMainViewController.h"
 #import "MyController.h"
 #import "UMSocialWechatHandler.h"
 #import "UMSocial.h"
@@ -42,12 +42,12 @@
 //tabBar
 -(void)setupViewControllers{
     UINavigationController *navi0 = [HomeController defaultHomeNavi];
-    UINavigationController *navi1 = [WordController defaultWordNavi];
-    UINavigationController *navi2 = [VideoController defaultVideoNavi];
+    //UINavigationController *navi1 = [WordController defaultWordNavi];
+    CCMainViewController *navi2 = [CCMainViewController defaultVideoNavi];
     UINavigationController *vc3 = [MyController defaultMyNavi];
     CYLTabBarController* tbc = [CYLTabBarController new];
     [self customTabBarForController:tbc];
-    [tbc setViewControllers:@[navi0, navi1, navi2, vc3]];
+    [tbc setViewControllers:@[navi0, navi2, vc3]];
     self.tabBarController = tbc;
 }
 
@@ -55,9 +55,9 @@
     NSDictionary *dict0 = @{CYLTabBarItemTitle:@"首页",
                             CYLTabBarItemImage:@"news",
                             CYLTabBarItemSelectedImage:@"newsblue"};
-    NSDictionary *dict1 = @{CYLTabBarItemTitle:@"图文",
-                            CYLTabBarItemImage:@"live",
-                            CYLTabBarItemSelectedImage:@"liveblue"};
+//    NSDictionary *dict1 = @{CYLTabBarItemTitle:@"图文",
+//                            CYLTabBarItemImage:@"live",
+//                            CYLTabBarItemSelectedImage:@"liveblue"};
     NSDictionary *dict2 = @{CYLTabBarItemTitle:@"视频",
                             CYLTabBarItemImage:@"market",
                             CYLTabBarItemSelectedImage:@"marketblue"};
@@ -65,7 +65,7 @@
                             CYLTabBarItemImage:@"my",
                             CYLTabBarItemSelectedImage:@"myblue"};
     
-    NSArray* tabBarItems = @[dict0, dict1, dict2, dict3];
+    NSArray* tabBarItems = @[dict0, dict2, dict3];
     tbc.tabBarItemsAttributes = tabBarItems;
 }
 

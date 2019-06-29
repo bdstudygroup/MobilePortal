@@ -9,8 +9,14 @@
 #import "HomeListController.h"
 #import "HomeDetailController.h"
 #import "HomeListManager.h"
-
+#import "PicDetailController.h"
+#import "../../View/HomeView/OneImageTableViewCell.h"
+#import "../../View/HomeView/ThreeImageTableViewCell.h"
+#import "../../View/HomeView/NoImageTableViewCell.h"
+#import "AllList.h"
+#import "AllListItem.h"
 #define kHomeListCell @"kHomeListCell"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface HomeListController ()
 <
@@ -19,16 +25,24 @@ UITableViewDelegate
 >
 
 @property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, strong) NSArray<NSDictionary *> *articleList;
+@property (nonatomic, strong) NSMutableArray<NSDictionary *> *articleList;
+@property (nonatomic, strong) NSMutableArray *cacheHeight;
+@property (nonatomic, strong) HomeListManager *manager;
 
 @end
-
 @implementation HomeListController
 
 #pragma mark - Life Cycle
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.tabBarController.tabBar.hidden = NO;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.manager = [HomeListManager sharedManager];
+    self.manager.currentOffset = 0;
     [self setup];
     [self update];
 }
@@ -37,18 +51,13 @@ UITableViewDelegate
     self.tableView = [[UITableView alloc] init];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
+    self.tableView.tableFooterView = [UIView new];
     [self.view addSubview:self.tableView];
-}
-
-- (void)update {
-    __weak __typeof(self) weakSelf = self;
-    [[HomeListManager sharedManager] updateWithCompletion:^(NSArray * _Nonnull articleFeed) {
-        __strong __typeof(weakSelf) strongSelf = weakSelf;
-        strongSelf.articleList = articleFeed;
-        NSLog(@"%@",strongSelf.articleList);
-        //[strongSelf.tableView reloadData];
-
+    //上拉加载更多
+    self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        [self update];
     }];
+    [self.view addSubview:self.tableView];
 }
 
 - (void)viewDidLayoutSubviews {
@@ -60,13 +69,95 @@ UITableViewDelegate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [self.articleList count];
+    //return 4;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-
-    UITableViewCell *cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
-    cell.textLabel.text = self.articleList[indexPath.row][@"title"];
+    NSArray *arr = [[NSArray alloc]initWithArray:self.articleList[indexPath.row][@"image_infos"]];
+    NSError *err = nil;
+    NSString *cellID = [NSString stringWithFormat:@"cellID:%ld", indexPath.row];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
+    if(!cell) {
+        if([arr count] == 0) {
+            cell = [[NoImageTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
+            ((NoImageTableViewCell*)cell).content.text = self.articleList[indexPath.row][@"title"];
+        } else if([arr count] == 1 || [arr count] == 2) {
+            cell = [[OneImageTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
+            ((OneImageTableViewCell*)cell).content.text = self.articleList[indexPath.row][@"title"];
+            
+            NSData *jsonData = [NSJSONSerialization dataWithJSONObject:arr[0] options:kNilOptions error:&err];
+            NSDictionary *json = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:&err];
+            NSString *url = json[@"url_prefix"];
+            url = [url stringByAppendingString:json[@"web_uri"]];
+            [((OneImageTableViewCell*)cell).headImageView setImageWithURL:url];
+        } else {
+            cell = [[ThreeImageTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
+            NSMutableArray *url_arr = [[NSMutableArray alloc]init];
+            for(int i = 0; i < 3; i++) {
+                NSData *jsonData = [NSJSONSerialization dataWithJSONObject:arr[i] options:kNilOptions error:&err];
+                NSDictionary *json = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:&err];
+                NSString *url = json[@"url_prefix"];
+                url = [url stringByAppendingString:json[@"web_uri"]];
+                [url_arr addObject:url];
+            }
+            ((ThreeImageTableViewCell*)cell).content.text = self.articleList[indexPath.row][@"title"];
+            [((ThreeImageTableViewCell*)cell).imageFirst sd_setImageWithURL:url_arr[0]];
+            [((ThreeImageTableViewCell*)cell).imageSecond sd_setImageWithURL:url_arr[1]];
+            [((ThreeImageTableViewCell*)cell).imageThird sd_setImageWithURL:url_arr[2]];
+            //push data
+            NSArray *visibleRows = [self.tableView indexPathsForVisibleRows];
+            NSInteger nextRow = indexPath.row + visibleRows.count;
+            if(self.articleList.count - indexPath.row < visibleRows.count) {
+                [self.tableView.mj_footer beginRefreshing];
+            }
+        }
+        //高度缓存
+        CGFloat height = [cell systemLayoutSizeFittingSize:CGSizeMake(tableView.frame.size.width, 0) withHorizontalFittingPriority:UILayoutPriorityRequired verticalFittingPriority:UILayoutPriorityFittingSizeLevel].height;
+        NSNumber *heightNum = [[NSNumber alloc]initWithFloat:height];
+        self.cacheHeight[indexPath.row] = heightNum;
+    } else {
+        if([arr count] == 0) {
+            ((NoImageTableViewCell*)cell).content.text = self.articleList[indexPath.row][@"title"];
+        }else if([arr count] == 1 || [arr count] == 2) {
+            //NSLog(@"%d", self.articleList[indexPath.row][@"image_infos"].count);
+            ((OneImageTableViewCell*)cell).content.text = self.articleList[indexPath.row][@"title"];
+            
+            NSData *jsonData = [NSJSONSerialization dataWithJSONObject:arr[0] options:kNilOptions error:&err];
+            NSDictionary *json = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:&err];
+            NSString *url = json[@"url_prefix"];
+            url = [url stringByAppendingString:json[@"web_uri"]];
+            //NSLog(@"%@", url);
+            
+            [((OneImageTableViewCell*)cell).headImageView setImageWithURL:url];
+        }else{
+            NSMutableArray *url_arr = [[NSMutableArray alloc]init];
+            for(int i = 0; i < 3; i++) {
+                NSData *jsonData = [NSJSONSerialization dataWithJSONObject:arr[i] options:kNilOptions error:&err];
+                NSDictionary *json = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:&err];
+                NSString *url = json[@"url_prefix"];
+                url = [url stringByAppendingString:json[@"web_uri"]];
+                [url_arr addObject:url];
+            }
+            ((ThreeImageTableViewCell*)cell).content.text = self.articleList[indexPath.row][@"title"];
+            [((ThreeImageTableViewCell*)cell).imageFirst sd_setImageWithURL:url_arr[0]];
+            [((ThreeImageTableViewCell*)cell).imageSecond sd_setImageWithURL:url_arr[1]];
+            [((ThreeImageTableViewCell*)cell).imageThird sd_setImageWithURL:url_arr[2]];
+            //push data
+            NSArray *visibleRows = [self.tableView indexPathsForVisibleRows];
+            NSInteger nextRow = indexPath.row + visibleRows.count;
+            if(self.articleList.count - indexPath.row < visibleRows.count) {
+                [self.tableView.mj_footer beginRefreshing];
+            }
+        }
+    }
     return cell;
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    HomeDetailController* detailController = [[HomeDetailController alloc] init];
+    detailController.groupId = self.articleList[indexPath.row][@"group_id"];
+    //NSLog(@"%@", self.articleList[indexPath.row][@"image_infos"]);
+    [self.navigationController pushViewController:detailController animated:YES];
+    
 }
 
 #pragma mark - Setter
@@ -76,7 +167,38 @@ UITableViewDelegate
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.tableView reloadData];
     });
-
+    
 }
 
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return [self.cacheHeight[indexPath.row] floatValue]?:UITableViewAutomaticDimension;
+}
+
+
+-(CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 100;
+}
+
+- (void) update {
+    static Boolean noMoreData = false;
+    [self.manager  updateWithCompletion:^(NSArray *articleFeed) {
+        if(articleFeed == NULL) {
+            noMoreData = true;
+        } else {
+            NSMutableArray *temp = [[NSMutableArray alloc]initWithArray:self.articleList];
+            NSMutableArray *tempHeight = [[NSMutableArray alloc]initWithCapacity:articleFeed.count];
+            [temp addObjectsFromArray:articleFeed];
+            [self.cacheHeight addObjectsFromArray:tempHeight];
+            self.articleList = temp;
+        }
+    }];
+    if(noMoreData) {
+        [self.tableView.mj_footer endRefreshingWithNoMoreData];
+    } else {
+        [self.tableView.mj_footer endRefreshing];
+        self.tableView.mj_header.hidden = YES;
+    }
+}
 @end

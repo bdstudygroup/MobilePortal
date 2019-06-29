@@ -9,10 +9,13 @@
 #import "SetController.h"
 #import "MyController.h"
 #import "RegisterLoginController.h"
+#import "InfoManager.h"
 
 @interface SetController () <UITableViewDataSource, UITableViewDelegate>
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) UIButton *exitBtn;
+@property (strong, nonatomic) NSString *tempUsername;
+@property (strong, nonatomic) NSString *tempImage;
 
 @end
 
@@ -20,6 +23,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.tempUsername = @"";
+    self.tempImage = @"";
+    if(!([InfoManager getUsername] == nil)) {
+        NSLog(@"22222222");
+        self.tempUsername = [InfoManager getUsername];
+        self.tempImage = [InfoManager getImage];
+    }
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationController.navigationBar.hidden = NO;
     [BarItem addBackItemToVC:self];
@@ -73,8 +83,11 @@ kRemoveCellSeparator
                 [self.tableView reloadData];
             });
         });
-        
         [self showSuccessWithMsg:@"清理成功"];
+        NSLog(@"%@", self.tempUsername);
+        if(![self.tempUsername isEqualToString:@""]) {
+            [InfoManager saveInfo:self.tempUsername image:self.tempImage];
+        }
     }];
     [ac addAction:cancelAction];
     [ac addAction:ensureAction];
@@ -121,6 +134,7 @@ kRemoveCellSeparator
 
 - (UIButton *)exitBtn {
     if(_exitBtn == nil) {
+        [InfoManager cleanInfo];
         _exitBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         [_exitBtn setTitle:@"退出登录" forState:UIControlStateNormal];
         [_exitBtn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
@@ -132,12 +146,20 @@ kRemoveCellSeparator
         }];
         
         [_exitBtn bk_addEventHandler:^(id sender) {
-            MyController *vc = [MyController new];
-            [self.navigationController pushViewController:vc animated:YES];
+            // MyController *vc = [MyController new];
+            // [self.navigationController pushViewController:vc animated:YES];
+            NSHTTPCookieStorage *cookieJar = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+            for (NSHTTPCookie *cookie in [cookieJar cookies]) {
+                // NSLog(@"%@", cookie.name);
+                if([cookie.domain isEqualToString:@"172.26.17.164"] && [cookie.name isEqualToString:@"rememberMe"]) {
+                    [cookieJar deleteCookie:cookie];
+                }
+            }
+            [self.navigationController popViewControllerAnimated:YES];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"userInfo" object:self userInfo:@{@"type": @"update", @"username": @"", @"image": @""}];
         } forControlEvents:UIControlEventTouchUpInside];
     }
-    SingletonUser *singleton = [SingletonUser sharedInstance];
-    singleton.tag = false;
+    
     return _exitBtn;
 }
 
