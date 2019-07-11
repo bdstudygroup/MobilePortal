@@ -528,6 +528,66 @@ NSURLSessionDataTask* dataTask = [manager dataTaskWithRequest:formRequest upload
 }
 ```
 
+##### 视频列表
+使用UICollectionView实现视频列表展示
+```
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    
+    return self.videoList.count;
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    CGFloat itemWidth = (self.view.bounds.size.width - distanceItemLeftToScreen - distanceItemRightToScreen - distanceItemToItem) / 2.0; // 10.0,10.0,10.0 分别为item到屏幕左边框右边框和两个item之间的距离
+    CGFloat itemHeight = itemWidth / videoItemSacle;
+    return CGSizeMake(itemWidth, itemHeight);
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    CCVideoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kCCVideoCellId forIndexPath:indexPath];
+    cell.videoModel = self.videoList[indexPath.row];
+    return cell;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    self.videoPlayerController = [[CCVideoPlayerController alloc] init];
+    self.videoPlayerController.navigationItemTitle = self.videoList[indexPath.row].videoTitle;
+    self.videoPlayerController.videoURLString = self.videoList[indexPath.row].videoUrlString;
+    self.videoPlayerController.loadingImage = ((CCVideoCell *)[collectionView cellForItemAtIndexPath:indexPath]).videoImageView.image;
+    CCDebugLog(@"image %@",self.videoPlayerController.loadingImage);
+    [self.navigationController pushViewController:self.videoPlayerController animated:YES];
+}
+```
+
+##### 视频播放器
+视频播放器使用AVPlayer实现，包含播放、暂停视频，进度条显示与拖动，全屏，调节亮度与音量大小等功能
+```
+- (void)commonInit {
+    
+    // Root View
+    self.view.backgroundColor = [UIColor whiteColor];
+    
+    // Status Bar & Navigation Bar
+    if (UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation)) {
+        [[UIApplication sharedApplication] setStatusBarHidden:YES];
+        [self.navigationController setNavigationBarHidden:YES];
+    } else {
+        self.navigationItem.title = self.navigationItemTitle;
+    }
+    
+    self.videoView = [CCVideoView videoViewWithUrl:[NSURL URLWithString:self.videoURLString]];
+    self.videoView.toolViewTitle = self.navigationItemTitle;
+    self.videoView.loadingImage = self.loadingImage;
+    self.videoView.dataSource = self;
+    self.videoView.delegate = self;
+    [self.view addSubview:self.videoView];
+    
+    
+
+}
+```
+
 #### 个人总结
 
 ##### 王亮岛的个人总结
