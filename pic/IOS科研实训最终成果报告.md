@@ -34,6 +34,15 @@
   </tr>
 </table>
 
+<table>
+  <tr>
+    <td><img src="video2.png">视频播放页</td>
+    <td><img src="video3.png"></td>
+    <td><img src="video4.png"></td>
+    <td><img src="video5.png"></td>
+  </tr>
+</table>
+
 #### 功能设计介绍
 
 ##### 新闻详情页
