@@ -7,7 +7,7 @@
 | 王亮岛 | 16340219 | 郑贵锋   |
 | 王晶   |          | 郑贵锋   |
 | 曲翔宇 |          | 郑贵锋   |
-| 彭伟林 |          | 郑贵锋   |
+| 彭伟林 | 16340181 | 郑贵锋   |
 
 #### 项目实现功能与介绍
 
@@ -326,12 +326,211 @@
 }
 ```
 
+##### 自动登录
+
+在初步的版本，我们前端并没有考虑得那么多，只是将简单的UI给设计出来，但由于实际的需求，用户不可能每次打开app都要重新登录，为了提高用户的体验，我们决定添加用户登录功能，这个过程也是我们学习到的理论知识真正运用到实际的开发当中的一个应用。在这里，我们用到cookie对用户的登录状态进行管理。
+
+在登录以后，将服务器传来的cookie设置在本地，并将有效字段提取出来保存在单例当中
+
+```objc
+NSURLSessionDataTask* dataTask = [manager dataTaskWithRequest:formRequest uploadProgress:nil downloadProgress:nil completionHandler: ^(NSURLResponse*_Nonnull response,id _Nullable responseObject,NSError*_Nullable error){
+    if(error) {
+        NSLog(@"Error: %@", error);
+        return;
+    }
+    NSLog(@"%@", responseObject);
+    NSString *imagePath = @"";
+    NSInteger code = [responseObject[@"code"] integerValue];
+    if(code == 200) {
+        if([responseObject[@"data"][@"iconpath"] isEqual:[NSNull null]]) {
+            [InfoManager saveInfo:@"username" image: @""];
+        } else {
+            NSString *url = responseObject[@"data"][@"iconpath"];
+            NSLog(@"%@", url);
+            imagePath = [@"http://172.19.3.119:8080/" stringByAppendingString:url];
+            [InfoManager saveInfo:@"username" image: imagePath];
+            NSLog(@"lll");
+        }
+        [self.navigationController popViewControllerAnimated:YES];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"userInfo" object:self userInfo:@{@"type": @"login", @"username": username, @"image": imagePath}];
+    } else {
+        [self showAlertMessage:@"登陆失败！"];
+    }
+
+}];
+
+[dataTask resume];
+```
+
+当再次打开app的时候，通过cookie获取token来向服务器请求用户数据，在cookie有效期内可以实现自动登录，并将用户信息拉取到本地，否则需要重新登录
+
+```objc
+- (void) checkCookie {
+    //通过remeberMe拉取用户信息
+     NSHTTPCookieStorage *cookieJar = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+     for (NSHTTPCookie *cookie in [cookieJar cookies]) {
+         // NSLog(@"%@", cookie.name);
+         if([cookie.domain isEqualToString:@"172.19.3.119"] && [cookie.name isEqualToString:@"rememberMe"]) {
+             NSString *remeberMe = cookie.value;
+             //请求用户信息
+             NSMutableURLRequest* formRequest = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"POST" URLString:@"http://172.19.3.119:8080/userinfo/getUserInfo/" parameters:nil error:nil];
+             [formRequest addValue:@"application/x-www-form-urlencoded"forHTTPHeaderField:@"Content-Type"];
+             [formRequest addValue:remeberMe forHTTPHeaderField:@"rememberMe"];
+             AFHTTPSessionManager* manager = [AFHTTPSessionManager manager];
+             AFJSONResponseSerializer* responseSerializer = [AFJSONResponseSerializer serializer];
+             [responseSerializer setAcceptableContentTypes:[NSSet setWithObjects:@"application/json",@"text/json",@"text/javascript",@"text/html",@"text/plain",nil]];
+             manager.responseSerializer= responseSerializer;
+             NSURLSessionDataTask* dataTask = [manager dataTaskWithRequest:formRequest uploadProgress:nil downloadProgress:nil completionHandler: ^(NSURLResponse*_Nonnull response,id _Nullable responseObject,NSError*_Nullable error){
+                 NSLog(@"%@", responseObject);
+                 if(error) {
+                     NSLog(@"Error: %@", error);
+                     [InfoManager cleanInfo];
+                     return;
+                 }
+                 NSInteger code = [responseObject[@"code"] integerValue];
+                 if(code == 200) {
+                     //[self showAlertMessage:@"获取成功！"];
+                     //NSLog(@"%@", responseObject);
+                     if([responseObject[@"data"][@"userinfo"][@"iconpath"]isEqual:[NSNull null]]) {
+                         [self.myBtn setBackgroundImage:[UIImage imageNamed:@"login_portrait_ph"] forState:UIControlStateNormal];
+                         [InfoManager saveInfo:responseObject[@"data"][@"userinfo"][@"username"] image:@""];
+                     } else {
+                         NSString *url = responseObject[@"data"][@"userinfo"][@"iconpath"];
+                         NSString *imagePath = [@"http://172.19.3.119:8080/" stringByAppendingString:url];
+                         [InfoManager saveInfo:responseObject[@"data"][@"userinfo"][@"username"] image:imagePath];
+                         //set UI, 没有图片的时候默认
+                         [self.myBtn setBackgroundImage:[self getImageFromURL:imagePath] forState:UIControlStateNormal];
+                     }
+                     self.label.text = responseObject[@"data"][@"userinfo"][@"username"];
+                     self.isLogin = true;
+                 } else {
+                     [self showAlertMessage:@"获取失败！"];
+                     [InfoManager cleanInfo];
+                     self.isLogin = false;
+                 }
+             }];
+             [dataTask resume];
+        } else {
+            self.isLogin = false;
+            [self.myBtn setBackgroundImage:[UIImage imageNamed:@"login_portrait_ph"] forState:UIControlStateNormal];
+            self.label.text = @"登陆/注册";
+            [InfoManager cleanInfo];
+        }
+    }
+}
+```
+
+每次需要向服务器请求数据的时候，通过单例获取到用户信息
+
+```objc
+- (void)jumpToLogin{
+    if(!([InfoManager getUsername] == nil)) {
+        [self showAlertMessage:@"你已经登陆!"];
+    } else {
+        RegisterLoginController *controller = [[RegisterLoginController alloc] init];
+        controller.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:controller animated:YES];
+    }
+}
+```
+
+在需要手动登录的情况下，通过通知的方式传递页面信息
+
+```objc
+[[NSNotificationCenter defaultCenter] postNotificationName:@"userInfo" object:self userInfo:@{@"type": @"login", @"username": username, @"image": imagePath}];
+```
+
+```objc
+//注册通知
+[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getInfo:) name:@"userInfo" object:nil];
+```
+
+##### 首页信息展示
+
+首页信息展示其实实现起来非常简单，就是一个简单的UITableView来展示新闻信息，但这里其实是可以有很多可以优化的地方来提高用户体验的，但由于头条提供的api的拉取信息的部分限制比较大，对于随机拉取或者推荐这些做起来难道会比较大。
+
+- 针对cell本身的优化
+
+  首先是针对UITableViewCell的设计，对拉取到的新闻信息的标题进行分析，我们大致可以将cell设计成下面三种格式：
+
+  - 无图：拉取到的新闻的标题仅仅包含文字的情况下使用。
+  - 单图：拉取到的新闻标题包含1张图或者2张图的情况下使用。
+  - 多图：拉取到的新闻标题包含3张图或者以上的情况下使用。
+
+  由于每条新闻标题文字的长度会不一样，有些标题显示需要占1行，有些标题则需要占2行，显然，设计成一种固定高度的cell是不合适的，所以我们添加了一个自适应的功能，cell可以更加需要显示内容的多少来确定cell的高度，但这样设计又会存在另外一个问题，那就是高度的计算，由于每次显示cell的时候都需要计算一下cell的高度，这个计算的过程会影响到渲染cell的效率，为了解决这个问题，我根据UItableView渲染的生命周期的特点，在cell初次计算出cell的高度的时候，我就把cell的高度缓存起来，在再次显示的时候不用再次计算，减少了重复的计算。具体是在heightForRowAtIndexPath代理方法中设置UITableViewAutomaticDimension可以进行高度自适应，条件是cell的布局使用AutoLayout，如果高度已经被缓存，那么就直接取，否则就计算高度。
+
+  ```objc
+  NSMutableArray *temp = [[NSMutableArray alloc]initWithArray:self.articleList];
+  NSMutableArray *tempHeight = [[NSMutableArray alloc]initWithCapacity:articleFeed.count];
+  [temp addObjectsFromArray:articleFeed];
+  [self.cacheHeight addObjectsFromArray:tempHeight];
+  self.articleList = temp;
+  ```
+
+  ```objc
+  -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+  {
+      return [self.cacheHeight[indexPath.row] floatValue]?:UITableViewAutomaticDimension;
+  }
+  ```
+
+  同时在estimatedHeightForRowAtIndexPath代理方法中设置一个估计的高度
+
+  ```objc
+  -(CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
+  {
+      return 100;
+  }
+  ```
+
+- 针对滑动时用户体验的优化
+
+  在默认的UITableView的实现当中，只有当用户拉取到最后一行的时候才会触发拉取更多的实现，但是这样的用户体验非常的差，因为刷新后需要从网络当中拉取用户数据，网络时延有时候是让人难以接受的。为了解决这个问题，我在UITableView滑动的时候增加了一个判断，在已经拉取的数据并且还未展示的数据不足以显示下一屏的时候，我会从网络拉取一次新的数据，这样用户就可以一直滑动，基本不会感受到网络的时延。
+
+##### 用户信息管理
+
+对于用户信息的管理，由于需要在不同的页面获取到当前已登录的用户的信息，这里采用NSUserDefaults对用户信息进行管理
+
+```objc
++(void)saveInfo:(NSString *)username image : (NSString *)image
+{
+    NSError *error = nil;
+    NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
+    NSData *usernameData = [NSKeyedArchiver archivedDataWithRootObject:username requiringSecureCoding:false error:&error];
+    NSData *imageData = [NSKeyedArchiver archivedDataWithRootObject:image requiringSecureCoding:false error:&error];
+    [userDefaults setObject:usernameData forKey:USERNAME_KEY];
+    [userDefaults setObject:imageData forKey:IMAGE_KEY];
+    [userDefaults synchronize];
+}
+```
+
+在获取信息的时候通过调用getUsername获取用户的信息等等。
+
+```objc
++(NSString *)getUsername
+{
+    NSError *error;
+    NSSet *codingClasses = [NSSet setWithArray:@[ [NSDictionary class],[NSArray class] ]];
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSData *usernameData = [userDefaults objectForKey:USERNAME_KEY];
+    NSString *username = [NSKeyedUnarchiver unarchivedObjectOfClass:codingClasses.class fromData:usernameData error:&error];
+    [userDefaults synchronize];
+    return username;
+}
+```
+
 #### 个人总结
 
 ##### 王亮岛的个人总结
 
 本人承担了应用开发界面的整体框架搭建，新闻详情页，评论功能，新闻搜索功能，收藏功能，用户界面和清理缓存功能的设计。总体上感觉自己收获挺大的，但是还只是处于IOS的入门阶段，还有很多知识和一些应用需要学习，这次的开发只是初步使用了线程加载图片，但是还是有一些问题要了解。关于IOS的属性，这次实训我只是会基本使用了，但是他们什么时候用还是不太清楚。值得骄傲的是我能够熟练使用UITableView和对组件进行布局和设计了。
 
+##### 彭伟林的个人总结
+
+一个学期过去了，对于学习一门开发来说，时间确实是远远不够的，这个学期其实也就是为我们指明了方向，那些知识是比较重要的。其实几个月来，掌握的知识只是毛皮而已，更多的是个人的能力得到了锻炼，编程能力与团队合作的能力都在这次的项目当中得到锻炼。在这个过程当中，很多知识都是现学现用，针对新闻标题的情况设计了较为负责的UITableViewCell，然后对其进行了一定的优化，这部分还是比较熟练的。
+
 #### 人员分工与贡献度
 
 王亮岛：承担了应用开发界面的整体框架搭建，新闻详情页，评论功能，新闻搜索功能，收藏功能，用户界面和清理缓存功能的设计。
+
+彭伟林：承担了登录注册界面和功能的实现，前端自动登录功能和前端用户信息的管理，首页新闻信息的拉取与展示，UITableView的优化。
