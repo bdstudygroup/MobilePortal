@@ -487,6 +487,89 @@ NSURLSessionDataTask* dataTask = [manager dataTaskWithRequest:formRequest upload
 
   在默认的UITableView的实现当中，只有当用户拉取到最后一行的时候才会触发拉取更多的实现，但是这样的用户体验非常的差，因为刷新后需要从网络当中拉取用户数据，网络时延有时候是让人难以接受的。为了解决这个问题，我在UITableView滑动的时候增加了一个判断，在已经拉取的数据并且还未展示的数据不足以显示下一屏的时候，我会从网络拉取一次新的数据，这样用户就可以一直滑动，基本不会感受到网络的时延。
 
+  ```objc
+  - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+      NSArray *arr = [[NSArray alloc]initWithArray:self.articleList[indexPath.row][@"image_infos"]];
+      NSError *err = nil;
+      NSString *cellID = [NSString stringWithFormat:@"cellID:%ld", indexPath.row];
+      UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
+      if(!cell) {
+          if([arr count] == 0) {
+              cell = [[NoImageTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
+              ((NoImageTableViewCell*)cell).content.text = self.articleList[indexPath.row][@"title"];
+          } else if([arr count] == 1 || [arr count] == 2) {
+              cell = [[OneImageTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
+              ((OneImageTableViewCell*)cell).content.text = self.articleList[indexPath.row][@"title"];
+              
+              NSData *jsonData = [NSJSONSerialization dataWithJSONObject:arr[0] options:kNilOptions error:&err];
+              NSDictionary *json = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:&err];
+              NSString *url = json[@"url_prefix"];
+              url = [url stringByAppendingString:json[@"web_uri"]];
+              [((OneImageTableViewCell*)cell).headImageView setImageWithURL:url];
+          } else {
+              cell = [[ThreeImageTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
+              NSMutableArray *url_arr = [[NSMutableArray alloc]init];
+              for(int i = 0; i < 3; i++) {
+                  NSData *jsonData = [NSJSONSerialization dataWithJSONObject:arr[i] options:kNilOptions error:&err];
+                  NSDictionary *json = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:&err];
+                  NSString *url = json[@"url_prefix"];
+                  url = [url stringByAppendingString:json[@"web_uri"]];
+                  [url_arr addObject:url];
+              }
+              ((ThreeImageTableViewCell*)cell).content.text = self.articleList[indexPath.row][@"title"];
+              [((ThreeImageTableViewCell*)cell).imageFirst sd_setImageWithURL:url_arr[0]];
+              [((ThreeImageTableViewCell*)cell).imageSecond sd_setImageWithURL:url_arr[1]];
+              [((ThreeImageTableViewCell*)cell).imageThird sd_setImageWithURL:url_arr[2]];
+              //push data
+              NSArray *visibleRows = [self.tableView indexPathsForVisibleRows];
+              NSInteger nextRow = indexPath.row + visibleRows.count;
+              if(self.articleList.count - indexPath.row < visibleRows.count) {
+                  [self.tableView.mj_footer beginRefreshing];
+              }
+          }
+          //高度缓存
+          CGFloat height = [cell systemLayoutSizeFittingSize:CGSizeMake(tableView.frame.size.width, 0) withHorizontalFittingPriority:UILayoutPriorityRequired verticalFittingPriority:UILayoutPriorityFittingSizeLevel].height;
+          NSNumber *heightNum = [[NSNumber alloc]initWithFloat:height];
+          self.cacheHeight[indexPath.row] = heightNum;
+      } else {
+          if([arr count] == 0) {
+              ((NoImageTableViewCell*)cell).content.text = self.articleList[indexPath.row][@"title"];
+          }else if([arr count] == 1 || [arr count] == 2) {
+              //NSLog(@"%d", self.articleList[indexPath.row][@"image_infos"].count);
+              ((OneImageTableViewCell*)cell).content.text = self.articleList[indexPath.row][@"title"];
+              
+              NSData *jsonData = [NSJSONSerialization dataWithJSONObject:arr[0] options:kNilOptions error:&err];
+              NSDictionary *json = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:&err];
+              NSString *url = json[@"url_prefix"];
+              url = [url stringByAppendingString:json[@"web_uri"]];
+              //NSLog(@"%@", url);
+              
+              [((OneImageTableViewCell*)cell).headImageView setImageWithURL:url];
+          }else{
+              NSMutableArray *url_arr = [[NSMutableArray alloc]init];
+              for(int i = 0; i < 3; i++) {
+                  NSData *jsonData = [NSJSONSerialization dataWithJSONObject:arr[i] options:kNilOptions error:&err];
+                  NSDictionary *json = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:&err];
+                  NSString *url = json[@"url_prefix"];
+                  url = [url stringByAppendingString:json[@"web_uri"]];
+                  [url_arr addObject:url];
+              }
+              ((ThreeImageTableViewCell*)cell).content.text = self.articleList[indexPath.row][@"title"];
+              [((ThreeImageTableViewCell*)cell).imageFirst sd_setImageWithURL:url_arr[0]];
+              [((ThreeImageTableViewCell*)cell).imageSecond sd_setImageWithURL:url_arr[1]];
+              [((ThreeImageTableViewCell*)cell).imageThird sd_setImageWithURL:url_arr[2]];
+              //push data
+              NSArray *visibleRows = [self.tableView indexPathsForVisibleRows];
+              NSInteger nextRow = indexPath.row + visibleRows.count;
+              if(self.articleList.count - indexPath.row < visibleRows.count) {
+                  [self.tableView.mj_footer beginRefreshing];
+              }
+          }
+      }
+      return cell;
+  }
+  ```
+
 ##### 用户信息管理
 
 对于用户信息的管理，由于需要在不同的页面获取到当前已登录的用户的信息，这里采用NSUserDefaults对用户信息进行管理
